@@ -1,0 +1,289 @@
+# Classification
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+### The Non-Western Foreigners Data Set
+
+We start by clearing our workspace.
+
+```{r}
+# clear workspace
+rm(list = ls())
+```
+
+Let's check the codebook of our data.
+
+|Variable Name|Description|
+|--------|-----------------------------------------------------------|
+|IMMBRIT | Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?|
+|over.estimate | 1 if estimate is higher than 10.7%. |
+|RSex | 1 = male, 2 = female |
+|RAge | Age of respondent |
+|Househld | Number of people living in respondent's household |
+|party_self | 1 = Conservatives; 2 = Labour; 3 = SNP; 4 = Ukip; 5 = BNP; 6 = GP; 7 = party.other |
+|paper | Do you normally read any daily morning newspaper 3+ times/week? |
+|WWWhourspW | How many hours WWW per week? |
+|religious | Do you regard yourself as belonging to any particular religion? |
+|employMonths | How many mnths w. present employer? |
+|urban | Population density, 4 categories (highest density is 4, lowest is 1) |
+|health.good | How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good) |
+|HHInc | Income bands for household, high number = high HH income |
+
+The dataset is on your memory sticks and also available for download [here](http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData).
+
+```{r}
+# load non-western foreigners data set
+load("non_western_immigrants.RData")
+
+# data manipulation
+fdata$RSex <- factor(fdata$RSex, labels = c("Male", "Female"))
+fdata$health.good <- factor(fdata$health.good, labels = c("bad", "fair", "fairly good", "good") )
+fdata$party_self <- factor(fdata$party_self, labels = c("Conservatives", "Labour", "SNP", 
+                                                         "Ukip", "BNP", "Greens", "Other"))
+
+# urban to dummies (for knn later)
+table(fdata$urban) # 3 is the modal category (keep as baseline) but we create all categories
+fdata$rural <- ifelse( fdata$urban == 1, yes = 1, no = 0)
+fdata$partly.rural <- ifelse( fdata$urban == 2, yes = 1, no = 0)
+fdata$partly.urban <- ifelse( fdata$urban == 3, yes = 1, no = 0)
+fdata$urban <- ifelse( fdata$urban == 4, yes = 1, no = 0)
+```
+
+In our data manipulation, we first turned `RSex` into a factor variable. Factor is a variable type in R, that is handy because we declare that a variable is categorical. When we run models with a factor variable, R will handle them correctly, i.e. break them up into binary variables internally.
+
+Alternatively, with `urban`, we show how to break up such a variable into binary variables manually. We use the `ifelse()` function were the first argument is a logical condition such as `fdata$urban == 1` meaning "if the variable `urban` in `fdata` takes on the value 1. This condition is evaluated for every observation in the dataset and if it is met we assign a 1 (`yes = 1`) and if not we assign a 0 (`no = 0`).
+
+### Logistic Regression
+
+We want to predict whether respondents over-estimate immigration from non-western contexts. We begin by normalizing our variables (we make them comparable). Then we look at the distribution of the dependent variable. We check how well we could predict misperception of immigration in our sample without a statistical model.
+
+```{r}
+# create a copy of the original IMMBRIT variable (needed for classification with lm)
+fdata$IMMBRIT_original_scale <- fdata$IMMBRIT
+
+# our function for normalization
+our.norm <- function(x){
+  return((x - mean(x)) / sd(x))
+}
+
+# continuous variables
+c.vars <- c("IMMBRIT", "RAge", "Househld", "HHInc", "employMonths", "WWWhourspW")
+
+# normalize
+fdata[, c.vars] <- apply( X = fdata[, c.vars], MARGIN = 2, FUN = our.norm )
+```
+
+First, we copied the variable IMMBRIT before normalizing it. Don't worry about this now, it will become clear why we did this further down in the code. 
+
+We then define our own function. A function takes some input which we called `x` and does something with that input. In case, x is a numeric variable. For every value of x, we subtract the mean of x. Therefore, we center the variable on 0, i.e. the new mean will be 0. We then divide by the standard deviation of the variable. This is necessary to make the variables comparable. The units of all variables are then represented in average deviations from their means.
+
+In the next step, we create a character vector with the variable names of all variables that are continuous and lastly we normalize. We do this by sub-setting our data with square brackets. So `fdata[ , c.vars]` is the part of our dataset that includes the continuous variables. The function `apply()` lets us carry out the same operation repeatedly for all the variables. The argument `X` is the data. The argument `MARGIN` says we want to apply our normalization column-wise. The argument `FUN` means function. Here, we input our normalization function.
+
+We now have a look at our dependent variable of interest. The variable `over.estimate` measures whether a respondent over estimates the number of non-western immigrants or not (yes = 1; no = 0). The actual percentage of non-western immigrants was 10.7 percent at the time of the survey. 
+
+#### The naive guess
+
+The naive guess is the best prediction without a model. Or put differently, the best prediction we could make without having any context information. Have a look at the variable `over.estimate` and decide on your own what you would do to maximize your predictive accuracy...
+
+```{r class.source="collapsible"}
+# proportion of people who over-estimate
+mean(fdata$over.estimate)
+
+# naive guess
+ifelse( mean(fdata$over.estimate) >= 0.5, yes = 1, no = 0 )
+
+# So, to maximise prediction accuracy without a model, we must simply always predict the more common category. If more people over estimate than under estimate, we predict over estimation every time.
+```
+
+Alright, now that we have figured out what to predict, what would be our predictive power based on that prediction? Try to figure this out on your own...
+
+```{r class.source="collapsible"}
+# predicitive power based on the naive guess
+
+ifelse( mean(fdata$over.estimate) >= 0.5,
+        yes = mean(fdata$over.estimate),
+        no = 1 - mean(fdata$over.estimate))
+
+# So our predicitive accuracy depends on the proportion of people who over estimate. If the proportion is more than 0.5, the mean is the percent of correct predictions. Otherwise, 1 - mean is the percentage of correct predictions.
+```
+
+A predictive model must always beat the predictive power of the naive guess.
+
+
+### The logit model
+
+We use the generalized linear model function `glm()` to estimate a logistic regression. The syntax is very similar to the `lm` regression function that we are already familiar with, but there is an additional argument that we need to specify (the `family` argument) in order to tell R that we would like to estimate a logistic regression model.
+
+|Argument|Description|
+|--------|-----------------------------------------------------------|
+|`formula`|As before, the `formula` describes the relationship between the dependent and independent variables, for example `dependent.variable ~ independent.variable` <br> In our case, we will use the formula: `vote ~ wifecoethnic + distance` |
+|`data`|Again as before, this is simply the name of the dataset that contains the variable of interest. In our case, this is the dataset called `afb`.|
+|`family`|The `family` argument provides a description of the error distribution and link function to be used in the model. For our purposes, we would like to estimate a binary logistic regression model and so we set `family = binomial(link = "logit")`|
+
+We tell `glm()` that we have a binary dependent variable and we want to use the logistic link function using the `family = binomial(link = "logit")` argument:
+
+
+```{r}
+m.logit <- glm( over.estimate ~ RSex + RAge + Househld + party_self + paper + WWWhourspW +  
+                  religious +  employMonths + rural + partly.rural + urban + health.good + 
+                  HHInc, data = fdata, family = binomial(link = "logit"))
+summary(m.logit)
+```
+
+### Predict Outcomes from logit
+
+We can use the `predict()` function to calculate fitted values for the logistic regression model, just as we did for the linear model. Here, however, we need to take into account the fact that we model the *log-odds* that $Y = 1$, rather than the *probability* that $Y=1$. The `predict()` function will therefore, by default, give us predictions for Y on the log-odds scale. To get predictions on the probability scale, we need to add an additional argument to `predict()`: we set the `type` argument to `type = "response"`.
+
+```{r}
+# predict probabilities
+preds.logit <- predict( m.logit, type = "response")
+```
+
+To see how good our classification model is we need to compare the classification with the actual outcomes. We first create an object `exp.logit` which will be either `0` or `1`. In a second step, we cross-tab it with the true outcomes and this allows us to see how well the classification model is doing.
+
+
+```{r}
+# predict whether respondent over-estimates or not
+exp.logit <- ifelse( preds.logit > 0.5, yes = 1, no = 0)
+
+# confusion matrix (table of predictions and true outcomes)
+table(prediction = exp.logit, truth = fdata$over.estimate)
+```
+
+The diagonal elements are the correct classifications and the off-diagonal ones are wrong. We can compute the share of correct classified observations as a ratio.
+
+```{r}
+# percent correctly classified
+(35 + 728) / 1049
+```
+
+We can also write code that will estimate the percentage correctly classified for different values.
+
+```{r}
+# more generally
+mean( exp.logit == fdata$over.estimate)
+```
+
+This is the performance on the training data and we expect the test error to be higher than this. To get at a better indication of the model's classification error we can split the dataset into a training set and a test set.
+
+This is the performance on the training data and we expect the test error to be higher than this. To get at a better indication of the model's classification error we can split the dataset into a training set and a test set.
+
+```{r}
+# set the random number generator
+set.seed(123)
+
+# random draw of 80% of the observations (row numbers) to train the model
+train.ids <- sample(nrow(fdata), size = as.integer( (nrow(fdata)*.80) ), replace = FALSE)
+
+# the validation data 
+fdata.test <- fdata[ -train.ids, ]
+dim(fdata.test)
+```
+
+So, we first set the random number generator with `set.seed()`. It does not matter which number we use to set the RNG but the point is that re-running our script will always lead to the same result (Disclaimer: In April 2019, it was changed how the RNG works. To replicate anything that was created prior to that data or anything that was created on an old R version, the options have to be adjusted like so: `RNGkind(sample.kind = "Rounding")`)
+
+We then take a random sample with `sample()` function. The first argument is what we draw from. Here, we use `nrow()` which returns the number of rows in the data set. We therefore, draw numbers between 1 and the number of observations in our dataset. We draw 80 percent of the observations, so we multiply the number of observations with 0.8. Since that number might not be whole, we cut off decimal places with the `as.integer()` function. Finally, the argument `replace = FALSE` ensures that we can draw an observation only once.
+
+Now we fit the model using the training data only and then test its performance on the test data.
+
+```{r}
+# re-fit the model on the raining data
+m.logit <- glm(over.estimate ~ RSex + RAge + Househld + party_self + paper + WWWhourspW +  religious + 
+               employMonths + rural + partly.rural + urban + health.good + HHInc, data = fdata, 
+               subset = train.ids, 
+               family = binomial(link = "logit"))
+
+# predict probabilities of over-estimating but for the unseen data
+preds.logit <- predict(m.logit, newdata = fdata.test, type = "response")
+
+# classify predictions as over-estimating or not
+exp.logit <- ifelse( preds.logit > 0.5, yes = 1, no = 0)
+
+# confusion matrix of predictions against truth
+table( prediction = exp.logit, truth = fdata.test$over.estimate)
+
+# percent correctly classified
+mean( exp.logit == fdata.test$over.estimate )
+```
+
+The accuracy of the model is slightly lower in the test dataset than in the training data. The difference is not big here but in practice it can be quite large.
+
+Let's try to improve the classification model by relying on the best predictors.
+
+```{r}
+# try to improve the prediction model by relying on "good" predictors
+m.logit <- glm(over.estimate ~ RSex + rural + partly.rural + urban + HHInc, 
+             data = fdata, subset = train.ids, family = binomial(link = "logit"))
+preds.logit <- predict(m.logit, newdata = fdata.test, type = "response")
+exp.logit <- ifelse( preds.logit > 0.5, yes = 1, no = 0)
+table( prediction = exp.logit, truth = fdata.test$over.estimate )
+mean( exp.logit == fdata.test$over.estimate )
+```
+
+We improved our model by removing variables. This will never be the case if we apply the same data for training a model and testing it. But this illustrates that a model that is not parsimonious starts fitting noise and will do poorly with new data.
+
+### K-Nearest Neighbors
+
+There are many models for classification. One of the more simple ones is KNN. For it, we need to provide the data in a slightly different format and we need to install the `class` package.
+
+```{r}
+# training & test data set of predictor variables only
+train.X <- cbind( fdata$RSex, fdata$rural, fdata$partly.rural, fdata$urban, fdata$HHInc )[train.ids, ]
+test.X <- cbind( fdata$RSex, fdata$rural, fdata$partly.rural, fdata$urban, fdata$HHInc )[-train.ids, ]
+
+# response variable for training observations
+train.Y <- fdata$over.estimate[ train.ids ]
+
+# re-setting the random number generator
+set.seed(123)
+
+# run knn
+knn.out <- class::knn(train.X, test.X, train.Y, k = 1)
+
+# confusion matrix
+table( prediction = knn.out, truth = fdata.test$over.estimate )
+
+# percent correctly classified
+mean( knn.out == fdata.test$over.estimate )
+```
+
+We can try and increase the accuracy by changing the number of nearest neighbors we are using:
+
+```{r}
+# try to increae accuracy by varying k
+knn.out <- class::knn(train.X, test.X, train.Y, k = 7)
+mean( knn.out == fdata.test$over.estimate )
+```
+
+### Model the Underlying Continuous Process
+
+We can try to model the underlying process and classify afterwards. By doing that, the dependent variable provides more information. In effect we turn our classification problem into a regression problem.
+
+```{r}
+# fit the linear model on the numer of immigrants per 100 Brits
+m.lm <- lm(IMMBRIT ~ RSex + rural + partly.rural + urban + HHInc, 
+           data = fdata, subset = train.ids)
+
+# preditions
+preds.lm <- predict(m.lm, newdata = fdata.test)
+
+# threshold for classfication
+threshold <- (10.7 - mean(fdata$IMMBRIT_original_scale)) / sd(fdata$IMMBRIT_original_scale)
+
+# now we do the classfication 
+exp.lm <- ifelse( preds.lm > threshold, yes = 1, no = 0)
+
+# confusion matrix
+table( prediction = exp.lm, truth = fdata.test$over.estimate)
+
+# percent correctly classified
+mean( exp.lm == fdata.test$over.estimate)
+```
+
+We do worse by treating this as a regression problem rather than a classification problem - often, however, this would be the other way around.
+
+

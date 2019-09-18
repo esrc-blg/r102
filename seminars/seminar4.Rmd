@@ -1,0 +1,372 @@
+# Subset Selection
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+In this exercise, we learn how to select the best predictors out of a set of variables. This is sometimes referred to as a variable selection model (the Lasso which we introduce later falls into the same category).
+
+We start by clearing our workspace.
+
+```{r}
+# clear workspace
+rm( list = ls() )
+```
+
+### Subset Selection Methods
+
+We use a modified data set on non-western immigrants (we inserted some missings). Download the data [here](http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip_missings.RData).
+
+The codebook is:
+
+|Variable Name|Description|
+|--------|-----------------------------------------------------------|
+|IMMBRIT | Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?|
+|over.estimate | 1 if estimate is higher than 10.7%. |
+|RSex | 1 = male, 2 = female |
+|RAge | Age of respondent |
+|Househld | Number of people living in respondent's household |
+|Cons, Lab, SNP, Ukip, BNP, GP, party.other | Party self-identification|
+|paper | Do you normally read any daily morning newspaper 3+ times/week? |
+|WWWhourspW | How many hours WWW per week? |
+|religious | Do you regard yourself as belonging to any particular religion? |
+|employMonths | How many mnths w. present employer? |
+|urban | Population density, 4 categories (highest density is 4, lowest is 1) |
+|health.good | How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good) |
+|HHInc | Income bands for household, high number = high HH income |
+
+```{r, eval=FALSE}
+# load foreigners data
+load("your directory/BSAS_manip_missings.RData")
+```
+
+```{r, include=FALSE}
+# load foreigners data
+load("BSAS_manip_missings.RData")
+df <- data2
+rm(data2)
+```
+
+We check our dataset for missing values variable by variable using `apply()`, `is.na()`, and `table()`.
+
+```{r}
+# check for missing values
+apply(df, 2, function(x) table(is.na(x))["TRUE"] )
+```
+
+We next drop variables from the dataset.
+
+```{r}
+# we drop missings in IMMBRIT
+df <- df[ !is.na(df$IMMBRIT), ]
+```
+
+If you ever want to drop variables on an entire dataset you can run `df <- na.omit(df)`. If you want to use the same method for dropping a few variables, you can run `df[, c("some var", "some other var")] <- na.omit(df[, c("some var", "some other var")])`.
+
+We now declare the categorical variables to be factors and create a copy of the main data set that excludes `over.estimate`.
+
+```{r}
+# declare factor variables
+df$urban <- factor(df$urban, labels = c("rural", "more rural", "more urban", "urban"))
+df$RSex <- factor(df$RSex, labels = c("Male", "Female"))
+df$health.good <- factor(df$health.good, labels = c("bad", "fair", "fairly good", "good") )
+
+# drop the binary response coded 1 if IMMBRIT > 10.7 
+df$over.estimate <- NULL
+df$Cons <- NULL
+```
+
+### Best Subset Selection
+
+We use the `regsubsets()` function to identify the best model based on subset selection quantified by the residual sum of squares (RSS) for each model. The function is included in the `leaps` package which we need to install if it is not already like so: `install.packages("leaps")`.
+
+```{r}
+library(leaps)
+
+# run best subset selection
+regfit.full <- regsubsets(IMMBRIT ~ ., data = df)
+summary(regfit.full)
+```
+
+In the regression output, variables with a star were selected for the model. Here, we see 8 different models from 1 to 8 variables. With the `nvmax` parameter we control the number of variables in the model. The default used by `regsubsets()` is 8.
+
+```{r}
+# increase the max number of variables
+regfit.full <- regsubsets(IMMBRIT ~ ., data = df, nvmax = 16)
+reg.summary <- summary(regfit.full)
+```
+
+We can look at the components of the `reg.summary` object using the `names()` function and examine the $R^2$ statistic stored in `rsq`.
+
+```{r}
+names(reg.summary)
+reg.summary$rsq
+```
+
+Next, we plot the $RSS$ and adjusted $R^2$ and add a point where $R^2$ is at its maximum using the `which.max()` function.
+
+```{r, eval=FALSE}
+par( mfrow =  c(2,2) ) # 2 row, 2 columns in plot window
+plot(reg.summary$rss, xlab = "Number of Variables", ylab = "Residual Sum of Squares", type = "l")
+plot(reg.summary$adjr2, xlab = "Number of Variables", ylab = "Adjusted R^2", type = "l")
+
+# find the peak of adj. R^2
+adjr2.max <- which.max( reg.summary$adjr2 )
+points(adjr2.max, reg.summary$adjr2[adjr2.max], col = "red", pch = 20, cex = 2)
+```
+
+```{r, echo=FALSE, fig.height=3}
+par( mfrow =  c(1,2) ) # 2 row, 2 columns in plot window
+plot(reg.summary$rss, xlab = "Number of Variables", ylab = "Residual Sum of Squares", type = "l")
+plot(reg.summary$adjr2, xlab = "Number of Variables", ylab = "Adjusted R^2", type = "l")
+
+# find the peak of adj. R^2
+adjr2.max <- which.max( reg.summary$adjr2 )
+points(adjr2.max, reg.summary$adjr2[adjr2.max], col = "red", pch = 20, cex = 2)
+```
+
+We can also plot the $C_{p}$ statistic and $BIC$ and identify the minimum points for each statistic using the $which.min()$ function.
+
+```{r, eval=FALSE}
+# cp
+plot(reg.summary$cp, xlab = "Number of Variables", ylab = "Cp", type = "l")
+cp.min <- which.min(reg.summary$cp)
+points(cp.min, reg.summary$cp[cp.min], col = "red", cex = 2, pch = 20)
+
+# bic
+bic.min <- which.min(reg.summary$bic)
+plot(reg.summary$bic, xlab = "Number of Variables", ylab = "BIC", type = "l")
+points(bic.min, reg.summary$bic[bic.min], col = "red", cex = 2, pch = 20)
+```
+
+```{r, echo=FALSE}
+par( mfrow =  c(2,2) ) # 2 row, 2 columns in plot window
+plot(reg.summary$rss, xlab = "Number of Variables", ylab = "Residual Sum of Squares", type = "l")
+plot(reg.summary$adjr2, xlab = "Number of Variables", ylab = "Adjusted R^2", type = "l")
+
+# find the peak of adj. R^2
+adjr2.max <- which.max( reg.summary$adjr2 )
+points(adjr2.max, reg.summary$adjr2[adjr2.max], col = "red", pch = 20, cex = 2)
+
+# cp
+plot(reg.summary$cp, xlab = "Number of Variables", ylab = "Cp", type = "l")
+cp.min <- which.min(reg.summary$cp)
+points(cp.min, reg.summary$cp[cp.min], col = "red", cex = 2, pch = 20)
+
+# bic
+bic.min <- which.min(reg.summary$bic)
+plot(reg.summary$bic, xlab = "Number of Variables", ylab = "BIC", type = "l")
+points(bic.min, reg.summary$bic[bic.min], col = "red", cex = 2, pch = 20)
+```
+
+The estimated models from `regsubsets()` can be directly plotted to compare the differences based on the values of $R^2$, adjusted $R^2$, $C_{p}$ and $BIC$ statistics.
+
+```{r, fig.height = 6}
+par( mfrow = c(1,1), oma = c(3,0,0,0))
+
+# plot model comparison based on R^2
+plot(regfit.full, scale = "r2")
+
+# plot model comparison based on adjusted R^2
+plot(regfit.full, scale = "adjr2")
+
+
+# plot model comparison based on adjusted CP
+plot(regfit.full, scale = "Cp")
+
+
+# plot model comparison based on adjusted BIC
+plot(regfit.full, scale = "bic")
+```
+
+To show the coefficients associated with the model with the lowest $BIC$, we use the `coef()` function.
+
+```{r}
+coef(regfit.full, bic.min)
+```
+
+### Forward and Backward Stepwise Selection
+
+The default method used by `regsubsets()` is exhaustive but we can change it to forward or backward and compare the results. Best subset selection will take very long with many variables because the number of models to estimate grows exponentially. In these cases, we will want to use forward and backward selection instead.
+
+Let's carry out forward selection.
+```{r}
+# run forward selection
+regfit.fwd <- regsubsets(IMMBRIT ~ ., data = df, nvmax = 16, method = "forward")
+summary(regfit.fwd)
+```
+
+Let's carry out backwards selection next.
+```{r}
+# run backward selection
+regfit.bwd <- regsubsets(IMMBRIT ~ ., data = df, nvmax = 16, method = "backward")
+summary(regfit.bwd)
+```
+
+Then we compare the models.
+
+```{r}
+# model coefficients of best 7-variable models
+coef(regfit.full, 7)
+coef(regfit.fwd, 7)
+coef(regfit.bwd, 7)
+```
+In this case, all methods arrived at the same conclusion. This will not always be the case. We can arrive at very different conclusions.
+
+
+#### Choosing Among Models Using the Validation Set Approach and Cross-Validation
+
+For validation set approach, we split the dataset into a training subset and a test subset. In order to ensure that the results are consistent over multiple iterations, we set the random seed with `set.seed()` before calling `sample()`.
+
+```{r}
+set.seed(1)
+
+# sample true or false for each observation
+train <- sample( c(TRUE, FALSE), size = nrow(df), replace = TRUE )
+# the complement
+test <- (!train)
+```
+
+We use `regsubsets()` as we did in the last section, but limit the estimation to the training subset.
+
+```{r}
+regfit.best <- regsubsets(IMMBRIT ~ ., data = df[train, ], nvmax = 16)
+```
+
+We create a matrix from the test subset using `model.matrix()`. Model matrix takes the dependent variable out of the data and adds an intercept to it.
+
+```{r}
+# test data
+test.mat <- model.matrix(IMMBRIT ~., data = df[test, ])
+```
+
+Next, we compute the validation error for each model.
+
+```{r}
+# validation error for each model
+val.errors <- NA
+for (i in 1:16 ){
+  
+  coefi <- coef(regfit.best, id = i)
+  # this prediction without the predict function for a linear model
+  # here we use linear algebra operations were we multiply the data matrix
+  # with the coefficient vector
+  y_hat <- test.mat[, names(coefi)] %*% coefi
+  
+  # we compute the test set MSE for each model
+  val.errors[i] <- mean(  (df$IMMBRIT[test] - y_hat)^2   )
+}
+```
+
+We examine the validation error for each model and identify the best model with the lowest error.
+
+```{r}
+val.errors
+
+# which model has smallest error
+min.val.errors <- which.min(val.errors)
+
+# coefficients of that model
+coef( regfit.best, min.val.errors )
+```
+
+We can combine these steps into a function that can be called repeatedly when running k-fold cross-validation.
+
+```{r}
+# predict function for repeatedly choosing model with lowest test error
+predict.regsubsets <- function( object, newdata, id, ... ){
+  # get the formula from the model
+  m.formula <- as.formula( object$call[[2]] )
+  # use that formula to create the model matrix for some new data
+  mat <- model.matrix( m.formula, newdata )
+  # get coeffiecients where id is the number of variables
+  coefi <- coef( object, id = id )
+  # get the variable names of current model
+  xvars <- names( coefi )
+  # multiply data with coefficients
+  mat[ , xvars ] %*% coefi
+}
+```
+
+We run `regsubsets()` on the full dataset and examine the coefficients associated with the model that has the lower validation error.
+
+```{r}
+# best subset on full data set
+regfit.best <- regsubsets( IMMBRIT ~ ., data = df, nvmax = 16 )
+
+# examine coefficients of the model that had the lowest validation error
+coef( regfit.best, min.val.errors )
+```
+
+#### k-fold cross-validation
+
+For cross-validation, we create the number of folds needed (10, in this case) and allocate a matrix for storing the results.
+
+```{r}
+# number of folds
+k <- 10
+set.seed(1)
+
+# fold assignment for each observation
+folds <- sample(1:k, nrow(df), replace = TRUE)
+
+# frequency table of fold assignment (should be relatively balanced)
+table(folds)
+```
+
+Let's create an object that will store errors for cross-validation and we then look at that.
+
+```{r}
+# container for cross-validation errors
+cv.errors <- matrix(NA, nrow = k, ncol = 16, dimnames = list(NULL, paste(1:16)))
+# have a look at the matrix
+cv.errors
+```
+
+We then run through each fold in a `for()` loop and predict the salary using our predict function. We then calculate the validation error for each fold and save them in the matrix created above.
+
+```{r}
+# loop over folds
+for (a in 1:k){
+  
+  # best subset selection on training data
+  best.fit <- regsubsets(IMMBRIT ~ ., data = df[ folds != a, ], nvmax = 16)
+  
+  # loop over the 16 subsets
+  for (b in 1:16){
+    
+    # predict response for test set for current subset
+    pred <- predict(best.fit, df[ folds == a ,], id = b )
+    
+    # MSE into container; rows are folds; columns are subsets
+    cv.errors[a, b] <- mean( (df$IMMBRIT[folds==a] - pred)^2 )
+    
+  } # end of loop over the 16 subsets
+} # end of loop over folds
+# the cross-validation error matrix
+cv.errors
+```
+
+We calculate the mean error for all subsets by applying mean to each column using the `apply()` function.
+
+```{r}
+# average cross-validation errors over the folds
+mean.cv.errors <- apply(cv.errors, 2, mean)
+mean.cv.errors
+
+# visualize
+par( mfrow = c(1,1) , oma = c(0,0,0,0))
+plot( mean.cv.errors, type = "b" )
+```
+
+Finally, we run `regsubsets()` on the full dataset and show the coefficients for the best performing model which we picked using 10-fold cross-validation.
+
+```{r}
+# run regsubsets on full data set
+reg.best <- regsubsets(IMMBRIT ~ ., data = df, nvmax = 16)
+
+# coefficients of subset which minimized test error
+coef(reg.best, which.min(mean.cv.errors))
+```

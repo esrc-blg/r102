@@ -1,0 +1,239 @@
+# All non-linear (polynomials to splines)
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+In this exercise, we will learn how to model non-linear relationships using generalized linear models. This exercise is based on based on James et al. 2013. We begin by loading that `ISLR` package and attaching to the Wage dataset that we will be using throughout this exercise. When we attach a dataset, we do not need to write `dataset.name$variable.name` to access a variable but we can instead just write `variable.name` to access it.
+
+Note: We need to install the `ISLR` package if it is not installed already like so: `install.packages("ISLR")`
+Note2: The `Wage` dataset is spelled with a capital W.
+
+```{r, eval=FALSE}
+# clear workspace, load ISLR, attach wage data set
+rm(list=ls())
+library(ISLR)
+attach(Wage)
+?Wage # codebook
+```
+
+```{r, include=FALSE}
+# clear workspace, load ISLR, attach wage data set
+rm(list=ls())
+library(ISLR)
+attach(Wage)
+```
+
+### Polynomial Regression
+
+Let's fit a linear model to predict `wage` with a forth-degree polynomial using the `poly()` function.
+
+Note: The dependent variable `wage` is spelled with a lower case w.
+
+```{r}
+# linear regression on wage, with age up to a 4th degree polynomial
+fit <- lm(wage ~ poly(age, 4), data = Wage)
+coef(summary(fit))
+```
+
+We can also obtain raw instead of orthogonal polynomials by passing the `raw = TRUE` argument to `poly()`. The coefficients will change the fit should be largely unaffected. It is not advisable to use the raw argument because it introduces unnecessary multicolinearity into the model.
+
+```{r}
+fit2 <- lm(wage ~ poly(age, 4, raw = TRUE), data = Wage)
+coef(summary(fit2))
+```
+
+There are several ways to specify polynomials. These are, however a little less convenient.
+
+```{r}
+fit2a <- lm(wage ~ age + I(age^2) + I(age^3) + I(age^4), data = Wage)
+coef(fit2a)
+```
+
+A more compact version of the same example uses `cbind()` and eliminates the need to wrap each term in `I()`. The output is less readable though.
+
+```{r}
+fit2b <- lm(wage ~ cbind(age, age^2, age^3, age^4), data = Wage)
+coef(fit2b)
+```
+
+We can create an age grid (minimum age to maximum age) and pass the grid to `predict()`. We can set the argument `se=TRUE` in the `predict()` function which will return a list that includes standard errors of the outcome. We can use these to an upper and lower bound of our estimate of $y$.
+
+```{r}
+# minimum and maximum values of age variable
+agelims <- range(age) 
+age.grid <- seq(from = agelims[1], to = agelims[2])
+
+# se=TRUE returns standard errors
+preds <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+
+# confidence intervals as estimate + and - 2 standard deviations
+se.bands <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+```
+
+We can plot the data and add the fit from the degree-4 polynomial. We set the margins and outer margins in our plot the later plot a title that will be the overall title for two plots that we plot next to each other. The function `matlines()` lets us draw the lines for the uncertainty bounds in one go.
+
+```{r, eval=FALSE}
+# set margins to plot title in margins
+par(mfrow = c(1, 2), mar = c(4.5, 4.5, 1, 1), oma = c(0, 0, 4, 0))
+
+plot(wage ~ jitter(age,2), xlim = agelims, cex = 0.5, col = "darkgrey", bty = "n",
+     xlab = "age")
+
+# overall plot window title
+title("Degree -4 Polynomial ", outer = TRUE)
+
+# line for mean estimate
+lines(age.grid, preds$fit, lwd = 2, col = "blue")
+
+# ~95% ci's
+matlines(age.grid, se.bands, lwd = 2, col = "blue", lty = 3)
+```
+
+```{r, echo=FALSE}
+# set margins to plot title in margins
+par(mfrow = c(1, 1), mar = c(4.5, 4.5, 1, 1), oma = c(0, 0, 4, 0))
+plot(wage ~ jitter(age,2), xlim = agelims, cex = 0.5, col = "darkgrey", bty = "n",
+     xlab = "age")
+# overall plot window title
+title("Degree -4 Polynomial ", outer = TRUE)
+# line for mean estimate
+lines(age.grid, preds$fit, lwd = 2, col = "blue")
+# ~95% ci's
+matlines(age.grid, se.bands, lwd = 2, col = "blue", lty = 3)
+```
+
+We compare the orthogonolized polynomials that we saved in the object called `fit` with the polynomials that plain polynomials saved in `fit2`. The difference will be close to $0$. We predict the outcome from the fit with the raw polynomials and take the difference to the fit with the independent linear combinations of the powers of age.
+
+```{r}
+preds2 <- predict(fit2, newdata = list(age = age.grid), se = TRUE)
+
+# average difference
+mean(preds$fit - preds2$fit)
+
+# maximum difference
+max(abs(preds$fit - preds2$fit))
+```
+
+When we have only predictor variable and and its powers we use the `coef()` function to see whether the powers of the variable improve in-sample model fit.
+
+```{r}
+fit.5 <- lm(wage ~ poly(age, 5), data = Wage)
+coef(summary(fit.5))
+```
+
+With more variables, we use the `anova()` function and look at the F-test to decide whether in-sample fit improves by including powers of a variable.
+
+```{r}
+fit.1 <- lm(wage ~ age, data = Wage)
+fit.2 <- lm(wage ~ poly(age, 2), data = Wage)
+fit.3 <- lm(wage ~ poly(age, 3), data = Wage)
+fit.4 <- lm(wage ~ poly(age, 4), data = Wage)
+anova(fit.1, fit.2, fit.3, fit.4, fit.5)
+```
+
+With `glm()` we can also fit a polynomial logistic regression. Here, we create a binary variable that is 1 if wage > 250 and 0 otherwise.
+
+```{r}
+fit <- glm(I(wage > 250) ~ poly(age, 4), data = Wage, family = binomial)
+```
+
+Similar to `lm()` we use the `predict()` function again and also obtain standard errors by setting `se=TRUE`.
+
+Note: If we do **not** set `type="response"` in the `predict()` function, we get the latent $y$ as $X\beta$. We have to send those values through the link function to get predicted probabilities. We do this, so that we can estimate the standard errors on the latent $y$. We then send these through the link function as well. This ensures that our confidence intervals will never be outside the logical $[0, 1]$ interval for probabilities. If we would not do this, we could get standard errors outside the $[0, 1]$ interval.
+
+```{r}
+# predict latent y
+preds <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+
+# send latent y through the link function
+pfit <- 1 / (1 + exp(-preds$fit))
+
+# error bands calculate on the latent y
+se.bands.logit <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+se.bands <- 1 / (1 + exp(-se.bands.logit))
+```
+
+We add the results next to the plot where wage is continuous. With the `points()` function we add the actual data to the plot. The argument `pch="|"` draws a bar as the symbol for each point. Also notice the y-coordinate of each point. In the `plot()` function we set the range of the y-axis with `ylim = c(0, 0.2)` to range from $0$ to $0.2$. If the true outcome is $1$ we want to draw the | at $y=0.2$ and otherwise at $y=0$. We achieve this with `I((wage > 250)/5)`. Play around to see why.
+
+```{r, eval = FALSE}
+plot(I(wage > 250) ~ age, xlim = agelims, type = "n", ylim = c(0, 0.2))
+# add data to the plot
+points(jitter(age), I((wage > 250)/5) , cex = 1, pch = "|", col = " darkgrey ")
+# mean estimate
+lines(age.grid, pfit, lwd = 2, col = "blue")
+# 95 ci
+matlines(age.grid, se.bands, lwd = 2, col = "blue", lty = 3)
+```
+
+```{r, echo=FALSE}
+par(mfrow = c(1, 2), mar = c(4.5, 4.5, 1, 0), oma = c(0, 0, 4, 0))
+
+# old data
+fit <- lm(wage ~ poly(age, 4), data = Wage)
+agelims <- range(age)
+age.grid <- seq(from = agelims[1], to = agelims[2])
+preds <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+se.bands <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+
+# old plot
+plot(jitter(age,2), wage, xlim = agelims, cex = 0.5, col = "darkgrey", bty = "n",
+     xlab = "age")
+title("Degree -4 Polynomial ", outer = TRUE)
+lines(age.grid, preds$fit, lwd = 2, col = "blue")
+matlines(age.grid, se.bands, lwd = 2, col = "blue", lty = 3)
+
+# newdata
+fit <- glm(I(wage > 250) ~ poly(age, 4), data = Wage, family = binomial)
+preds <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+pfit <- exp(preds$fit) / (1 + exp(preds$fit))
+se.bands.logit <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+se.bands <- exp(se.bands.logit)/(1 + exp(se.bands.logit))
+preds <- predict(fit, newdata = list(age = age.grid), type = "response", se = TRUE)
+
+# second plot
+plot(age, I(wage > 250), xlim = agelims, type = "n", ylim = c(0, 0.2), bty = "n")
+points(jitter(age), I((wage > 250)/5), cex = 1, pch = "|", col = " darkgrey ")
+lines(age.grid, pfit, lwd = 2, col = "blue")
+matlines(age.grid, se.bands, lwd = 2, col = "blue", lty = 3)
+```
+
+Notice, that the confidence interval becomes very large in the range of the data where we have few data and no $1$'s.
+
+
+### Step Functions
+
+Instead of using polynomials to create a non-linear prediction, we could also use step functions. With step functions we fit different lines for different data ranges.
+
+We use the `cut()` function to create equally spaced cut-points in our data. We use the now categorical variable age as predictor in our linear model.
+
+```{r}
+# four equally spaced intervals of age
+table(cut(age, 4))
+# fit the linear regression with the factor variable age that has four categories
+fit <- lm(wage ~ cut(age, 4), data = Wage)
+# the first category is the baseline.
+coef(summary(fit))
+```
+
+### Splines
+
+We use the `splines` package to fit splines.
+
+```{r}
+library(splines)
+```
+
+We first use `bs()` to generate a basis matrix for a polynomial spline and fit a model with knots at age 25, 40 and 60. `bs` will by default fit a cubic spline with the specified number of knots. To deviate from a cubic spline, change the argument `degree` to some other value.
+
+```{r}
+fit <- lm(wage ~ bs(age, knots = c(25, 40, 60)), data = Wage)
+pred <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+par( mfrow = c(1,1))
+plot(jitter(age,2), wage, col = "gray", xlab = "age", bty = "n")
+lines(age.grid, pred$fit, lwd = 2)
+lines(age.grid, pred$fit + 2 * pred$se, lty = "dashed", lwd = 2)
+lines(age.grid, pred$fit - 2 * pred$se, lty = "dashed", lwd = 2)
+```

@@ -1,0 +1,43 @@
+---
+title: "Follow-up on R"
+#author: "Philipp Broniecki"
+site: bookdown::bookdown_site
+#documentclass: book
+#output:
+#  bookdown::gitbook: default
+  #bookdown::pdf_book: default
+---
+
+# About this course {-}
+
+***Course Content***
+
+This course builds on introductory R and expands on essential concepts for R. We cover common problems in data manipulation to pre-process datasets and we will cover some visualization. $99.5\%$ of a data scientist's job is data pre-processing and visualization. The rest is analysis. Therefore, brushing up on programming skills in R makes the experience of working with R a lot more enjoyable.
+
+***Course Objectives***
+
+Participants will learn data manipulation skills such as merging data, re-shaping it, aggregating it and more. Course participants should be a lot more comfortable in working with R upon completing this course.
+
+
+***Course Prerequisites***
+
+Participants are expected to have used R and RStudio before.
+
+***Agenda***
+
+1. Data sub-setting and logical conditions
+2. Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating
+3. Merging data
+4. Reshaping data
+5. Regular expressions
+
+***Acknowledgements***
+
+The infrastructure for this website is in large parts adopted from work by UCL's [Altaf Ali](https://iris.ucl.ac.uk/iris/browse/profile?upi=ALIAX58), [Jack Blumenau](https://www.jackblumenau.com/), [Lucas Leemann](https://lucasleemann.ch), [Slava Jankin Mikhaylov](https://sjankin.com/), and [Philipp Broniecki](https://philippbroniecki.com). The ESRC Business and Local Government Data Research Centre is funded by the [Economic and Social Research Council (ESRC)](https://esrc.ukri.org).
+
+----
+
+<div class="container btn-container">
+<button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/ml101/raw/master/data/data.zip');">placeholder</button>
+<button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/ml101/raw/master/slides/slides.pdf');">placeholder</button>
+</div>

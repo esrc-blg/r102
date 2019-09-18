@@ -1,0 +1,172 @@
+# Regularization
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+### Ridge Regression and the Lasso
+
+We start by clearing our workspace, loading the foreigners data, and doing the necessary variable manipulations. The data is available [here](http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData).
+
+We then need to normalize all numeric variables to put them on the same scale. Regularization requires that variables are comparable. 
+
+```{r, eval=FALSE}
+# clear workspace
+rm(list=ls())
+
+# load foreigners data
+load("your directory/BSAS_manip.RData")
+head(data2)
+
+# we declare the factor variables
+data2$urban <- factor(data2$urban, labels = c("rural", "more rural", "more urban", "urban"))
+data2$RSex <- factor(data2$RSex, labels = c("Male", "Female"))
+data2$health.good <- factor(data2$health.good, labels = c("bad", "fair", "fairly good", "good") )
+
+# categorical variables
+cat.vars <- unlist(lapply(data2, function(x) is.factor(x) | all(x == 0 | x==1) | all( x==1 | x==2) ))
+# normalize numeric variables
+data2[, !cat.vars] <- apply(data2[, !cat.vars], 2, scale)
+```
+
+```{r, include=FALSE}
+# clear workspace
+rm(list=ls())
+
+# load foreigners data
+load("BSAS_manip.RData")
+head(data2)
+
+# we declare the factor variables
+data2$urban <- factor(data2$urban, labels = c("rural", "more rural", "more urban", "urban"))
+data2$RSex <- factor(data2$RSex, labels = c("Male", "Female"))
+data2$health.good <- factor(data2$health.good, labels = c("bad", "fair", "fairly good", "good") )
+
+# categorical variables
+cat.vars <- unlist(lapply(data2, function(x) is.factor(x) | all(x == 0 | x==1) | all( x==1 | x==2) ))
+# normalize numeric variables
+data2[, !cat.vars] <- apply(data2[, !cat.vars], 2, scale)
+```
+
+In order to run ridge regression, we create a matrix from our dataset using the `model.matrix()` function. We also need to remove the intercept from the resulting matrix because the function to run ridge regression automatically includes one. Furthermore, we will use the subjective rate of immigrants as response. Consequently, we have to remove `over.estimate` as it measures the same thing. Lastly, the party affiliation dummies are mutually exclusive, so we have to exclude the model category `Cons`.
+
+```{r}
+# covariates in matrix form but remove the intercept, over.estimate, and Cons
+x <- model.matrix(IMMBRIT ~ . -1 -over.estimate -Cons, data2)
+# check if it looks fine
+head(x)
+
+# response vector
+y <- data2$IMMBRIT
+```
+
+#### Ridge Regression
+
+The `glmnet` package provides functionality to fit ridge regression and lasso models. We load the package and call `glmnet()` to perform ridge regression. Before being able to run this, we have to install the package like so: `install.packages("glmnet")`.
+
+The performance of ridge depends on the right choice of lambda. A tuning parameter is a parameter that we need to set and we need to set correctly. We do this by trying different values. All different values are what we refer to as our grid.
+
+```{r}
+library(glmnet)
+
+# tuning parameter
+grid <- 10^seq(4, -2, length = 100)
+
+plot(grid, bty = "n", pch = 19,
+     main = expression(paste("Grid of Tuning Parameters ", lambda)))
+```
+
+We now run ridge regression. We tune `lambda` and set `alpha` to 0 which means we carry out ridge regression (instead as for instance the Lasso or the Elastic Net).
+
+```{r}
+# run ridge; alpha = 0 means do ridge
+ridge.mod <- glmnet(x, y, alpha = 0, lambda = grid)
+
+# coefficient shrinkage visualized
+plot(ridge.mod, xvar = "lambda", label = TRUE)
+```
+
+the object `ridge.mod` contains a set of coefficients for each of the lambdas which we can access by running the `coef()` function on the object `ridge.mod`. We tried 100 lambda values and therefore we get  100 coefficient sets. The object is a matrix where rows are variables and columns are the coefficients based on the chosen lambda values. 
+
+```{r}
+# a set of coefficients for each lambda
+dim(coef(ridge.mod))
+```
+
+We can look at the coefficients at different values for $\lambda$. Here, we randomly choose two different values and notice that smaller values of $\lambda$ result in larger coefficient estimates and vice-versa.
+
+```{r}
+# Lambda and Betas
+ridge.mod$lambda[80]
+coef(ridge.mod)[, 80]
+sqrt( sum(coef(ridge.mod)[-1, 80]^2) )
+
+ridge.mod$lambda[40]
+coef(ridge.mod)[, 40]
+sqrt(sum(coef(ridge.mod)[-1, 40]^2))
+```
+
+We can get ridge regression coefficients for any value of $\lambda$ using predict.
+
+```{r}
+# compute coefficients at lambda = s
+predict(ridge.mod, s = 50, type = "coefficients")[1:nrow(coef(ridge.mod)), ]
+```
+
+We would like to know which value of lambda gives us the model with the best predictive power. We use cross-validation on ridge regression by first splitting the dataset into training and test subsets.
+
+We can choose different values for $\lambda$ by running cross-validation on ridge regression using `cv.glmnet()`.
+
+```{r}
+set.seed(1)
+
+# training data for CV to find optimal lambda, but then test data to estimate test error
+cv.out <- cv.glmnet(x, y, alpha = 0, nfolds = 5)
+
+# illustrate test MSE based on size of lambda
+plot(cv.out)
+
+# best performing model's lambda value
+bestlam <- cv.out$lambda.min
+bestlam
+```
+
+The best performing model is the one with $\lambda =$ `r bestlam`. We can also extract the mean cross-validated error of the best model.
+
+```{r}
+cv.out$cvm[ which(cv.out$lambda == bestlam) ]
+```
+
+#### The Lasso
+
+The lasso model can be estimated in the same way as ridge regression. The `alpha = 1` parameter tells `glmnet()` to run lasso regression instead of ridge regression. Lasso is often used more as a variable selection model because a large shrinkage parameter $\lambda$ can cause coefficients of some variables to be exactly zero which means that those variables are excluded from the model.
+
+```{r}
+lasso.mod <- glmnet(x, y, alpha = 1, lambda = grid)
+plot(lasso.mod)
+```
+
+Similarly, we can perform cross-validation using identical step as we did on ridge regression.
+
+```{r}
+# cross-validation to pick lambda
+set.seed(1)
+cv.out <- cv.glmnet(x, y, alpha = 1, nfolds = 5)
+plot(cv.out)
+```
+
+We select the best Lambda value and the cross-validation error.
+
+```{r}
+bestlam <- cv.out$lambda.min
+cv.out$cvm[ which(cv.out$lambda == bestlam) ]
+```
+
+```{r}
+# compare to ridge regression
+out <- glmnet(x, y, alpha = 1, lambda = grid)
+lasso.coef <- predict(out, type = "coefficients", s = bestlam)[1:16, ]
+lasso.coef[lasso.coef != 0]
+```

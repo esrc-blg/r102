@@ -1,0 +1,6 @@
+name: FollowUpOnR
+description: Introduction to Data Science
+
+config_file: ~/.r102
+working_dir: ~/r102
+

@@ -1,0 +1,258 @@
+# Cross-Validation
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+We start by clearing our workspace.
+
+```{r, echo=FALSE}
+par(mfrow=c(1,1))
+```
+
+```{r}
+# clear workspace
+rm( list = ls() )
+```
+
+### The Validation Set Approach
+
+We use a subset of last weeks non-western immigrants data set (the version for this week includes men only). We can use the `head()` function to have a quick glance at the data. Download the data [here](http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip_men.RData)
+
+The codebook is:
+
+|Variable Name|Description|
+|--------|-----------------------------------------------------------|
+|IMMBRIT | Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?|
+|over.estimate | 1 if estimate is higher than 10.7%. |
+|RAge | Age of respondent |
+|Househld | Number of people living in respondent's household |
+|Cons, Lab, SNP, Ukip, BNP, GP, party.other | Party self-identification|
+|paper | Do you normally read any daily morning newspaper 3+ times/week? |
+|WWWhourspW | How many hours WWW per week? |
+|religious | Do you regard yourself as belonging to any particular religion? |
+|employMonths | How many mnths w. present employer? |
+|urban | Population density, 4 categories (highest density is 4, lowest is 1) |
+|health.good | How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good) |
+|HHInc | Income bands for household, high number = high HH income |
+
+```{r}
+# load non-western foreigners data
+load("BSAS_manip_men.RData")
+```
+
+We first select a random sample of 239 out of 478 observations (check that that's half the observations in our dataset using `nrow(data2)`). We initialize the random number generator with a seed using `set.seed()` to ensure that repeated runs produce consistent results.
+
+```{r}
+# initialize random number generator
+set.seed(1)
+
+# pick 239 numbers out of 1 to 478
+train <- sample(478, 239)
+```
+
+We then estimate the effects of age on the perceived number of immigrants per 100 Brits with `lm()` on the selected subset.
+
+```{r}
+# linear regression
+m.lm <- lm( IMMBRIT ~ RAge, data = data2, subset = train)
+```
+
+Next, we use our model that we trained on the training set to predict outcomes in the test set - the test set contains unseen data. We subset the dataset using square brackets such that it excludes the training observations. The `-` operator means except in this case. So `data2[-tain, ]` is the dataset excluding training observations.
+
+```{r}
+# predict on test set
+preds.lm <- predict( m.lm, data2[-train,] )
+```
+
+Next, we compare our predictions on the test set to the real outcomes. Our loss function (evaluation metric) is the mean squared error (MSE):
+
+\[ \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2 \]
+
+```{r}
+# mse in the validation (test) set
+mse <- mean((data2$IMMBRIT[-train] - preds.lm)^2)
+ # error rate
+mse
+```
+
+The error rate for a linear model is `r round(mse, digits=2)`. We can also fit higher degree polynomials with the `poly()` function. First, let's try a quadratic model.
+
+So far, we have modeled the relationship between `RAge` and `IMMBRIT` as linear. It is possible that the relationship is non-linear. We can model this using polynomials, i.e. raising `RAge` to some power. We start with the square. We could use the `^2` operator to raise `RAge` to the second power like so: `data2$RAge^2`. However, it's generally not a good idea to do this because polynomials are correlated introducing colinearity into the model. We can avoid this using the `poly()` function which de-correlates the variable and its powers. 
+
+```{r}
+# polynomials (quadratic)
+m.lm2 <- lm( IMMBRIT ~ poly(RAge, 2), data = data2, subset = train)
+```
+
+Let's have a quick look at the regression table using the `texreg` package.
+
+```{r}
+library(texreg)
+texreg::screenreg(m.lm2)
+```
+
+Interpreting polynomials is not straightforward because the effect is not linear, i.e. it is not constant. Here, `poly(RAge, 2)1` is `RAge` and `poly(RAge, 2)1` is the square of `RAge`. The effect is significant. However, to interpret the effect we would need to plot it. Instead, we will proceed by making predictions on the validation set (test set) again and calculate the MSE.
+
+```{r}
+preds.lm2 <- predict(m.lm2, data2[-train,])
+mse2 <- mean((data2$IMMBRIT - preds.lm2)^2)
+mse2
+```
+
+Quadratic regression performs better than a linear model because it reduces the error (MSE) from `r round(mse, digits=2)` to `r round(mse2, digits=2)` (`r round(((mse2-mse)/mse)*-100, 2)`%). We move on to a cubic model.
+
+```{r}
+# cubic model
+m.lm3 <- lm( IMMBRIT ~ poly(RAge, 3), data = data2, subset = train)
+mse3  <- mean( (data2$IMMBRIT[-train] -  predict(m.lm3, data2[-train,]))^2 )
+mse3
+```
+
+According to our approach, the quadratic model is the best out of the three we tested. However, this might be due to the training/test split that we made. We will try again using a different split of the data.
+
+```{r}
+# fit the models on a different training/test split
+set.seed(2)
+train <- sample(478, 239)
+m.lm <- lm( IMMBRIT ~ RAge, data = data2, subset = train)
+mse <- mean( (data2$IMMBRIT[-train] -  predict(m.lm, data2[-train,]) )^2 )
+
+# quadratic
+m.lm2 <- lm( IMMBRIT ~ poly(RAge, 2), data = data2, subset = train)
+mse2 <- mean( (data2$IMMBRIT[-train] -  predict(m.lm2, data2[-train,]))^2 )
+
+# cubic
+m.lm3 <- lm( IMMBRIT ~ poly(RAge, 3), data = data2, subset = train)
+mse3 <- mean( (data2$IMMBRIT[-train] -  predict(m.lm3, data2[-train,]))^2 )
+
+# outut
+output <- cbind( mse, mse2, mse3 )
+colnames(output) <- c("linear", "quadratic", "cubic")
+output
+```
+
+Clearly, the results are different from our initial run. Not only, are the error rates different but in addition, the order of the models changes. In this trial, the cubic model performs best. It appears that we need to split data more often to determine which is the best model overall. We will move on to leave-one-out cross-validation which does exactly that.
+
+### Leave-One-Out Cross-Validation (LOOCV)
+
+In LOOCV, we train our model on all but the first observation and subsequently predict the first observation using our model. Next, we train our model on all but the second observation and predict the second observation with that model and so forth for every observation in the dataset. That means, we must estimate as many models as we have observations in the dataset. While there are some tricks to make the computation faster for linear models, LOOCV can take a long time to run.
+
+Before we get into it, we quickly introduce a new function. The `glm()` function offers a generalization of the linear model while allowing for different link functions and error distributions other than gaussian. By default, `glm()` simply fits a linear model identical to the one estimated with `lm()`. Let's confirm this quickly.
+
+```{r}
+glm.fit <- glm( IMMBRIT ~ RAge, data = data2)
+lm.fit <- lm( IMMBRIT ~ RAge, data = data2)
+texreg::screenreg( list(glm.fit, lm.fit), custom.model.names = c("GLM", "LM") )
+```
+
+
+The coefficient estimates are similar but the fit statistics that are reported differ. Generally a GLM maximizes the likelihood whereas LM minimizes the sum of squared deviations from the regression line. Maximum likelihood estimation is more general and used in most statistical models.
+
+We will use the `glm()` function from here on because it can be used with `cv.glm()` which allows us to estimate the k-fold cross-validation prediction error. We also need to install a new package called `boot` using `install.packages("boot")`.
+
+```{r}
+library(boot)
+
+# use cv.glm() for k-fold corss-validation on glm
+cv.err <- cv.glm(data2, glm.fit)
+
+# cross-validation error
+cv.err$delta
+
+# the number of folds
+cv.err$K
+```
+
+The returned value from `cv.glm()` contains a delta vector of components - the raw cross-validation estimate and the adjusted cross-validation estimate respectively. We are interested in the raw cross-validation error.
+
+NOTE: if we do not provide the option **K** in `cv.glm()` we automatically perform leave-one-out cross-validation (LOOCV).
+
+We repeat this process in a `for()` loop to compare the cross-validation error of higher-order polynomials. The following example estimates the polynomial fit of the order 1 through 7 and stores the result in a cv.error vector.
+
+We will also record the in-sample prediction error to illustrate that we do need to test our models using new data rather than improving them in-sample due to the bias-variance trade-off.
+
+```{r}
+# container for cv errors
+cv.error <- NA
+
+# container for in-sample MSE
+in.sample.error <- NA
+
+# loop over age raised to the power 1...7
+for (i in 1:7){
+  
+  glm.fit <- glm( IMMBRIT ~ poly(RAge, i), data = data2 )
+  
+  # cv error
+  cv.error[i] <- cv.glm(data2, glm.fit)$delta[1]
+  # in-sample mse
+  in.sample.error[i] <- mean( (data2$IMMBRIT - predict(glm.fit, data2) )^2)
+
+}
+```
+
+Next, we plot the effect of increasing the complexity of the model. We also plot the in-sample error
+
+```{r, non.finished.plotting}
+# plot of error rates
+plot( cv.error ~ seq(1, 7), bty = "n", pch = 20,
+      xlab = "complexity", ylab = "cross-validation error",
+      ylim = c(355, 385))
+# cv error
+lines( y = cv.error, x = seq(1,7), lwd = 2, col = 1)
+# in-sample error
+lines( y = in.sample.error, x = seq(1,7), lwd = 2, col = 2 )
+# legend
+legend("topright", c("Out of sample MSE", "In sample MSE"), col = c(1,2), lwd= 2)
+```
+
+Apparently, the cubic model performs best. We would have missed this using the initial split of the data into one training set and one test set. Furthermore, the in-sample MSE keeps decreasing the more complex we make our model (although with diminishing marginal returns). However, the more complex models start fitting idiosyncratic aspects of the sample (noise) and perform badly with new data.
+
+### k-Fold Cross-Validation
+
+K-fold cross-validation splits the datset into k datasets. Common choices for k are 5 and 10. Using 5, we would split the data into five folds. We would then train our model on the first fold and predict on the remaining folds. Next, we would train our model on the second fold and predict on the four remaining ones and so on until we train on the fifth fold and predict on the remaining folds. Each time we will get an error (e.g. MSE). We would then average over the five MSEs to obtain the overall k-fold cross-validation MSE.
+
+In addition to LOOCV, `cv.glm()` can also be used to run k-fold cross-validation. In the following example, we estimate the cross-validation error of polynomials of the order $1$ through $7$ using $10$-fold cross-validation.
+
+```{r}
+# re-initialize random number generator
+set.seed(17)
+
+# container for 10-fold cross-validation errors
+cv.error.10 <- NA
+
+# loop over 7 different powers of age
+for (i in 1:7){
+  glm.fit <- glm( IMMBRIT ~ poly(RAge, i), data = data2)
+  cv.error.10[i] <- cv.glm( data2, glm.fit, K = 10)$delta[1]
+}
+cv.error.10
+```
+
+We add the results to the plot:
+
+```{r, eval = FALSE}
+# add to plot
+points(x = seq(1,7), y = cv.error.10, col = 3, pch = 20)
+lines( x = seq(1,7), y = cv.error.10, col = 3, lwd = 2)
+```
+
+```{r, echo = FALSE}
+# plot of error rates
+plot( cv.error ~ seq(1, 7), bty = "n", pch = 20,
+      xlab = "complexity", ylab = "cross-validation error",
+      ylim = c(355, 385))
+# cv error
+lines( y = cv.error, x = seq(1,7), lwd = 2, col = 1)
+# in-sample error
+lines( y = in.sample.error, x = seq(1,7), lwd = 2, col = 2 )
+
+# add to plot
+points(x = seq(1,7), y = cv.error.10, col = 3, pch = 20)
+lines( x = seq(1,7), y = cv.error.10, col = 3, lwd = 2)
+```
+
+The 10-fold cross-validation error is more wiggly. In this example, it estimates the best performance with a square model of age whereas the LOOCV error finds a minimum at the cube of age. Eyeballing the results, we suggest that there are no substantial improvements beyond the squared term. However, using the cubic model would be an alternative.

@@ -1,0 +1,441 @@
+# Tree Based Models
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+Tree models are non-parametric models. Depending on the data generation process, these models can be better predictive models than generalized linear models even with regularization. We will start with the highly variable simple tree, followed by pruning, the random forest model and boosting machines.
+
+We load  post-election survey data from the 2004 British Election Survey. The data is available [here](http://philippbroniecki.github.io/ML2017.io/data/bes.dta).
+
+```{r}
+# clear workspace
+rm(list=ls())
+
+# needed because .dta is a foreign file format (STATA format)
+library(readstata13)
+bes <- read.dta13("bes.dta")
+
+# drop missing values
+bes <- na.omit(bes)
+
+# drop id variable
+bes$cs_id <- NULL
+```
+
+We clean the `in_school` variable which should be binary indicating whether a respondent is attending school or not. However, we estimated missing values (which is a superior treatment of missing values than list-wise deletion) and forgot classify those predictions into 0s and 1s. 
+
+```{r}
+# clean in_school
+table(bes$in_school)
+```
+
+We use the `ifelse()` function to classify into 0 and 1.
+```{r}
+bes$in_school <- ifelse (bes$in_school < 0.5, 0, bes$in_school)
+table(bes$in_school)
+```
+
+Next, we declare the categorical variables in the dataset to be factors en bulk.
+
+```{r}
+# data manipulation
+categcorical <- c("Turnout", "Vote2001", "Gender", "PartyID", "Telephone", "edu15",
+                  "edu16", "edu17", "edu18", "edu19plus", "in_school", "in_uni")
+# declare factor variables
+bes[, categcorical] <- lapply(bes[, categcorical], factor)
+```
+
+### Classification Trees
+
+We use trees to classify respondents into voters and non-voters. Here we need the `tree` package which we have to install if is not already `install.packages("tree")`.
+
+```{r}
+library(tree)
+
+# build classification tree (- in formula language means except)
+t1 <- tree( Turnout ~ . -CivicDutyScores, data = bes)
+summary(t1)
+```
+We can plot the tree using the standard plot function. On every split a condition is printed. The observations in the left branch are those for which the condition is true and the ones on the right are those for which the condition is false.
+
+```{r}
+# plot tree object
+plot(t1)
+text(t1, pretty = 0)
+```
+
+We can also examine the splits as text.
+
+```{r}
+# examin the tree object
+t1
+```
+
+Now we use the validation set approach for classification. We split our data and re-grow the tree on the training data.
+
+```{r}
+# initialize random number generator
+set.seed(2)
+
+# training/test split
+train <- sample(nrow(bes), size = as.integer(nrow(bes)*.66))
+bes.test <- bes[ -train, ]
+turnout.test <- ifelse( bes$Turnout[-train] == "1", yes = 1, no = 0)
+
+# grow tree on training data
+t2 <- tree( Turnout ~ . , data = bes, subset = train)
+```
+
+We predict outcomes using the `predict()` function.
+
+```{r}
+# predict outcomes
+t2.pred <- predict(t2, newdata = bes.test, type = "class")
+
+# confusion matrix
+table(prediction = t2.pred, truth = turnout.test)
+
+# percent correctly classified
+mean( t2.pred == turnout.test )
+```
+
+We correctly classify `r round(mean( t2.pred == turnout.test )*100,0)`% of the observations. In classification models, the Brier Score is often used as as measure of model quality. We estimate it as the average of the squared differences between predicted probabilities and true outcomes. It is, thus, similar to the MSE.
+
+```{r}
+# using the predict function to predict outcomes from tree
+t2.pred <- predict(t2, newdata = bes.test, type = "vector")
+head(t2.pred)
+```
+
+Next we estimate the Brier Score.
+
+```{r}
+# the second column of t2.pred is the probabilities that the outcomes is equal to 1
+t2.pred <- t2.pred[,2]
+
+# brier score
+mse.tree <- mean( (t2.pred - turnout.test)^2 )
+```
+
+We turn to cost-complexity pruning to see if we can simplify the tree and thus decrease variance without increasing bias. We use k-fold cross-validation to determine the best size of the tree.
+
+```{r}
+set.seed(3)
+cv.t2 <- cv.tree(t2, FUN = prune.misclass)
+
+# illustrate
+par(mfrow = c(1, 2))
+plot(cv.t2$size, cv.t2$dev, type = "b")
+plot(cv.t2$k, cv.t2$dev, type = "b")
+```
+
+We can prune the tree to four terminal nodes.
+
+```{r}
+# prune the tree (pick the smallest tree that does not substiantially increase error)
+prune.t2 <- prune.misclass(t2, best = 4)
+par(mfrow = c(1,1))
+plot(prune.t2)
+text(prune.t2, pretty = 0)
+```
+
+We then predict outcomes.
+
+```{r}
+# predict outcomes
+t2.pred <- predict(prune.t2, newdata = bes.test, type = "class")
+
+# did we loose predictive power?
+mean( t2.pred == turnout.test )
+```
+
+Let's estimate the Brier Score
+
+```{r}
+# Brier score
+t2.pred <- predict(t2, newdata = bes.test, type = "vector")[,2]
+mse.pruned <- mean( (t2.pred - turnout.test)^2 ) 
+```
+
+We still correctly classify `r round(mean( t2.pred == turnout.test )*100,2)`$\%$ of the observations and the brier score remained stable. In the previous plots, we saw that we should do worse if we prune back the tree to have less than 4 terminal nodes. We examine what happens if we overdo it.
+
+```{r}
+# using "wrong" value for pruning (where the error rate does increase)
+prune.t2 <- prune.misclass(t2, best = 2)
+plot(prune.t2, bty = "n")
+text(prune.t2, pretty = 0)
+```
+
+We now predict outcomes based on the tree that is too small.
+
+```{r}
+t2.pred <- predict(prune.t2, newdata = bes.test, type = "class")
+
+# our predictive power decreased
+mean( t2.pred == turnout.test )
+```
+
+Let's estimate the Brier Score.
+```{r}
+# brier score
+t2.pred <- predict(prune.t2, newdata = bes.test, type = "vector")[,2]
+mse.pruned2 <- mean( (t2.pred - turnout.test)^2 ) 
+```
+
+We see that our test error increases.
+
+### Regression Trees
+
+We predict the continuous variable `Income`. The plot of the regression tree is similar. However, in the terminal nodes the mean values of the dependent variable for that group are displayed rather than the class labels.
+
+```{r}
+# grow a regression tree
+set.seed(123)
+reg.t1 <- tree(Income ~ ., data = bes, subset = train)
+summary(reg.t1)
+```
+
+Let's plot the tree.
+```{r}
+# plot regression tree
+plot(reg.t1)
+text(reg.t1, pretty = 0)
+```
+
+We can also examine the same output as text.
+
+```{r}
+# examin the tree objext
+t1
+```
+
+We estimate test error of our tree.
+
+```{r}
+# MSE
+mse.tree <- mean( (bes.test$Income - predict(reg.t1, newdata = bes.test))^2, na.rm = TRUE)
+```
+
+We apply pruning again to get a smaller more interpretable tree.
+
+```{r}
+# cross-validation (to determine cutback size for pruning)
+cv.reg.t1 <- cv.tree(reg.t1)
+plot(cv.reg.t1)
+plot(cv.reg.t1$size, cv.reg.t1$dev, type = "b")
+```
+
+This is time we will increase error by pruning the tree. We choose four as a smaller tree size that does not increase RSS by much.
+
+```{r}
+# pruning
+prune.reg.t1 <- prune.tree(reg.t1, best = 4)
+plot(prune.reg.t1)
+text(prune.reg.t1, pretty = 0)
+```
+
+We can predict the outcome based on our pruned back tree. We will predict four values because we have four terminal nodes. We can illustrate the groups and their variance and estimate the MSE of our prediction.
+
+```{r}
+# predict outcomes
+yhat <- predict(prune.reg.t1, newdata = bes.test)
+plot(yhat, bes.test$Income)
+abline(0, 1)
+```
+
+We estimate the Brier Score (prediction error).
+
+```{r}
+# MSE
+mse.pruned <- mean((yhat - bes.test$Income)^2)
+```
+
+#### Bagging and Random Forests
+
+We now apply bagging and random forests to improve our prediction. Bagging is the idea that the high variance of a single bushy tree can be reduced by bootstrapping samples and averaging over trees that were grown on the samples.
+
+Note: Bagging gets an estimate of the test error for free as it always leaves out some observations when a tree is fit. The reported out-of-bag MSE is thus an estimate of test error. We also estimate test error separately on a test set. This is one particular test set, so the test error may vary.
+
+In our run below the OOB MSE may be a better estimate of test error. It is reported to be lower than our test error estimate. We need to install the `randomForest` package like so: `install.packages("randomForest")`.
+
+```{r}
+set.seed(123)
+library(randomForest)
+
+# estiamte random forrests model (this may take a moment)
+bag1 <- randomForest(Income ~ . , mtry = 19, data = bes, subset = train, importance = TRUE)
+bag1
+```
+
+We can use the predict function to predict outcomes from our random forests object.
+
+```{r}
+# predict outcome, illustrate, MSE
+yhat.bag <- predict(bag1, newdata = bes.test)
+plot(yhat.bag, bes.test$Income)
+abline(0, 1) # line of 1:1 perfect prediction
+```
+
+We estimate the MSE in the validation set
+
+```{r}
+mse.bag <- mean( (yhat.bag - bes.test$Income)^2 )
+
+# reduction of error
+(mse.bag - mse.tree) / mse.tree
+```
+
+We reduce the error rate by `r round(((mse.bag - mse.tree) / mse.tree)*-100, 2)`$\%$ by using bagging. We examine what happens when we reduce the number of trees we grow. The default is 500.
+
+```{r}
+# dcrease the number of trees (defaults to 500)
+bag2 <- randomForest(Income ~ ., mtry = 19, data = bes, subset = train, ntree = 25, importance = TRUE)
+
+# predict outcome
+yhat.bag2 <- predict(bag2, newdata = bes.test)
+mse.bag2 <- ( (yhat.bag2 - bes.test$Income)^2 )
+```
+
+The result is that our rate increases substantially again.
+
+We now apply random forest. The trick is to de-corelate the trees by randomly considering only a subset of variables at every split. We thereby reduce variance further. The number of variables argument `mtry` is a tuning parameter.
+
+```{r}
+# Random Forest: not trying all vars at each split decorrelates the trees
+set.seed(123)
+
+# we try to find the optimal tuning parameter for the number of variables to use at each split
+oob.error <- NA
+val.set.error <- NA
+for ( idx in 1:10){
+  rf1 <- randomForest(Income ~ ., mtry = idx, data = bes, subset = train, importance = TRUE)
+  # record out of bag error
+  oob.error[idx] <- rf1$mse[length(rf1$mse)]
+  cat(paste("\n", "Use ", idx, " variables at each split", sep=""))
+  # record validation set error
+  val.set.error[idx] <- mean( (predict(rf1, newdata = bes.test) - bes.test$Income)^2 )
+}
+
+# check optimal values for mtry
+matplot( 1:idx, cbind(oob.error, val.set.error), pch = 19, col = c("red", "blue"),
+         type = "b", ylab = "MSE", frame.plot = FALSE)
+legend("topright", legend = c("OOB", "Val. Set"), pch = 19, col = c("red", "blue"),
+       bty = "n")
+```
+
+We use 3 as the optimal value for `mtry`. In cases where it is hard to decide, it's a good idea to choose the less complex model.
+
+```{r}
+rf <- randomForest(Income ~ ., mtry = 4, data = bes, subset = train, importance = TRUE)
+
+# predict outcomes
+yhat.rf <- predict(rf, newdata = bes.test)
+mse.rf <- mean( (yhat.rf - bes.test$Income)^2 )
+
+# on previous random forests model
+(mse.rf - mse.bag) / mse.bag
+```
+
+We reduced the error rate by another `r round(((mse.rf - mse.bag) / mse.bag)*-100,2)`$\%$ by de-correlating the trees. We can examine variable importance as well. Variable reduction is obtained as the average that a predictor reduces error at splits within a tree where it was used and averaged again over all trees. Similarly, node purity is based on the gini index of how heterogeneous a group becomes due to a split.
+
+```{r}
+par(mfrow = c(1,1))
+# which varaibles help explain outcome
+importance(rf1)
+# importance plot
+varImpPlot(rf1)
+```
+
+#### Boosting
+
+The general idea of boosting is that a tree is fit to predict outcome. The second tree is then fit on the residual of the first and so with all following trees. Each additional tree is discounted by a learning rate, so that each tree does not contribute much but slowly the ensemble becomes more predictive.
+
+Install the `gbm` package like so `install.packages("gbm")`.
+
+```{r}
+library(gbm)
+set.seed(1234)
+```
+
+We run gradient boosting. The tuning parameters are the tree size. Tree size is directly related to the second tuning parameter: the learning rate. When the learning rate is smaller, we need more trees. The third tuning parameter interaction.depth determines how bushy the tree is. Common choices are 1, 2, 4, 8. When interaction depth is 1, each tree is a stump. If we increase to two we can get bi-variate interactions with 2 splits and so. A final parameter that is related to the complexity of the tree could be minimum number of observations in the terminal node which defaults to 10.
+
+Notice that we just set hyper-parameters. We might achieve better predictions by training the boosting model properly (however, this would take very long).
+
+```{r, fig.height=8}
+# gradient boosting
+gb1 <- gbm(Income ~ ., data = bes[train, ], 
+           distribution = "gaussian", 
+           n.trees = 5000, 
+           interaction.depth = 4,
+           shrinkage = 0.001)
+
+summary(gb1, order = TRUE, las = 2)
+```
+
+The variable importance plot gives a good idea about which variables are important predictors. The general weakness of GBM is that the model is somewhat of a black box. However, variables importance gives us some insights into the model. For instance, it seems that high education and age are most predictive. Variables like arty identification or ideology play less of a role in the predictive model. Gender is the sixth strongest predictor.
+
+The importance plot does not inform us about the direction of the relationship. To get insights into such predictors, we can assess partial dependence plots. Let's do so for the high education variable `edu19plus` and for `Age`.
+
+```{r}
+# partial dependence plots
+plot(gb1, i = "edu19plus")
+plot(gb1, i = "Age")
+```
+
+We predict the test MSE again and compare to our best model.
+
+```{r}
+# predict outcome
+yhat.gb <- predict(gb1, newdata = bes.test, n.trees = 5000)
+mse.gb <- mean( (yhat.gb - bes.test$Income)^2 )
+
+# reduction in error
+(mse.gb - mse.rf) / mse.rf
+```
+
+We reduce the error rate again quite a bit.
+
+#### Bayesian Additive Regression Trees (BARTs)
+
+BARTs move regression trees into a Bayesian framework were priors are used on several parameters to reduce some of the problems of over-fitting that boosting and random forests are prone to. We will illustrate a small example here. Before you can run this, ***64bit JAVA*** must be installed on your computer. We then need to install `install.packages("rJava")` and then `install.packages("bartMachine")`. Installing Java can be tricky and you may need admin rights on your computer.
+
+There are several tuning parameters for the priors that are set to values that work for most applications. Check the documentation if you want to learn more about these. We set the number of trees to grow, the iterations in the Markow-Chain Monte-Carlo estimations to discard and the draws from the posterior distribution. These parameters should also be tested for instance using cross-validation. The algorithm needs some time to run and therefore we pick out-of-the-box values.
+
+
+```{r}
+options(java.parameters = "-Xmx5g")
+library(bartMachine)
+
+# vector of covariate names
+Xs <- c("Turnout", "Vote2001", "Age", "Gender", "PartyID", "Influence", "Attention",
+        "Telephone", "LeftrightSelf", "CivicDutyScores", "polinfoindex", "edu15", 
+        "edu16", "edu18", "edu19plus", "in_school", "in_uni")
+
+
+# run BART
+bart1 <- bartMachine(X = bes[train, Xs],
+                     y = bes$Income[train],
+                     num_trees = 500,
+                     num_burn_in = 200,
+                     num_iterations_after_burn_in = 1000,
+                     seed = 123)
+
+# predict outcomes on the test set
+pred <- predict(object = bart1, new_data = bes[-train, Xs])
+
+# Brier Score
+mse.bart <- mean((bes.test$Income - pred)^2)
+```
+
+Let's compare our final BART prediction to the reigning champion gradient boosting. 
+
+```{r}
+# reduction in error
+(mse.bart - mse.gb) / mse.gb
+```
+
+We have reduced the error by another `r round(((mse.bart - mse.gb) / mse.gb)*-100,2)`$\%$. Not bad... However, keep in mind that we are usig the validation set approach here. A better evaluation would be based on cross-validation or a truly new dataset.
++
