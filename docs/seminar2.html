@@ -146,6 +146,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="seminar2.html"><a href="seminar2.html"><i class="fa fa-check"></i><b>2</b> Tidyverse introduction</a><ul>
 <li class="chapter" data-level="2.1" data-path="seminar2.html"><a href="seminar2.html#seminar"><i class="fa fa-check"></i><b>2.1</b> Seminar</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="seminar2.html"><a href="seminar2.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>2.1.1</b> Introduction to the tidyverse</a></li>
+<li class="chapter" data-level="2.1.2" data-path="seminar2.html"><a href="seminar2.html#data-visualization-with-ggplot2"><i class="fa fa-check"></i><b>2.1.2</b> Data visualization with ggplot2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="seminar2.html"><a href="seminar2.html#renaming-variables-and-selecting-subsets"><i class="fa fa-check"></i><b>2.1.3</b> Renaming variables and selecting subsets</a></li>
+<li class="chapter" data-level="2.1.4" data-path="seminar2.html"><a href="seminar2.html#aggregating-and-pipes"><i class="fa fa-check"></i><b>2.1.4</b> Aggregating and pipes</a></li>
+<li class="chapter" data-level="2.1.5" data-path="seminar2.html"><a href="seminar2.html#merging-data-sets"><i class="fa fa-check"></i><b>2.1.5</b> Merging data sets</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -171,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Seminar</h2>
 <div id="introduction-to-the-tidyverse" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Introduction to the tidyverse</h3>
-<p>The <code>tidyverse</code> package makes it easier to pre-process data. By pre-processing, we mean storing data in such a way that observations are in rows and variables are in columns. Data comes in different forms and is not always stored in this way. We will use data from the World Bank to illustrate this point.</p>
+<p>The <code>tidyverse</code> package makes it easier to pre-process data. The package attempts to make it easier to apply operations that would otherwise require a substantial amount of coding. The syntax of the <code>tidyverse</code> is meant to be more intuitive than base R syntax but that also means that you have to learn new syntax. Working with the tidyverse is a matter of taste. A great resource for learning <code>tidyverse</code> and R is the book <a href="https://r4ds.had.co.nz/">R for data science</a> which is freely available.</p>
 <p>Before getting started, we first need to install the <code>tidyverse</code> package like so: <code>install.packages("tidyverse")</code>. You only need to install once. However, doing this again is not a mistake. In fact, R, RStudio and R packages are regularly updated. It is good practice to update all of these on your computer as well. Just remember never to update before a deadline!</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear workspace</span>
 <span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
@@ -203,76 +207,287 @@ install.packages(c(&quot;httr&quot;, &quot;modelr&quot;, &quot;tidyr&quot;, &quo
 <span class="kw">tidyverse_update</span>()</code></pre>
 <pre><code>All tidyverse packages up-to-date</code></pre>
 <p>Now, everything is updated correctly.</p>
-<p>Let’s check the codebook of our data.</p>
-<table>
-<colgroup>
-<col width="11%" />
-<col width="88%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>IMMBRIT</td>
-<td>Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?</td>
-</tr>
-<tr class="even">
-<td>over.estimate</td>
-<td>1 if estimate is higher than 10.7%.</td>
-</tr>
-<tr class="odd">
-<td>RSex</td>
-<td>1 = male, 2 = female</td>
-</tr>
-<tr class="even">
-<td>RAge</td>
-<td>Age of respondent</td>
-</tr>
-<tr class="odd">
-<td>Househld</td>
-<td>Number of people living in respondent’s household</td>
-</tr>
-<tr class="even">
-<td>party_self</td>
-<td>1 = Conservatives; 2 = Labour; 3 = SNP; 4 = Ukip; 5 = BNP; 6 = GP; 7 = party.other</td>
-</tr>
-<tr class="odd">
-<td>paper</td>
-<td>Do you normally read any daily morning newspaper 3+ times/week?</td>
-</tr>
-<tr class="even">
-<td>WWWhourspW</td>
-<td>How many hours WWW per week?</td>
-</tr>
-<tr class="odd">
-<td>religious</td>
-<td>Do you regard yourself as belonging to any particular religion?</td>
-</tr>
-<tr class="even">
-<td>employMonths</td>
-<td>How many mnths w. present employer?</td>
-</tr>
-<tr class="odd">
-<td>urban</td>
-<td>Population density, 4 categories (highest density is 4, lowest is 1)</td>
-</tr>
-<tr class="even">
-<td>health.good</td>
-<td>How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good)</td>
-</tr>
-<tr class="odd">
-<td>HHInc</td>
-<td>Income bands for household, high number = high HH income</td>
-</tr>
-</tbody>
-</table>
-<p>The dataset is on your memory sticks and also available for download <a href="http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load non-western foreigners data set</span>
-<span class="kw">load</span>(<span class="st">&quot;non_western_immigrants.RData&quot;</span>)</code></pre>
+<p>Let’s re-load the EU data set that we used previously.</p>
+<div class="container btn-container">
+<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button></p>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
+</div>
+<div id="data-visualization-with-ggplot2" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Data visualization with ggplot2</h3>
+<p>In the previous exercise, we stopped on data illustration. Base R graphics is very powerful and you can do almost anything with it. However, it does require to write a lot of code. ggplot2 is useful because it helps us to produce good looking graphics with relative ease.</p>
+<p>Let’s create a simple scatter plot. We use the wealth variable <code>econ_2gdp_eur_hab</code> and the European Quality of Government Index (EQI) — variable name <code>eqi_eqi</code> — to assess whether the two are related but only for post 2010.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>,]) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>The plot looks a bit better than what we produced with base R. We also spot a slightly positive relationship. Let’s walk trough the code. First, we type <code>ggplot()</code> which creates the coordinate system which we then add layers to. The argument that we supply to <code>ggplot()</code> is the data we are using. The code <code>ggplot(data = eu)</code> creates an empty plot. We then add the points or observations to the plot with the function <code>geom_point()</code>. The argument <code>mapping</code> is necessary for ggplot to decide how variables are mapped to visuals. <code>mapping</code> is always paired with <code>aes()</code> as well as the <code>x</code> and <code>y</code> arguments which just like in base R’s <code>plot()</code> function correspond to the axes. Recall that it is convention to place the independent variable on the x axis and the dependent variable on the y axis.</p>
+<p>Let’s add a third variable to the plot. Here, we use labor market statistics. The variable <code>unemp_pc_act</code> measures long-term unemployment as percentage of the active population. We use the variable for the color argument.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, 
+                              <span class="dt">color =</span> unemp_pc_act) ) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>The lighter shading corresponds to more unemployment. Using unemployment does not shed a lot of light on the relationship between the variables. It does seem like places with more unemployment cluster at the lower end of the governance index and they correspond with less per capita wealth which is to be expected.</p>
+<p>Instead of using a third variable on color, we could use it on the size of the points. For instance, population size is often applied here, making larger units more prominent. Let’s use the total population variable for the size of the points.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, <span class="dt">color =</span> unemp_pc_act, 
+                              <span class="dt">size =</span> demo_d2jan_t) ) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Let’s evaluate whether the relationship between the governance index and wealth holds within countries. We can use <strong>facets</strong> to create multiple plots where the splots are split by a variable like, for instance, country.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>NUTS0, <span class="dt">nrow =</span> <span class="dv">5</span>)</code></pre>
+<pre><code>Warning: Removed 13469 rows containing missing values (geom_point).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>The variable to split the plot by should be discrete rather than continuous. It is diffcult to see much on facet plots, when the splitting variable has many categories as in this case. We see, however that especially in Italy there are large differences beteween the quality of governance.</p>
+<p>In our initial plot, we were interested in the relationship between governance and the wealth. Let’s add a linear regression line including the confidence interval to the plot.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu, <span class="kw">aes</span>(<span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<pre><code>Warning: Removed 13469 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>Warning: Removed 13469 rows containing missing values (geom_point).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>This was useful. Let’s say we have a more complex model. To illustrate this, we quickly load the <code>world.data</code> data set.</p>
+<div class="container btn-container">
+<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/QoG2012.csv');">Download Data</button></p>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r">world.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QoG2012.csv&quot;</span>)</code></pre>
+<p>Now, we regress quality of life measured by the United Nations Human Development Index on wealth measured as GDP per capita. We fit one linear model, one quadratic model and one log transformed model. We then make predictions including confidence intervals and add them to the data set. We then plot the results using ggplot.</p>
+<p>We need some additional data manipulation skills which we will cover as we go along. Specifically, we select a subset of the data set and we reshape the data set into long format.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># drop missings</span>
+world.data &lt;-<span class="st"> </span>world.data[ <span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>wdi_gdpc) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>undp_hdi), ]
+
+<span class="co"># run regressions</span>
+m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span>wdi_gdpc, <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
+m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(wdi_gdpc,<span class="dv">2</span>), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
+m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(wdi_gdpc), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
+
+<span class="co"># make predictions</span>
+preds1 &lt;-<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
+preds2 &lt;-<span class="st"> </span><span class="kw">predict</span>(m2, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
+preds3 &lt;-<span class="st"> </span><span class="kw">predict</span>(m3, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
+
+<span class="co">## add point estimates and CIs to the world.data data set</span>
+
+<span class="co"># model 1</span>
+world.data<span class="op">$</span>bestguess1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit
+world.data<span class="op">$</span>lowerbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit
+world.data<span class="op">$</span>upperbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit
+
+<span class="co"># model 2</span>
+world.data<span class="op">$</span>bestguess2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit
+world.data<span class="op">$</span>lowerbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit
+world.data<span class="op">$</span>upperbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit
+
+<span class="co"># model 3</span>
+world.data<span class="op">$</span>bestguess3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit
+world.data<span class="op">$</span>lowerbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit
+world.data<span class="op">$</span>upperbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit
+
+<span class="co"># selecting a subset of variables</span>
+plot.data &lt;-<span class="st"> </span><span class="kw">select</span>(world.data,
+                    <span class="st">&quot;undp_hdi&quot;</span>,
+                    <span class="st">&quot;wdi_gdpc&quot;</span>,
+                    <span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,
+                    <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,
+                    <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>)
+
+<span class="co"># reshaping the data set</span>
+plot.data &lt;-<span class="st"> </span><span class="kw">reshape</span>(plot.data, <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>,
+        <span class="dt">varying =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,
+                    <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,
+                    <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>),
+        <span class="dt">timevar =</span> <span class="st">&quot;Model&quot;</span>,
+        <span class="dt">times =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>),
+        <span class="dt">v.names =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess&quot;</span>,<span class="st">&quot;lowerbound&quot;</span>,<span class="st">&quot;upperbound&quot;</span>),
+        <span class="dt">idvar =</span> <span class="kw">c</span>(<span class="st">&quot;undp_hdi&quot;</span>,<span class="st">&quot;wdi_gdpc&quot;</span>))
+
+<span class="co"># renaming the rownames of the data set</span>
+<span class="kw">row.names</span>(plot.data) &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(plot.data))
+
+<span class="co"># changing the grouping id into a factor</span>
+plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.data<span class="op">$</span>Model, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;Quadratic&quot;</span>, <span class="st">&quot;Log&quot;</span>))
+
+<span class="kw">ggplot</span>(plot.data, <span class="kw">aes</span>(<span class="dt">x =</span> wdi_gdpc, <span class="dt">y =</span> undp_hdi)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>( <span class="kw">aes</span>( <span class="dt">y =</span> bestguess, <span class="dt">color =</span> Model), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_ribbon</span>( <span class="kw">aes</span>( <span class="dt">ymin =</span> lowerbound, <span class="dt">ymax =</span> upperbound, <span class="dt">fill =</span> Model), <span class="dt">alpha =</span> <span class="fl">0.25</span> ) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;GDP per capita&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Human Development Index&quot;</span>, 
+          <span class="dt">title =</span> <span class="st">&quot;Relationship between wealth and quality of life&quot;</span>)</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+</div>
+<div id="renaming-variables-and-selecting-subsets" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Renaming variables and selecting subsets</h3>
+<p>You may remember that renaming variables involved sub-setting and the logical evaluations. Well, this is one of the things that is quite easy to do in tidyverse. Here, we use the <code>rename()</code> function from the <code>dplyr</code> package.</p>
+<p>Let’s go back to the <code>eu</code> data set and rename the following variables:</p>
+<ol style="list-style-type: decimal">
+<li><code>NUTS0</code> into <code>country</code></li>
+<li><code>region_name</code> into <code>region</code></li>
+<li><code>econ_2gdp_eur_hab</code> into <code>wealth</code></li>
+<li><code>eqi_eqi</code> into <code>quality.of.government</code></li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">eu.renamed &lt;-<span class="st"> </span><span class="kw">rename</span>(eu,
+                     <span class="dt">country =</span> NUTS0,
+                     <span class="dt">region =</span> region_name,
+                     <span class="dt">wealth =</span> econ_2gdp_eur_hab,
+                     <span class="dt">quality.of.government =</span> eqi_eqi)</code></pre>
+<p>Selecting a subset is as easy as renaming. The function <code>select()</code> lets us do this easily.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.renamed &lt;-<span class="st"> </span><span class="kw">select</span>(eu.renamed,
+                     country, region, wealth, quality.of.government)
+<span class="kw">names</span>(eu.renamed)</code></pre>
+<pre><code>[1] &quot;country&quot;               &quot;region&quot;                &quot;wealth&quot;               
+[4] &quot;quality.of.government&quot;</code></pre>
+<p>Let’s remove our small data set <code>eu.renamed</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(eu.renamed)</code></pre>
+<p>We can rename and select in one step within the <code>select()</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">select</span>(eu,
+             <span class="dt">country =</span> NUTS0,
+             <span class="dt">region =</span> region_name,
+             year,
+             <span class="dt">wealth =</span> econ_2gdp_eur_hab,
+             <span class="dt">quality.of.government =</span> eqi_eqi)
+<span class="kw">summary</span>(eu)</code></pre>
+<pre><code>   country             region               year          wealth      
+ Length:13884       Length:13884       Min.   :1990   Min.   :  1300  
+ Class :character   Class :character   1st Qu.:1996   1st Qu.: 14600  
+ Mode  :character   Mode  :character   Median :2002   Median : 23800  
+                                       Mean   :2002   Mean   : 23450  
+                                       3rd Qu.:2009   3rd Qu.: 30000  
+                                       Max.   :2015   Max.   :172600  
+                                                      NA&#39;s   :7896    
+ quality.of.government
+ Min.   :-2.719       
+ 1st Qu.:-0.534       
+ Median : 0.368       
+ Mean   : 0.184       
+ 3rd Qu.: 0.963       
+ Max.   : 2.781       
+ NA&#39;s   :13453        </code></pre>
+</div>
+<div id="aggregating-and-pipes" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Aggregating and pipes</h3>
+<p>Our data set is on the region-year level. We want to compare countries over time. Therefore, we now aggregate our data up to the country-year level. Note that you want data in the most dis-aggregated fashion possible because aggregating to the next higher level is easy. We want to average over the regions within each country and year.</p>
+<p>To do this we introduce two new functions and one new concept. The new concept is called the pipe and its operator is <code>%&gt;%</code>. In our example we say first create a copy of the data set called <code>eu</code> called <code>eu.country.year</code>. We do not stop here but we continue on indicated by the pipe operator <code>%&gt;%</code>. We then group the data set by two variables with the <code>group_by()</code> function. The first variable that indentifies groups is the country and the second is the year. We then contiue on with the pipe operator <code>%&gt;%</code> and finally we summarize the data within the groups using the <code>summarize()</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.country.year &lt;-<span class="st"> </span>eu <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+<span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">15</span>)</code></pre>
+<pre><code># A tibble: 15 x 4
+# Groups:   country [1]
+   country  year wealth quality.of.government
+   &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;                 &lt;dbl&gt;
+ 1 AT       1990   NaN                    NaN
+ 2 AT       1991   NaN                    NaN
+ 3 AT       1992   NaN                    NaN
+ 4 AT       1993   NaN                    NaN
+ 5 AT       1994   NaN                    NaN
+ 6 AT       1995   NaN                    NaN
+ 7 AT       1996   NaN                    NaN
+ 8 AT       1997   NaN                    NaN
+ 9 AT       1998   NaN                    NaN
+10 AT       1999   NaN                    NaN
+11 AT       2000 25738.                   NaN
+12 AT       2001 26477.                   NaN
+13 AT       2002 27138.                   NaN
+14 AT       2003 27623.                   NaN
+15 AT       2004 28746.                   NaN</code></pre>
+<p>It turns out that we have a lot of missing data in our dataset. Our goal is to plot wealth over time. We have all the necessary parts to do this but we would like to also add an EU average. In other words, for each year we need to create a new observation that receives the value <code>EU</code> for the country variable and the average of wealth within that year and the average of quality of government within that year. We follow the same procedure as previosly.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.year &lt;-<span class="st"> </span>eu.country.year <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre>
+<p>We now have two datasets which need to combine.</p>
+</div>
+<div id="merging-data-sets" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> Merging data sets</h3>
+<p>We cannot just paste the data sets together because they differ in the number of columns. As a first step, we need to create a new variable in the data set <code>eu.year</code> called <code>country</code> which identifies the country in that data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.year<span class="op">$</span>country &lt;-<span class="st"> &quot;EU&quot;</span>
+eu.year</code></pre>
+<pre><code># A tibble: 26 x 4
+    year wealth quality.of.government country
+   &lt;int&gt;  &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;  
+ 1  1990    NaN                   NaN EU     
+ 2  1991    NaN                   NaN EU     
+ 3  1992    NaN                   NaN EU     
+ 4  1993    NaN                   NaN EU     
+ 5  1994    NaN                   NaN EU     
+ 6  1995    NaN                   NaN EU     
+ 7  1996    NaN                   NaN EU     
+ 8  1997    NaN                   NaN EU     
+ 9  1998    NaN                   NaN EU     
+10  1999    NaN                   NaN EU     
+# ... with 16 more rows</code></pre>
+<p>We now merge the two variables together. Recall that observations are uniquely identified by the variables <code>country</code> and <code>year</code>. We neeed to order the observations in both data sets before merging. To do this we use the <code>arrange()</code> function from the <code>dplyr</code> package. The datasets are already ordered by the country first and the year second. Let’s reorder by year first and then country to illustrate how the function works.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.country.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.country.year, year, country)
+eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, year, country)
+<span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre>
+<pre><code># A tibble: 20 x 4
+# Groups:   country [20]
+   country  year wealth quality.of.government
+   &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;                 &lt;dbl&gt;
+ 1 AT       1990    NaN                   NaN
+ 2 BE       1990    NaN                   NaN
+ 3 BG       1990    NaN                   NaN
+ 4 CY       1990    NaN                   NaN
+ 5 CZ       1990    NaN                   NaN
+ 6 DE       1990    NaN                   NaN
+ 7 DK       1990    NaN                   NaN
+ 8 EE       1990    NaN                   NaN
+ 9 EL       1990    NaN                   NaN
+10 ES       1990    NaN                   NaN
+11 FI       1990    NaN                   NaN
+12 FR       1990    NaN                   NaN
+13 GR       1990    NaN                   NaN
+14 HR       1990    NaN                   NaN
+15 HU       1990    NaN                   NaN
+16 IE       1990    NaN                   NaN
+17 IT       1990    NaN                   NaN
+18 LT       1990    NaN                   NaN
+19 LU       1990    NaN                   NaN
+20 LV       1990    NaN                   NaN</code></pre>
+<p>We are ready to merge. To do so, we use the <code>merge()</code> function. We have the same variables in both data sets and both are unique observations. In this case, an alternative to using <code>merge()</code> is to simply bind the data sets together row-wise like so: <code>rbind(eu.country.year, eu.year)</code>. However, the nice side-effect of using <code>merge()</code> is that our order by years and then countries remains intact. So the first two arguemnts of <code>merge()</code> are the names of the data sets to merge. We then specify the variables to merge by in the <code>by</code> argument and finally we need to say keep all observations that are unique to either data set with <code>all = TRUE</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.join &lt;-<span class="st"> </span><span class="kw">merge</span>(eu.country.year, eu.year, <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(eu.country.year), <span class="kw">names</span>(eu.year)), <span class="dt">all =</span> <span class="ot">TRUE</span>)</code></pre>
+<p>Now, you should be able to plot wealth over time on your own. The plot should show the all “countries” in the data set. We do not have data before 2000, so there is no point in plotting it.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu.join[eu.join<span class="op">$</span>year<span class="op">&gt;</span><span class="dv">1999</span>,]) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country))</code></pre>
+<pre><code>Warning: Removed 45 rows containing missing values (geom_path).</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>There are too many countries in this plot. Let’s compare the UK with France, Italy, Belgium, Greece, Germany, and Spain. To do this, we use the <code>filter()</code> function. We also take the opportunity to filter out the missing years.</p>
+<pre class="sourceCode r"><code class="sourceCode r">eu.join.small &lt;-<span class="st"> </span><span class="kw">filter</span>(eu.join, country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;UK&quot;</span>,<span class="st">&quot;FR&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;EL&quot;</span>,<span class="st">&quot;DE&quot;</span>,<span class="st">&quot;ES&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2015</span> )
+<span class="kw">head</span>(eu.join.small, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre>
+<pre><code>   country year   wealth quality.of.government
+1       BE 2000 25200.00                   NaN
+2       BE 2001 25900.00                   NaN
+3       BE 2002 26600.00                   NaN
+4       BE 2003 27793.33                   NaN
+5       BE 2004 29253.33                   NaN
+6       BE 2005 30300.00                   NaN
+7       BE 2006 31506.67                   NaN
+8       BE 2007 32873.33                   NaN
+9       BE 2008 33493.33                   NaN
+10      BE 2009 32720.00                   NaN
+11      BE 2010 34020.00             0.2645683
+12      BE 2011 34786.67                   NaN
+13      BE 2012 35146.67                   NaN
+14      BE 2013 35426.67             0.6278485
+15      BE 2014 35993.33                   NaN
+16      DE 2000 25083.64                   NaN
+17      DE 2001 25789.09                   NaN
+18      DE 2002 26163.64                   NaN
+19      DE 2003 26347.27                   NaN
+20      DE 2004 26983.64                   NaN</code></pre>
+<p>Now, we plot the data again.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu.join.small) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country), <span class="dt">size =</span> <span class="fl">1.2</span>)</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 
 </div>
 </div>

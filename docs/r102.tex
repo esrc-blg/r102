@@ -2448,7 +2448,7 @@ It seems that per person wealth in Essex was not quite back at pre financial cri
 \hypertarget{introduction-to-the-tidyverse}{%
 \subsubsection{Introduction to the tidyverse}\label{introduction-to-the-tidyverse}}
 
-The \texttt{tidyverse} package makes it easier to pre-process data. By pre-processing, we mean storing data in such a way that observations are in rows and variables are in columns. Data comes in different forms and is not always stored in this way. We will use data from the World Bank to illustrate this point.
+The \texttt{tidyverse} package makes it easier to pre-process data. The package attempts to make it easier to apply operations that would otherwise require a substantial amount of coding. The syntax of the \texttt{tidyverse} is meant to be more intuitive than base R syntax but that also means that you have to learn new syntax. Working with the tidyverse is a matter of taste. A great resource for learning \texttt{tidyverse} and R is the book \href{https://r4ds.had.co.nz/}{R for data science} which is freely available.
 
 Before getting started, we first need to install the \texttt{tidyverse} package like so: \texttt{install.packages("tidyverse")}. You only need to install once. However, doing this again is not a mistake. In fact, R, RStudio and R packages are regularly updated. It is good practice to update all of these on your computer as well. Just remember never to update before a deadline!
 
@@ -2498,93 +2498,466 @@ All tidyverse packages up-to-date
 
 Now, everything is updated correctly.
 
-Let's check the codebook of our data.
+Let's re-load the EU data set that we used previously.
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.11\columnwidth}\raggedright
-Variable Name\strut
-\end{minipage} & \begin{minipage}[b]{0.83\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-IMMBRIT\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-over.estimate\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-1 if estimate is higher than 10.7\%.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-RSex\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-1 = male, 2 = female\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-RAge\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Age of respondent\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-Househld\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Number of people living in respondent's household\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-party\_self\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-1 = Conservatives; 2 = Labour; 3 = SNP; 4 = Ukip; 5 = BNP; 6 = GP; 7 = party.other\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-paper\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Do you normally read any daily morning newspaper 3+ times/week?\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-WWWhourspW\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-How many hours WWW per week?\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-religious\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Do you regard yourself as belonging to any particular religion?\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-employMonths\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-How many mnths w. present employer?\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-urban\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Population density, 4 categories (highest density is 4, lowest is 1)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-health.good\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-HHInc\strut
-\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
-Income bands for household, high number = high HH income\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
-
-The dataset is on your memory sticks and also available for download \href{http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData}{here}.
+Download Data
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# load non-western foreigners data set}
-\KeywordTok{load}\NormalTok{(}\StringTok{"non_western_immigrants.RData"}\NormalTok{)}
+\NormalTok{eu <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"qog_eureg_long_sep16.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{data-visualization-with-ggplot2}{%
+\subsubsection{Data visualization with ggplot2}\label{data-visualization-with-ggplot2}}
+
+In the previous exercise, we stopped on data illustration. Base R graphics is very powerful and you can do almost anything with it. However, it does require to write a lot of code. ggplot2 is useful because it helps us to produce good looking graphics with relative ease.
+
+Let's create a simple scatter plot. We use the wealth variable \texttt{econ\_2gdp\_eur\_hab} and the European Quality of Government Index (EQI) --- variable name \texttt{eqi\_eqi} --- to assess whether the two are related but only for post 2010.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ eu[eu}\OperatorTok{$}\NormalTok{year }\OperatorTok{>}\DecValTok{2010}\NormalTok{,]) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ eqi_eqi, }\DataTypeTok{y =}\NormalTok{ econ_2gdp_eur_hab)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Quality of Government Index"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"GDP per capita price adjusted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 2464 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-47-1.pdf}
+
+The plot looks a bit better than what we produced with base R. We also spot a slightly positive relationship. Let's walk trough the code. First, we type \texttt{ggplot()} which creates the coordinate system which we then add layers to. The argument that we supply to \texttt{ggplot()} is the data we are using. The code \texttt{ggplot(data\ =\ eu)} creates an empty plot. We then add the points or observations to the plot with the function \texttt{geom\_point()}. The argument \texttt{mapping} is necessary for ggplot to decide how variables are mapped to visuals. \texttt{mapping} is always paired with \texttt{aes()} as well as the \texttt{x} and \texttt{y} arguments which just like in base R's \texttt{plot()} function correspond to the axes. Recall that it is convention to place the independent variable on the x axis and the dependent variable on the y axis.
+
+Let's add a third variable to the plot. Here, we use labor market statistics. The variable \texttt{unemp\_pc\_act} measures long-term unemployment as percentage of the active population. We use the variable for the color argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ eu[eu}\OperatorTok{$}\NormalTok{year }\OperatorTok{>}\DecValTok{2010}\NormalTok{, ]) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ eqi_eqi, }\DataTypeTok{y =}\NormalTok{ econ_2gdp_eur_hab, }
+                              \DataTypeTok{color =}\NormalTok{ unemp_pc_act) ) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Quality of Government Index"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"GDP per capita price adjusted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 2464 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-49-1.pdf}
+
+The lighter shading corresponds to more unemployment. Using unemployment does not shed a lot of light on the relationship between the variables. It does seem like places with more unemployment cluster at the lower end of the governance index and they correspond with less per capita wealth which is to be expected.
+
+Instead of using a third variable on color, we could use it on the size of the points. For instance, population size is often applied here, making larger units more prominent. Let's use the total population variable for the size of the points.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ eu[eu}\OperatorTok{$}\NormalTok{year }\OperatorTok{>}\DecValTok{2010}\NormalTok{, ]) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ eqi_eqi, }\DataTypeTok{y =}\NormalTok{ econ_2gdp_eur_hab, }\DataTypeTok{color =}\NormalTok{ unemp_pc_act, }
+                              \DataTypeTok{size =}\NormalTok{ demo_d2jan_t) ) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Quality of Government Index"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"GDP per capita price adjusted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 2464 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-51-1.pdf}
+
+Let's evaluate whether the relationship between the governance index and wealth holds within countries. We can use \textbf{facets} to create multiple plots where the splots are split by a variable like, for instance, country.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ eu) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ eqi_eqi, }\DataTypeTok{y =}\NormalTok{ econ_2gdp_eur_hab)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{NUTS0, }\DataTypeTok{nrow =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 13469 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+The variable to split the plot by should be discrete rather than continuous. It is diffcult to see much on facet plots, when the splitting variable has many categories as in this case. We see, however that especially in Italy there are large differences beteween the quality of governance.
+
+In our initial plot, we were interested in the relationship between governance and the wealth. Let's add a linear regression line including the confidence interval to the plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(eu, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ eqi_eqi, }\DataTypeTok{y =}\NormalTok{ econ_2gdp_eur_hab)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Quality of Government Index"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"GDP per capita price adjusted"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 13469 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+Warning: Removed 13469 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-55-1.pdf}
+
+This was useful. Let's say we have a more complex model. To illustrate this, we quickly load the \texttt{world.data} data set.
+
+Download Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{world.data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"QoG2012.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we regress quality of life measured by the United Nations Human Development Index on wealth measured as GDP per capita. We fit one linear model, one quadratic model and one log transformed model. We then make predictions including confidence intervals and add them to the data set. We then plot the results using ggplot.
+
+We need some additional data manipulation skills which we will cover as we go along. Specifically, we select a subset of the data set and we reshape the data set into long format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# drop missings}
+\NormalTok{world.data <-}\StringTok{ }\NormalTok{world.data[ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(world.data}\OperatorTok{$}\NormalTok{wdi_gdpc) }\OperatorTok{&}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(world.data}\OperatorTok{$}\NormalTok{undp_hdi), ]}
+
+\CommentTok{# run regressions}
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(undp_hdi }\OperatorTok{~}\StringTok{ }\NormalTok{wdi_gdpc, }\DataTypeTok{data =}\NormalTok{ world.data, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(undp_hdi }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(wdi_gdpc,}\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ world.data, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+\NormalTok{m3 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(undp_hdi }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(wdi_gdpc), }\DataTypeTok{data =}\NormalTok{ world.data, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+
+\CommentTok{# make predictions}
+\NormalTok{preds1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{preds2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m2, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{preds3 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m3, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{## add point estimates and CIs to the world.data data set}
+
+\CommentTok{# model 1}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{bestguess1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{lowerbound1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{upperbound1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# model 2}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{bestguess2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{lowerbound2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{upperbound2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# model 3}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{bestguess3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{lowerbound3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{world.data}\OperatorTok{$}\NormalTok{upperbound3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# selecting a subset of variables}
+\NormalTok{plot.data <-}\StringTok{ }\KeywordTok{select}\NormalTok{(world.data,}
+                    \StringTok{"undp_hdi"}\NormalTok{,}
+                    \StringTok{"wdi_gdpc"}\NormalTok{,}
+                    \StringTok{"bestguess1"}\NormalTok{,}\StringTok{"lowerbound1"}\NormalTok{,}\StringTok{"upperbound1"}\NormalTok{,}
+                    \StringTok{"bestguess2"}\NormalTok{,}\StringTok{"lowerbound2"}\NormalTok{,}\StringTok{"upperbound2"}\NormalTok{,}
+                    \StringTok{"bestguess3"}\NormalTok{,}\StringTok{"lowerbound3"}\NormalTok{,}\StringTok{"upperbound3"}\NormalTok{)}
+
+\CommentTok{# reshaping the data set}
+\NormalTok{plot.data <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(plot.data, }\DataTypeTok{direction =} \StringTok{"long"}\NormalTok{,}
+        \DataTypeTok{varying =} \KeywordTok{c}\NormalTok{(}\StringTok{"bestguess1"}\NormalTok{,}\StringTok{"lowerbound1"}\NormalTok{,}\StringTok{"upperbound1"}\NormalTok{,}
+                    \StringTok{"bestguess2"}\NormalTok{,}\StringTok{"lowerbound2"}\NormalTok{,}\StringTok{"upperbound2"}\NormalTok{,}
+                    \StringTok{"bestguess3"}\NormalTok{,}\StringTok{"lowerbound3"}\NormalTok{,}\StringTok{"upperbound3"}\NormalTok{),}
+        \DataTypeTok{timevar =} \StringTok{"Model"}\NormalTok{,}
+        \DataTypeTok{times =} \KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{),}
+        \DataTypeTok{v.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"bestguess"}\NormalTok{,}\StringTok{"lowerbound"}\NormalTok{,}\StringTok{"upperbound"}\NormalTok{),}
+        \DataTypeTok{idvar =} \KeywordTok{c}\NormalTok{(}\StringTok{"undp_hdi"}\NormalTok{,}\StringTok{"wdi_gdpc"}\NormalTok{))}
+
+\CommentTok{# renaming the rownames of the data set}
+\KeywordTok{row.names}\NormalTok{(plot.data) <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(plot.data))}
+
+\CommentTok{# changing the grouping id into a factor}
+\NormalTok{plot.data}\OperatorTok{$}\NormalTok{Model <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(plot.data}\OperatorTok{$}\NormalTok{Model, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Linear"}\NormalTok{, }\StringTok{"Quadratic"}\NormalTok{, }\StringTok{"Log"}\NormalTok{))}
+
+\KeywordTok{ggplot}\NormalTok{(plot.data, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ wdi_gdpc, }\DataTypeTok{y =}\NormalTok{ undp_hdi)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{color =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{( }\KeywordTok{aes}\NormalTok{( }\DataTypeTok{y =}\NormalTok{ bestguess, }\DataTypeTok{color =}\NormalTok{ Model), }\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_ribbon}\NormalTok{( }\KeywordTok{aes}\NormalTok{( }\DataTypeTok{ymin =}\NormalTok{ lowerbound, }\DataTypeTok{ymax =}\NormalTok{ upperbound, }\DataTypeTok{fill =}\NormalTok{ Model), }\DataTypeTok{alpha =} \FloatTok{0.25}\NormalTok{ ) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{x =} \StringTok{"GDP per capita"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Human Development Index"}\NormalTok{, }
+          \DataTypeTok{title =} \StringTok{"Relationship between wealth and quality of life"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-58-1.pdf}
+
+\hypertarget{renaming-variables-and-selecting-subsets}{%
+\subsubsection{Renaming variables and selecting subsets}\label{renaming-variables-and-selecting-subsets}}
+
+You may remember that renaming variables involved sub-setting and the logical evaluations. Well, this is one of the things that is quite easy to do in tidyverse. Here, we use the \texttt{rename()} function from the \texttt{dplyr} package.
+
+Let's go back to the \texttt{eu} data set and rename the following variables:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{NUTS0} into \texttt{country}
+\item
+  \texttt{region\_name} into \texttt{region}
+\item
+  \texttt{econ\_2gdp\_eur\_hab} into \texttt{wealth}
+\item
+  \texttt{eqi\_eqi} into \texttt{quality.of.government}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.renamed <-}\StringTok{ }\KeywordTok{rename}\NormalTok{(eu,}
+                     \DataTypeTok{country =}\NormalTok{ NUTS0,}
+                     \DataTypeTok{region =}\NormalTok{ region_name,}
+                     \DataTypeTok{wealth =}\NormalTok{ econ_2gdp_eur_hab,}
+                     \DataTypeTok{quality.of.government =}\NormalTok{ eqi_eqi)}
+\end{Highlighting}
+\end{Shaded}
+
+Selecting a subset is as easy as renaming. The function \texttt{select()} lets us do this easily.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.renamed <-}\StringTok{ }\KeywordTok{select}\NormalTok{(eu.renamed,}
+\NormalTok{                     country, region, wealth, quality.of.government)}
+\KeywordTok{names}\NormalTok{(eu.renamed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "country"               "region"                "wealth"               
+[4] "quality.of.government"
+\end{verbatim}
+
+Let's remove our small data set \texttt{eu.renamed}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(eu.renamed)}
+\end{Highlighting}
+\end{Shaded}
+
+We can rename and select in one step within the \texttt{select()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu <-}\StringTok{ }\KeywordTok{select}\NormalTok{(eu,}
+             \DataTypeTok{country =}\NormalTok{ NUTS0,}
+             \DataTypeTok{region =}\NormalTok{ region_name,}
+\NormalTok{             year,}
+             \DataTypeTok{wealth =}\NormalTok{ econ_2gdp_eur_hab,}
+             \DataTypeTok{quality.of.government =}\NormalTok{ eqi_eqi)}
+\KeywordTok{summary}\NormalTok{(eu)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   country             region               year          wealth      
+ Length:13884       Length:13884       Min.   :1990   Min.   :  1300  
+ Class :character   Class :character   1st Qu.:1996   1st Qu.: 14600  
+ Mode  :character   Mode  :character   Median :2002   Median : 23800  
+                                       Mean   :2002   Mean   : 23450  
+                                       3rd Qu.:2009   3rd Qu.: 30000  
+                                       Max.   :2015   Max.   :172600  
+                                                      NA's   :7896    
+ quality.of.government
+ Min.   :-2.719       
+ 1st Qu.:-0.534       
+ Median : 0.368       
+ Mean   : 0.184       
+ 3rd Qu.: 0.963       
+ Max.   : 2.781       
+ NA's   :13453        
+\end{verbatim}
+
+\hypertarget{aggregating-and-pipes}{%
+\subsubsection{Aggregating and pipes}\label{aggregating-and-pipes}}
+
+Our data set is on the region-year level. We want to compare countries over time. Therefore, we now aggregate our data up to the country-year level. Note that you want data in the most dis-aggregated fashion possible because aggregating to the next higher level is easy. We want to average over the regions within each country and year.
+
+To do this we introduce two new functions and one new concept. The new concept is called the pipe and its operator is \texttt{\%\textgreater{}\%}. In our example we say first create a copy of the data set called \texttt{eu} called \texttt{eu.country.year}. We do not stop here but we continue on indicated by the pipe operator \texttt{\%\textgreater{}\%}. We then group the data set by two variables with the \texttt{group\_by()} function. The first variable that indentifies groups is the country and the second is the year. We then contiue on with the pipe operator \texttt{\%\textgreater{}\%} and finally we summarize the data within the groups using the \texttt{summarize()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.country.year <-}\StringTok{ }\NormalTok{eu }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(country, year) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{wealth =} \KeywordTok{mean}\NormalTok{(wealth, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+              \DataTypeTok{quality.of.government =} \KeywordTok{mean}\NormalTok{(quality.of.government, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\KeywordTok{head}\NormalTok{(eu.country.year, }\DataTypeTok{n =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 15 x 4
+# Groups:   country [1]
+   country  year wealth quality.of.government
+   <chr>   <int>  <dbl>                 <dbl>
+ 1 AT       1990   NaN                    NaN
+ 2 AT       1991   NaN                    NaN
+ 3 AT       1992   NaN                    NaN
+ 4 AT       1993   NaN                    NaN
+ 5 AT       1994   NaN                    NaN
+ 6 AT       1995   NaN                    NaN
+ 7 AT       1996   NaN                    NaN
+ 8 AT       1997   NaN                    NaN
+ 9 AT       1998   NaN                    NaN
+10 AT       1999   NaN                    NaN
+11 AT       2000 25738.                   NaN
+12 AT       2001 26477.                   NaN
+13 AT       2002 27138.                   NaN
+14 AT       2003 27623.                   NaN
+15 AT       2004 28746.                   NaN
+\end{verbatim}
+
+It turns out that we have a lot of missing data in our dataset. Our goal is to plot wealth over time. We have all the necessary parts to do this but we would like to also add an EU average. In other words, for each year we need to create a new observation that receives the value \texttt{EU} for the country variable and the average of wealth within that year and the average of quality of government within that year. We follow the same procedure as previosly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.year <-}\StringTok{ }\NormalTok{eu.country.year }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(year) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{wealth =} \KeywordTok{mean}\NormalTok{(wealth, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+              \DataTypeTok{quality.of.government =} \KeywordTok{mean}\NormalTok{(quality.of.government, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+We now have two datasets which need to combine.
+
+\hypertarget{merging-data-sets}{%
+\subsubsection{Merging data sets}\label{merging-data-sets}}
+
+We cannot just paste the data sets together because they differ in the number of columns. As a first step, we need to create a new variable in the data set \texttt{eu.year} called \texttt{country} which identifies the country in that data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.year}\OperatorTok{$}\NormalTok{country <-}\StringTok{ "EU"}
+\NormalTok{eu.year}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 26 x 4
+    year wealth quality.of.government country
+   <int>  <dbl>                 <dbl> <chr>  
+ 1  1990    NaN                   NaN EU     
+ 2  1991    NaN                   NaN EU     
+ 3  1992    NaN                   NaN EU     
+ 4  1993    NaN                   NaN EU     
+ 5  1994    NaN                   NaN EU     
+ 6  1995    NaN                   NaN EU     
+ 7  1996    NaN                   NaN EU     
+ 8  1997    NaN                   NaN EU     
+ 9  1998    NaN                   NaN EU     
+10  1999    NaN                   NaN EU     
+# ... with 16 more rows
+\end{verbatim}
+
+We now merge the two variables together. Recall that observations are uniquely identified by the variables \texttt{country} and \texttt{year}. We neeed to order the observations in both data sets before merging. To do this we use the \texttt{arrange()} function from the \texttt{dplyr} package. The datasets are already ordered by the country first and the year second. Let's reorder by year first and then country to illustrate how the function works.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.country.year <-}\StringTok{ }\KeywordTok{arrange}\NormalTok{(eu.country.year, year, country)}
+\NormalTok{eu.year <-}\StringTok{ }\KeywordTok{arrange}\NormalTok{(eu.year, year, country)}
+\KeywordTok{head}\NormalTok{(eu.country.year, }\DataTypeTok{n =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 20 x 4
+# Groups:   country [20]
+   country  year wealth quality.of.government
+   <chr>   <int>  <dbl>                 <dbl>
+ 1 AT       1990    NaN                   NaN
+ 2 BE       1990    NaN                   NaN
+ 3 BG       1990    NaN                   NaN
+ 4 CY       1990    NaN                   NaN
+ 5 CZ       1990    NaN                   NaN
+ 6 DE       1990    NaN                   NaN
+ 7 DK       1990    NaN                   NaN
+ 8 EE       1990    NaN                   NaN
+ 9 EL       1990    NaN                   NaN
+10 ES       1990    NaN                   NaN
+11 FI       1990    NaN                   NaN
+12 FR       1990    NaN                   NaN
+13 GR       1990    NaN                   NaN
+14 HR       1990    NaN                   NaN
+15 HU       1990    NaN                   NaN
+16 IE       1990    NaN                   NaN
+17 IT       1990    NaN                   NaN
+18 LT       1990    NaN                   NaN
+19 LU       1990    NaN                   NaN
+20 LV       1990    NaN                   NaN
+\end{verbatim}
+
+We are ready to merge. To do so, we use the \texttt{merge()} function. We have the same variables in both data sets and both are unique observations. In this case, an alternative to using \texttt{merge()} is to simply bind the data sets together row-wise like so: \texttt{rbind(eu.country.year,\ eu.year)}. However, the nice side-effect of using \texttt{merge()} is that our order by years and then countries remains intact. So the first two arguemnts of \texttt{merge()} are the names of the data sets to merge. We then specify the variables to merge by in the \texttt{by} argument and finally we need to say keep all observations that are unique to either data set with \texttt{all\ =\ TRUE}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.join <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(eu.country.year, eu.year, }\DataTypeTok{by =} \KeywordTok{intersect}\NormalTok{(}\KeywordTok{names}\NormalTok{(eu.country.year), }\KeywordTok{names}\NormalTok{(eu.year)), }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, you should be able to plot wealth over time on your own. The plot should show the all ``countries'' in the data set. We do not have data before 2000, so there is no point in plotting it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(eu.join[eu.join}\OperatorTok{$}\NormalTok{year}\OperatorTok{>}\DecValTok{1999}\NormalTok{,]) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ wealth, }\DataTypeTok{col =}\NormalTok{ country))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 45 rows containing missing values (geom_path).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-69-1.pdf}
+
+There are too many countries in this plot. Let's compare the UK with France, Italy, Belgium, Greece, Germany, and Spain. To do this, we use the \texttt{filter()} function. We also take the opportunity to filter out the missing years.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.join.small <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(eu.join, country }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"UK"}\NormalTok{,}\StringTok{"FR"}\NormalTok{,}\StringTok{"IT"}\NormalTok{,}\StringTok{"BE"}\NormalTok{,}\StringTok{"EL"}\NormalTok{,}\StringTok{"DE"}\NormalTok{,}\StringTok{"ES"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{>}\StringTok{ }\DecValTok{1999} \OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{<}\StringTok{ }\DecValTok{2015}\NormalTok{ )}
+\KeywordTok{head}\NormalTok{(eu.join.small, }\DataTypeTok{n =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   country year   wealth quality.of.government
+1       BE 2000 25200.00                   NaN
+2       BE 2001 25900.00                   NaN
+3       BE 2002 26600.00                   NaN
+4       BE 2003 27793.33                   NaN
+5       BE 2004 29253.33                   NaN
+6       BE 2005 30300.00                   NaN
+7       BE 2006 31506.67                   NaN
+8       BE 2007 32873.33                   NaN
+9       BE 2008 33493.33                   NaN
+10      BE 2009 32720.00                   NaN
+11      BE 2010 34020.00             0.2645683
+12      BE 2011 34786.67                   NaN
+13      BE 2012 35146.67                   NaN
+14      BE 2013 35426.67             0.6278485
+15      BE 2014 35993.33                   NaN
+16      DE 2000 25083.64                   NaN
+17      DE 2001 25789.09                   NaN
+18      DE 2002 26163.64                   NaN
+19      DE 2003 26347.27                   NaN
+20      DE 2004 26983.64                   NaN
+\end{verbatim}
+
+Now, we plot the data again.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(eu.join.small) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ wealth, }\DataTypeTok{col =}\NormalTok{ country), }\DataTypeTok{size =} \FloatTok{1.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-72-1.pdf}
 
 
 \end{document}
