@@ -25,7 +25,7 @@ Participants are expected to have used R and RStudio before.
 
 ***Agenda***
 
-1. Data sub-setting and logical conditions
+1. Data sub-setting, logical conditions, missing values, simple plots
 2. Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating
 3. Merging data
 4. Reshaping data
