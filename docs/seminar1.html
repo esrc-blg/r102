@@ -286,45 +286,6 @@ longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</spa
 <p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button></p>
 </div>
 <p>A full codebook of the data set is available online (<a href="https://www.qogdata.pol.gu.se/data/qog_eureg_sep16.pdf">codebook</a>)</p>
-<p>We will use the following variables.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Variable</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">h_j</td>
-<td align="left">1 if Free Judiciary</td>
-</tr>
-<tr class="even">
-<td align="left">wdi_gdpc</td>
-<td align="left">Per capita wealth in US dollars</td>
-</tr>
-<tr class="odd">
-<td align="left">undp_hdi</td>
-<td align="left">Human development index (higher values = higher quality of life)</td>
-</tr>
-<tr class="even">
-<td align="left">wbgi_cce</td>
-<td align="left">Control of corruption index (higher values = more control of corruption)</td>
-</tr>
-<tr class="odd">
-<td align="left">wbgi_pse</td>
-<td align="left">Political stability index (higher values = more stable)</td>
-</tr>
-<tr class="even">
-<td align="left">former_col</td>
-<td align="left">1 = country was a colony once</td>
-</tr>
-<tr class="odd">
-<td align="left">lp_lat_abst</td>
-<td align="left">Latitude of country’s capital divided by 90</td>
-</tr>
-</tbody>
-</table>
 <pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
 <p>Before, we start working with the data set, do the following tasks on your own:</p>
 <ol style="list-style-type: decimal">
@@ -2071,6 +2032,50 @@ NA.7                                      &lt;NA&gt;                NA</code></p
    1300   14600   23800   23450   30000  172600    7896 </code></pre>
 <p>The <code>summary()</code> function informs us that there are 7896 missing values. We cannot calculate with missing values. For instance, <code>mean(eu$wealth)</code> will return <code>NA</code> unless we specifically instruct the <code>mean()</code> function to ignore missing values like so: <code>mean( eu$wealth, na.rm = TRUE )</code>. Some functions like <code>lm()</code> will just throw out missing values without informing us. Whenever we use <code>wealth</code> in calculation, we must remove missing values or fill in some estimates for the missing values.</p>
 <p>Should we remove missing values from our data sets before carrying out analysis? The answer is, it depends. we should never remove missing values from variables that we are not interested in. The reason is that, we must keep the rectangular structure of data set intact. We therefore delete entire rows from our data set whenever we delete a missing value. If an observation is recorded for a variable we are interested in but missing for a variable that we are not interested in, then removing missings on the un-interesting variables would unnecessarily remove a recorded observation from a variable we are interested in.</p>
+<p>However, removing missing values from a variable that we are interested in is fine. Remember though that statistical analyzes become less accurate (variance increases and bias may increase) through list-wise deletion. For statistics, imputing (estimating) missing values is often a better solution. We remove missing values from the <code>wealth</code> variable.</p>
+<p>The function <code>is.na()</code> returns TRUE or FALSE for every element in the vector that we supply where TRUE means that the value is missing. We could reverse <code>is.na()</code> to mean is <strong>not</strong> NA like so: <code>!is.na()</code>.</p>
+<p>Try this on your own. But combine it with the <code>table()</code> function. So that instead of getting a very long vector of TRUE/FALSE we see the number of missings and non-missings.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth))</code></pre>
+<pre><code>
+FALSE  TRUE 
+ 7896  5988 </code></pre>
+<p>We can subset our data set to include only those observations that are not missing. Try this on your own:</p>
+<pre class="sourceCode r collapsible"><code class="sourceCode r">eu &lt;-<span class="st"> </span>eu[<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth), ]</code></pre>
+<p>We have now successfully removed missing values from the <code>wealth</code> variable which will make working with the variable a lot easier. We produce a few simple plots to describe our data which would require a lot more code had we not removed missing values.</p>
+</div>
+<div id="simple-plots" class="section level4">
+<h4><span class="header-section-number">1.1.3.2</span> Simple plots</h4>
+<p>With the missing values removed from the <code>wealth</code> variable, we can now easily plot the distribution of that variable. The <code>density()</code> function will estimate the density of a variable which we can combine with the <code>plot()</code> function to give us an idea about the general distribution of that variable.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  <span class="kw">density</span>(eu<span class="op">$</span>wealth),
+  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,
+  <span class="dt">main =</span> <span class="st">&quot;Distribution of Wealth in the EU&quot;</span>
+)</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Is this distribution right-skewed or positively skewed? Put differently, are there a few observations that are very wealthy but most are not? To illustrate let’s add both the median and the mean to the plot. Recall that the mean is susceptible to outliers and hence in a right-skewed distribution the mean is greater than the median.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">median</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Median&quot;</span>),  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>In this case median and mean are relatively close together, pointing to a relatively symmetric distribution. Keep in mind though that our unit of observation is the region-year. For instance, Essex in 1994.</p>
+<p>Let’s plot over-time development of <code>wealth</code> in Essex. On the x-axis, we plot time and on the y-axis, we plot <code>wealth</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  <span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
+  <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
+  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Wealth in Euro&quot;</span>,
+  <span class="dt">main =</span> <span class="st">&quot;GDP per person in Essex adjusted by prices&quot;</span>,
+  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,
+  <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,
+  <span class="dt">pch =</span> <span class="dv">16</span>,
+  <span class="dt">cex =</span> <span class="fl">1.5</span>
+)
+<span class="kw">lines</span>(<span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
+      <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
+      <span class="dt">lwd =</span> <span class="dv">2</span>,
+      <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</code></pre>
+<p><img src="r102_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>It seems that per person wealth in Essex was not quite back at pre financial crisis levels in 2014. We might want to compare Essex to the rest of the UK. Doing so efficiently means that we have to aggregate wealth data to the UK level for each year. We could write code for this but doing such manipulations is one strong suits of the tidyverse which we introduce in the next part of this course.</p>
 
 </div>
 </div>

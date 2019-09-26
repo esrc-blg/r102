@@ -33,7 +33,7 @@ Participants are expected to have used R and RStudio before.
 
 ***Acknowledgements***
 
-The infrastructure for this website is in large parts adopted from work by UCL's [Altaf Ali](https://iris.ucl.ac.uk/iris/browse/profile?upi=ALIAX58), [Jack Blumenau](https://www.jackblumenau.com/), [Lucas Leemann](https://lucasleemann.ch), [Slava Jankin Mikhaylov](https://sjankin.com/), and [Philipp Broniecki](https://philippbroniecki.com). The ESRC Business and Local Government Data Research Centre is funded by the [Economic and Social Research Council (ESRC)](https://esrc.ukri.org).
+The ESRC Business and Local Government Data Research Centre is funded by the [Economic and Social Research Council (ESRC)](https://esrc.ukri.org).
 
 ----
 

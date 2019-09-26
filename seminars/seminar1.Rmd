@@ -144,22 +144,6 @@ We now load regional data from the European Union from the [Quality of Governmen
 
 A full codebook of the data set is available online ([codebook](https://www.qogdata.pol.gu.se/data/qog_eureg_sep16.pdf)) 
 
-We will use the following variables.
-
-```{r echo = FALSE}
-knitr::kable(tibble::tribble(
-  ~Variable,     ~Description,
-  "h_j",    "1 if Free Judiciary",
-  "wdi_gdpc",      "Per capita wealth in US dollars",
-  "undp_hdi",      "Human development index (higher values = higher quality of life)",
-  "wbgi_cce",      "Control of corruption index (higher values = more control of corruption)",
-  "wbgi_pse",    "Political stability index (higher values = more stable)",
-  "former_col",    "1 = country was a colony once",
-  "lp_lat_abst",    "Latitude of country's capital divided by 90"
-))
-```
-
-
 ```{r}
 eu <- read.csv("qog_eureg_long_sep16.csv", stringsAsFactors = FALSE)
 ```
@@ -270,7 +254,7 @@ Let's apply our knowledge to the `eu` data set. You have the following tasks.
 <summary>Reveal content</summary>
 
 ```{r}
-table(eu$NUTS0)0
+table(eu$NUTS0)
 
 uk <- eu[ eu$NUTS0 == "UK" , ]
 
@@ -332,7 +316,7 @@ Try this on your own. But combine it with the `table()` function. So that instea
 table(!is.na(eu$wealth))
 ```
 
-We can subset our dataset to include only those observations that are not missing. Try this on your own:
+We can subset our data set to include only those observations that are not missing. Try this on your own:
 
 
 ```{r class.source="collapsible"}
@@ -340,7 +324,7 @@ eu <- eu[!is.na(eu$wealth), ]
 ```
 
 
-We have now successfully removed missing values from the `wealth` variable which will make working with the variable a lot easier. We produce a few simple plots to describe our data which would require alot more code had we not removed missing values.
+We have now successfully removed missing values from the `wealth` variable which will make working with the variable a lot easier. We produce a few simple plots to describe our data which would require a lot more code had we not removed missing values.
 
 
 #### Simple plots
@@ -355,15 +339,16 @@ plot(
 )
 ```
 
-Is this distribution right-skewed or positively skewed? Put differently, are there a few observations that are very wealthy but most are not? To illustrate let's add both the median and the mean to the plot. Recall that the mean is suseptible to outliers and hence in a right-skewed distribution the mean is greater than the median. 
+Is this distribution right-skewed or positively skewed? Put differently, are there a few observations that are very wealthy but most are not? To illustrate let's add both the median and the mean to the plot. Recall that the mean is susceptible to outliers and hence in a right-skewed distribution the mean is greater than the median. 
 
 ```{r eval=FALSE}
 lines(x = rep(mean(eu$wealth),10), y = seq(0, 4e-05, length.out = 10), col = "red", lwd = 2)
 lines(x = rep(median(eu$wealth),10), y = seq(0, 4e-05, length.out = 10), col = "green", lwd = 2)
+legend("topright", c("Mean", "Median"),  col = c("red", "green"), lwd = 2)
 ```
 
 
-```{r include=FALSE}
+```{r echo=FALSE}
 plot(
   density(eu$wealth),
   bty = "n",
@@ -371,5 +356,31 @@ plot(
 )
 lines(x = rep(mean(eu$wealth),10), y = seq(0, 4e-05, length.out = 10), col = "red", lwd = 2)
 lines(x = rep(median(eu$wealth),10), y = seq(0, 4e-05, length.out = 10), col = "green", lwd = 2)
+legend("topright", c("Mean", "Median"),  col = c("red", "green"), lwd = 2, bty = "n")
 ```
+
+In this case median and mean are relatively close together, pointing to a relatively symmetric distribution. Keep in mind though that our unit of observation is the region-year. For instance, Essex in 1994.
+
+Let's plot over-time development of `wealth` in Essex. On the x-axis, we plot time and on the y-axis, we plot `wealth`.
+
+```{r }
+plot(
+  x = eu$year[eu$region_name=="Essex"],
+  y = eu$wealth[eu$region_name=="Essex"],
+  xlab = "",
+  ylab = "Wealth in Euro",
+  main = "GDP per person in Essex adjusted by prices",
+  bty = "n",
+  col = "darkgrey",
+  pch = 16,
+  cex = 1.5
+)
+lines(x = eu$year[eu$region_name=="Essex"],
+      y = eu$wealth[eu$region_name=="Essex"],
+      lwd = 2,
+      col = "darkgrey")
+```
+
+It seems that per person wealth in Essex was not quite back at pre financial crisis levels in 2014. We might want to compare Essex to the rest of the UK. Doing so efficiently means that we have to aggregate wealth data to the UK level for each year. We could write code for this but doing such manipulations is one strong suits of the tidyverse which we introduce in the next part of this course.
+
 

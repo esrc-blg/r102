@@ -152,7 +152,7 @@ Participants are expected to have used R and RStudio before.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Data sub-setting and logical conditions
+  Data sub-setting, logical conditions, missing values, simple plots
 \item
   Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating
 \item
@@ -165,7 +165,7 @@ Participants are expected to have used R and RStudio before.
 
 \textbf{\emph{Acknowledgements}}
 
-The infrastructure for this website is in large parts adopted from work by UCL's \href{https://iris.ucl.ac.uk/iris/browse/profile?upi=ALIAX58}{Altaf Ali}, \href{https://www.jackblumenau.com/}{Jack Blumenau}, \href{https://lucasleemann.ch}{Lucas Leemann}, \href{https://sjankin.com/}{Slava Jankin Mikhaylov}, and \href{https://philippbroniecki.com}{Philipp Broniecki}. The ESRC Business and Local Government Data Research Centre is funded by the \href{https://esrc.ukri.org}{Economic and Social Research Council (ESRC)}.
+The ESRC Business and Local Government Data Research Centre is funded by the \href{https://esrc.ukri.org}{Economic and Social Research Council (ESRC)}.
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -472,28 +472,6 @@ We now load regional data from the European Union from the \href{http://qog.pol.
 Download Data
 
 A full codebook of the data set is available online (\href{https://www.qogdata.pol.gu.se/data/qog_eureg_sep16.pdf}{codebook})
-
-We will use the following variables.
-
-\begin{tabular}{l|l}
-\hline
-Variable & Description\\
-\hline
-h\_j & 1 if Free Judiciary\\
-\hline
-wdi\_gdpc & Per capita wealth in US dollars\\
-\hline
-undp\_hdi & Human development index (higher values = higher quality of life)\\
-\hline
-wbgi\_cce & Control of corruption index (higher values = more control of corruption)\\
-\hline
-wbgi\_pse & Political stability index (higher values = more stable)\\
-\hline
-former\_col & 1 = country was a colony once\\
-\hline
-lp\_lat\_abst & Latitude of country's capital divided by 90\\
-\hline
-\end{tabular}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2375,6 +2353,91 @@ Let's have a look at the summary function on the \texttt{wealth} variable within
 The \texttt{summary()} function informs us that there are 7896 missing values. We cannot calculate with missing values. For instance, \texttt{mean(eu\$wealth)} will return \texttt{NA} unless we specifically instruct the \texttt{mean()} function to ignore missing values like so: \texttt{mean(\ eu\$wealth,\ na.rm\ =\ TRUE\ )}. Some functions like \texttt{lm()} will just throw out missing values without informing us. Whenever we use \texttt{wealth} in calculation, we must remove missing values or fill in some estimates for the missing values.
 
 Should we remove missing values from our data sets before carrying out analysis? The answer is, it depends. we should never remove missing values from variables that we are not interested in. The reason is that, we must keep the rectangular structure of data set intact. We therefore delete entire rows from our data set whenever we delete a missing value. If an observation is recorded for a variable we are interested in but missing for a variable that we are not interested in, then removing missings on the un-interesting variables would unnecessarily remove a recorded observation from a variable we are interested in.
+
+However, removing missing values from a variable that we are interested in is fine. Remember though that statistical analyzes become less accurate (variance increases and bias may increase) through list-wise deletion. For statistics, imputing (estimating) missing values is often a better solution. We remove missing values from the \texttt{wealth} variable.
+
+The function \texttt{is.na()} returns TRUE or FALSE for every element in the vector that we supply where TRUE means that the value is missing. We could reverse \texttt{is.na()} to mean is \textbf{not} NA like so: \texttt{!is.na()}.
+
+Try this on your own. But combine it with the \texttt{table()} function. So that instead of getting a very long vector of TRUE/FALSE we see the number of missings and non-missings.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(eu}\OperatorTok{$}\NormalTok{wealth))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+FALSE  TRUE 
+ 7896  5988 
+\end{verbatim}
+
+We can subset our data set to include only those observations that are not missing. Try this on your own:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu <-}\StringTok{ }\NormalTok{eu[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(eu}\OperatorTok{$}\NormalTok{wealth), ]}
+\end{Highlighting}
+\end{Shaded}
+
+We have now successfully removed missing values from the \texttt{wealth} variable which will make working with the variable a lot easier. We produce a few simple plots to describe our data which would require a lot more code had we not removed missing values.
+
+\hypertarget{simple-plots}{%
+\paragraph{Simple plots}\label{simple-plots}}
+
+With the missing values removed from the \texttt{wealth} variable, we can now easily plot the distribution of that variable. The \texttt{density()} function will estimate the density of a variable which we can combine with the \texttt{plot()} function to give us an idea about the general distribution of that variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \KeywordTok{density}\NormalTok{(eu}\OperatorTok{$}\NormalTok{wealth),}
+  \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{,}
+  \DataTypeTok{main =} \StringTok{"Distribution of Wealth in the EU"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+Is this distribution right-skewed or positively skewed? Put differently, are there a few observations that are very wealthy but most are not? To illustrate let's add both the median and the mean to the plot. Recall that the mean is susceptible to outliers and hence in a right-skewed distribution the mean is greater than the median.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lines}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{mean}\NormalTok{(eu}\OperatorTok{$}\NormalTok{wealth),}\DecValTok{10}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{4e-05}\NormalTok{, }\DataTypeTok{length.out =} \DecValTok{10}\NormalTok{), }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{median}\NormalTok{(eu}\OperatorTok{$}\NormalTok{wealth),}\DecValTok{10}\NormalTok{), }\DataTypeTok{y =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{4e-05}\NormalTok{, }\DataTypeTok{length.out =} \DecValTok{10}\NormalTok{), }\DataTypeTok{col =} \StringTok{"green"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"Mean"}\NormalTok{, }\StringTok{"Median"}\NormalTok{),  }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{), }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+In this case median and mean are relatively close together, pointing to a relatively symmetric distribution. Keep in mind though that our unit of observation is the region-year. For instance, Essex in 1994.
+
+Let's plot over-time development of \texttt{wealth} in Essex. On the x-axis, we plot time and on the y-axis, we plot \texttt{wealth}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ eu}\OperatorTok{$}\NormalTok{year[eu}\OperatorTok{$}\NormalTok{region_name}\OperatorTok{==}\StringTok{"Essex"}\NormalTok{],}
+  \DataTypeTok{y =}\NormalTok{ eu}\OperatorTok{$}\NormalTok{wealth[eu}\OperatorTok{$}\NormalTok{region_name}\OperatorTok{==}\StringTok{"Essex"}\NormalTok{],}
+  \DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}
+  \DataTypeTok{ylab =} \StringTok{"Wealth in Euro"}\NormalTok{,}
+  \DataTypeTok{main =} \StringTok{"GDP per person in Essex adjusted by prices"}\NormalTok{,}
+  \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{,}
+  \DataTypeTok{col =} \StringTok{"darkgrey"}\NormalTok{,}
+  \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
+  \DataTypeTok{cex =} \FloatTok{1.5}
+\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ eu}\OperatorTok{$}\NormalTok{year[eu}\OperatorTok{$}\NormalTok{region_name}\OperatorTok{==}\StringTok{"Essex"}\NormalTok{],}
+      \DataTypeTok{y =}\NormalTok{ eu}\OperatorTok{$}\NormalTok{wealth[eu}\OperatorTok{$}\NormalTok{region_name}\OperatorTok{==}\StringTok{"Essex"}\NormalTok{],}
+      \DataTypeTok{lwd =} \DecValTok{2}\NormalTok{,}
+      \DataTypeTok{col =} \StringTok{"darkgrey"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+It seems that per person wealth in Essex was not quite back at pre financial crisis levels in 2014. We might want to compare Essex to the rest of the UK. Doing so efficiently means that we have to aggregate wealth data to the UK level for each year. We could write code for this but doing such manipulations is one strong suits of the tidyverse which we introduce in the next part of this course.
 
 \hypertarget{tidyverse-introduction}{%
 \section{Tidyverse introduction}\label{tidyverse-introduction}}
