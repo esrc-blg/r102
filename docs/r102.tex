@@ -156,11 +156,7 @@ Participants are expected to have used R and RStudio before.
 \item
   Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating
 \item
-  Merging data
-\item
-  Reshaping data
-\item
-  Regular expressions
+  Merging data, re-shaping data, regular expressions
 \end{enumerate}
 
 \textbf{\emph{Acknowledgements}}
@@ -168,10 +164,6 @@ Participants are expected to have used R and RStudio before.
 The ESRC Business and Local Government Data Research Centre is funded by the \href{https://esrc.ukri.org}{Economic and Social Research Council (ESRC)}.
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
-
-placeholder
-
-placeholder
 
 \hypertarget{data-sub-setting-and-logical-conditions}{%
 \section{Data sub-setting and logical conditions}\label{data-sub-setting-and-logical-conditions}}
@@ -2653,12 +2645,13 @@ We need some additional data manipulation skills which we will cover as we go al
 \NormalTok{world.data}\OperatorTok{$}\NormalTok{upperbound3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{se.fit}
 
 \CommentTok{# selecting a subset of variables}
-\NormalTok{plot.data <-}\StringTok{ }\KeywordTok{select}\NormalTok{(world.data,}
-                    \StringTok{"undp_hdi"}\NormalTok{,}
-                    \StringTok{"wdi_gdpc"}\NormalTok{,}
-                    \StringTok{"bestguess1"}\NormalTok{,}\StringTok{"lowerbound1"}\NormalTok{,}\StringTok{"upperbound1"}\NormalTok{,}
-                    \StringTok{"bestguess2"}\NormalTok{,}\StringTok{"lowerbound2"}\NormalTok{,}\StringTok{"upperbound2"}\NormalTok{,}
-                    \StringTok{"bestguess3"}\NormalTok{,}\StringTok{"lowerbound3"}\NormalTok{,}\StringTok{"upperbound3"}\NormalTok{)}
+\NormalTok{plot.data <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}
+\NormalTok{  world.data,}
+  \StringTok{"undp_hdi"}\NormalTok{,}
+  \StringTok{"wdi_gdpc"}\NormalTok{,}
+  \StringTok{"bestguess1"}\NormalTok{,}\StringTok{"lowerbound1"}\NormalTok{,}\StringTok{"upperbound1"}\NormalTok{,}
+  \StringTok{"bestguess2"}\NormalTok{,}\StringTok{"lowerbound2"}\NormalTok{,}\StringTok{"upperbound2"}\NormalTok{,}
+  \StringTok{"bestguess3"}\NormalTok{,}\StringTok{"lowerbound3"}\NormalTok{,}\StringTok{"upperbound3"}\NormalTok{)}
 
 \CommentTok{# reshaping the data set}
 \NormalTok{plot.data <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(plot.data, }\DataTypeTok{direction =} \StringTok{"long"}\NormalTok{,}
@@ -2717,12 +2710,13 @@ Let's go back to the \texttt{eu} data set and rename the following variables:
 \end{Highlighting}
 \end{Shaded}
 
-Selecting a subset is as easy as renaming. The function \texttt{select()} lets us do this easily.
+Selecting a subset is as easy as renaming. The function \texttt{select()} lets us do this easily. The function \texttt{select()} exists in multiple packages. To avoid conflicts when loading these packages at the same time, we call \texttt{dplyr::select()} to make sure we use function from the correct package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{eu.renamed <-}\StringTok{ }\KeywordTok{select}\NormalTok{(eu.renamed,}
-\NormalTok{                     country, region, wealth, quality.of.government)}
+\NormalTok{eu.renamed <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}
+\NormalTok{  eu.renamed,}
+\NormalTok{  country, region, wealth, quality.of.government)}
 \KeywordTok{names}\NormalTok{(eu.renamed)}
 \end{Highlighting}
 \end{Shaded}
@@ -2744,12 +2738,13 @@ We can rename and select in one step within the \texttt{select()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{eu <-}\StringTok{ }\KeywordTok{select}\NormalTok{(eu,}
-             \DataTypeTok{country =}\NormalTok{ NUTS0,}
-             \DataTypeTok{region =}\NormalTok{ region_name,}
-\NormalTok{             year,}
-             \DataTypeTok{wealth =}\NormalTok{ econ_2gdp_eur_hab,}
-             \DataTypeTok{quality.of.government =}\NormalTok{ eqi_eqi)}
+\NormalTok{eu <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}
+\NormalTok{  eu,}
+  \DataTypeTok{country =}\NormalTok{ NUTS0,}
+  \DataTypeTok{region =}\NormalTok{ region_name,}
+\NormalTok{  year,}
+  \DataTypeTok{wealth =}\NormalTok{ econ_2gdp_eur_hab,}
+  \DataTypeTok{quality.of.government =}\NormalTok{ eqi_eqi)}
 \KeywordTok{summary}\NormalTok{(eu)}
 \end{Highlighting}
 \end{Shaded}
@@ -2958,6 +2953,486 @@ Now, we plot the data again.
 \end{Shaded}
 
 \includegraphics{r102_files/figure-latex/unnamed-chunk-72-1.pdf}
+
+\hypertarget{merging-re-shaping-and-regular-expressions}{%
+\section{Merging, re-shaping, and regular expressions}\label{merging-re-shaping-and-regular-expressions}}
+
+\hypertarget{seminar-1}{%
+\subsection{Seminar}\label{seminar-1}}
+
+In this part of the course, we will merge data sets again. The difference to the previous exercise is that both data sets contain the same observations but different variables (columns) which is the more common case. We explain how re-shaping data works with a small ``toy'' example which should make the procedure more clear. Re-shaping is very often necessary for producing ggplot graphs. Finally, we will introduce a simple regular expression example. Regular expressions are extremely useful to identifying similar content that is not exactly identical.
+
+\hypertarget{merging}{%
+\subsubsection{Merging}\label{merging}}
+
+We start by loading the \texttt{eu} data set again.
+
+Download Data
+Codebook
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"qog_eureg_long_sep16.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We now create a subset of the data set that only includes the variables \emph{year}, \emph{country}, \emph{region}, \emph{wealth}, \emph{quality.of.government}. We also filter by France, Germany, and the UK, and the years 2000 -- 2013. Furthermore, we must also filter out the observations within a country that are the country itself. Then, we save the data set as \texttt{eu\_subset1.csv}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{# copy, rename, select, filter, save}
+\NormalTok{eu_subset12 <-}\StringTok{ }\NormalTok{eu }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(year,}
+         \DataTypeTok{country =}\NormalTok{ NUTS0,}
+         \DataTypeTok{region =}\NormalTok{ region_name,}
+         \DataTypeTok{wealth =}\NormalTok{ econ_2gdp_eur_hab,}
+         \DataTypeTok{quality.of.government =}\NormalTok{ eqi_eqi) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"FR"}\NormalTok{, }\StringTok{"DE"}\NormalTok{, }\StringTok{"UK"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{>}\StringTok{ }\DecValTok{1999} \OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{<}\StringTok{ }\DecValTok{2014} \OperatorTok{&}\StringTok{ }
+\StringTok{           }\OperatorTok{!}\NormalTok{(region }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"DEUTSCHLAND "}\NormalTok{, }\StringTok{"FRANCE"}\NormalTok{, }\StringTok{"UNITED KINGDOM"}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{write.table}\NormalTok{(}\DataTypeTok{file =} \StringTok{"eu_subset1.csv"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}\NormalTok{,}
+              \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col.names =} \OtherTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Let us create another subset of the original data set. It will include the same countries plus the Netherlands and Belgium but on the aggregate level, i.e.~it is not the regional level. Furthermore, there will be an additional variable which is the total population size but it will exclude wealth and the quality of government.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu_subset2 <-}\StringTok{ }\NormalTok{eu }\OperatorTok{%>%}
+\StringTok{    }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}
+\NormalTok{      year,}
+      \DataTypeTok{country =}\NormalTok{ NUTS0,}
+      \DataTypeTok{population =}\NormalTok{ demo_d2jan_t) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"FR"}\NormalTok{, }\StringTok{"DE"}\NormalTok{, }\StringTok{"UK"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{>}\StringTok{ }\DecValTok{1999} \OperatorTok{&}\StringTok{ }\NormalTok{year }\OperatorTok{<}\StringTok{ }\DecValTok{2014}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(country, year) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{population =} \KeywordTok{sum}\NormalTok{(population, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{write.table}\NormalTok{(}\DataTypeTok{file =} \StringTok{"eu_subset2.csv"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}\NormalTok{,}
+              \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col.names =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that we needed to use the \texttt{sum()} function in summarize rather than \texttt{mean()} when we wanted average wealth or average quality of government. The \emph{population} variable is the sum of the regional populations in a given year and country. To demonstrate merging, we now clear our workspace.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+We load the two data sets we created and inspect them. We do this to understand what will happen in merging.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu1 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"eu_subset1.csv"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{eu2 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"eu_subset2.csv"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We start by printing the first 30 observations of the \texttt{eu1} data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(eu1, }\DataTypeTok{n =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   year country             region wealth quality.of.government
+1  2000      DE BADEN-WÃœRTTEMBERG  29700                    NA
+2  2001      DE BADEN-WÃœRTTEMBERG  30900                    NA
+3  2002      DE BADEN-WÃœRTTEMBERG  31000                    NA
+4  2003      DE BADEN-WÃœRTTEMBERG  31100                    NA
+5  2004      DE BADEN-WÃœRTTEMBERG  31400                    NA
+6  2005      DE BADEN-WÃœRTTEMBERG  31700                    NA
+7  2006      DE BADEN-WÃœRTTEMBERG  33700                    NA
+8  2007      DE BADEN-WÃœRTTEMBERG  35600                    NA
+9  2008      DE BADEN-WÃœRTTEMBERG  36000                    NA
+10 2009      DE BADEN-WÃœRTTEMBERG  33600                    NA
+11 2010      DE BADEN-WÃœRTTEMBERG  36400              1.010530
+12 2011      DE BADEN-WÃœRTTEMBERG  38700                    NA
+13 2012      DE BADEN-WÃœRTTEMBERG  39200                    NA
+14 2013      DE BADEN-WÃœRTTEMBERG  39900              0.980281
+15 2000      DE          Stuttgart  33300                    NA
+16 2001      DE          Stuttgart  35000                    NA
+17 2002      DE          Stuttgart  34800                    NA
+18 2003      DE          Stuttgart  35200                    NA
+19 2004      DE          Stuttgart  35200                    NA
+20 2005      DE          Stuttgart  35100                    NA
+21 2006      DE          Stuttgart  37700                    NA
+22 2007      DE          Stuttgart  40200                    NA
+23 2008      DE          Stuttgart  39800                    NA
+24 2009      DE          Stuttgart  36600                    NA
+25 2010      DE          Stuttgart  40500                    NA
+26 2011      DE          Stuttgart  43000                    NA
+27 2012      DE          Stuttgart  43900                    NA
+28 2013      DE          Stuttgart  44700                    NA
+29 2000      DE          Karlsruhe  29600                    NA
+30 2001      DE          Karlsruhe  30600                    NA
+\end{verbatim}
+
+It is clear that the data set is on the region-year level. Let us inspect the second data set in the same way. We print the entire data set because it is much smaller.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   country year population
+1       DE 2000  243755442
+2       DE 2001  244065601
+3       DE 2002  244632480
+4       DE 2003  244944119
+5       DE 2004  244947919
+6       DE 2005  244873939
+7       DE 2006  244702713
+8       DE 2007  244352058
+9       DE 2008  244080027
+10      DE 2009  243452378
+11      DE 2010  242869525
+12      DE 2011  245254806
+13      DE 2012  245531229
+14      DE 2013  246061734
+15      FR 2000  178261418
+16      FR 2001  179512459
+17      FR 2002  180795834
+18      FR 2003  182067770
+19      FR 2004  183303083
+20      FR 2005  184699398
+21      FR 2006  186029101
+22      FR 2007  187235541
+23      FR 2008  188276925
+24      FR 2009  189281644
+25      FR 2010  190189326
+26      FR 2011  191119409
+27      FR 2012  192028925
+28      FR 2013  194898565
+29      UK 2000  166803394
+30      UK 2001  167366218
+31      UK 2002  170368601
+32      UK 2003  171117914
+33      UK 2004  171966941
+34      UK 2005  173069726
+35      UK 2006  174302125
+36      UK 2007  175573637
+37      UK 2008  176961583
+38      UK 2009  178249105
+39      UK 2010  179527970
+40      UK 2011  180934071
+41      UK 2012  182228946
+42      UK 2013  183352914
+\end{verbatim}
+
+This data set is on the country-year level. Let's say we want to merge the second data set to the first data set. The second data set includes the variable \emph{population} which will be added to the new combinded data set but the observations are one the country-year level. Therefore, all regions in a country-year will get the same population value (which is the population of the entire country). Because the second data set is more aggregated, we cannot get the population on a more dis-aggregated level but we can still combine both data sets. We do so with the \texttt{merge()} function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu3 <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ eu1, }\DataTypeTok{y =}\NormalTok{ eu2, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"country"}\NormalTok{))}
+\KeywordTok{dim}\NormalTok{(eu3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2324    6
+\end{verbatim}
+
+So, the new data set has the same amount of observations as the bigger one but if we check the population variable, it is the same value for all regions within a country-year.
+
+\hypertarget{re-shaping}{%
+\subsubsection{Re-shaping}\label{re-shaping}}
+
+Re-shaping a data set is useful, for instance for plotting graphs. For example, have a dependent variable, we an independent variable, and we have different model predictions. Let us create some a small data set with 10 observations and two correlated independent variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+
+\CommentTok{# 2 correlated variables}
+\NormalTok{X <-}\StringTok{ }\KeywordTok{mvrnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{-4}\NormalTok{), }\DataTypeTok{Sigma =} \KeywordTok{matrix}\NormalTok{(}\DataTypeTok{data =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{))}
+\NormalTok{X <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x1 =}\NormalTok{ X[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{x2 =}\NormalTok{ X[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         x1        x2
+1  11.08120 -4.144625
+2  11.66785 -4.104582
+3  13.35199 -2.394544
+4  12.03189 -3.898109
+5  12.29843 -4.053119
+6  13.06198 -1.807875
+7  12.27983 -3.405302
+8  11.42176 -5.822041
+9  11.12661 -4.429818
+10 11.72672 -4.572302
+\end{verbatim}
+
+Now that we have the two independent variables, let's create the outcome variable as a linear function of \emph{x2} and some random noise.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X}\OperatorTok{$}\NormalTok{y <-}\StringTok{ }\FloatTok{1.7} \OperatorTok{+}\StringTok{ }\NormalTok{X}\OperatorTok{$}\NormalTok{x2 }\OperatorTok{*}\StringTok{ }\FloatTok{-2.5} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+With this done, we run three linear models. The first includes \emph{x1} only, the second \emph{x2} only and the third both \emph{x1} and \emph{x2}. We then make prediction of y including confidence intervals for all three models and attach them to the data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# regressions}
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x1, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ X)}
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x2, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ X)}
+\NormalTok{m3 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x1 }\OperatorTok{+}\StringTok{ }\NormalTok{x2, }\DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ X)}
+
+\CommentTok{# predictions}
+\NormalTok{preds1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m1, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{preds2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m2, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{preds3 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m3, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# attach point estimates}
+\NormalTok{X}\OperatorTok{$}\NormalTok{bestguess1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{bestguess2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{bestguess3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit}
+
+\CommentTok{# attach lower and upper bounds of the 95% CI from a t with the appropriate degrees of freedom}
+\NormalTok{X}\OperatorTok{$}\NormalTok{lowerbound1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m1}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{lowerbound2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m2}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{lowerbound3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m3}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{upperbound1 <-}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m1}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds1}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{upperbound2 <-}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m2}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds2}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{X}\OperatorTok{$}\NormalTok{upperbound3 <-}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.975}\NormalTok{, }\DataTypeTok{df =}\NormalTok{ m3}\OperatorTok{$}\NormalTok{df.residual) }\OperatorTok{*}\StringTok{ }\NormalTok{preds3}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# print data set}
+\NormalTok{X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         x1        x2         y bestguess1 bestguess2 bestguess3
+1  11.08120 -4.144625  8.858092  13.699237  11.130489   9.641748
+2  11.66785 -4.104582 11.307531  11.403226  10.981629  10.589413
+3  13.35199 -2.394544  4.608348   4.811964   4.624524   5.644261
+4  12.03189 -3.898109  9.258599   9.978477  10.214059  10.304613
+5  12.29843 -4.053119  9.957680   8.935323  10.790314  11.567548
+6  13.06198 -1.807875  1.159607   5.946962   2.443567   2.261255
+7  12.27983 -3.405302 12.726617   9.008104   8.382040   8.418132
+8  11.42176 -5.822041 16.715223  12.366378  17.366322  18.364911
+9  11.12661 -4.429818  9.360133  13.521520  12.190699  11.100571
+10 11.72672 -4.572302 16.892199  11.172839  12.720387  12.951578
+   lowerbound1 lowerbound2 lowerbound3 upperbound1 upperbound2 upperbound3
+1    8.9231907    9.185198    5.493225    18.47528   13.075781    13.79027
+2    8.1521159    9.053073    8.385503    14.65434   12.910186    12.79332
+3   -1.4113612    1.427737    1.518502    11.03529    7.821311     9.77002
+4    7.0285045    8.331855    8.354573    12.92845   12.096264    12.25465
+5    5.7545940    8.879660    8.835127    12.11605   12.700968    14.29997
+6    0.7326925   -1.633502   -1.959061    11.16123    6.520636     6.48157
+7    5.8550072    6.335486    6.309639    12.16120   10.428593    10.52662
+8    8.5825423   13.439212   13.644692    16.15021   21.293433    23.08513
+9    8.8894214   10.061580    7.653651    18.15362   14.319817    14.54749
+10   8.0152435   10.462938   10.560320    14.33043   14.977835    15.34284
+\end{verbatim}
+
+The data set is in the common format for analysis. However, if we want to plot the predictions in ggplot and differentiate them with color by model, we have to re-shape the data set into a long format. In long format, we want to have a new variable called \emph{model} which takes on the values ``model 1'', ``model 2'', ``model 3'' corresponding to the respective model that made the prediction of a best guess, lower or upper bound. We make the data set three times as long by combining \emph{bestguess1}, \emph{bestguess2}, and \emph{bestguess3} into one \emph{bestguess} variable. We do the same with the upper and lower bounds. The variables \emph{x1}, \emph{x2}, and \emph{y} are so called ``id'' variables because we just recycle the values that are already there, i.e.~nothing is combined here. We use the \texttt{reshape()} function.
+
+Have a look at the argument's meaning in the help window (usually at lower right in RStudio) by running \texttt{?reshape}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.long <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ X, }\DataTypeTok{varying =} \KeywordTok{c}\NormalTok{(}\StringTok{"bestguess1"}\NormalTok{, }\StringTok{"lowerbound1"}\NormalTok{, }\StringTok{"upperbound1"}\NormalTok{,}
+                                         \StringTok{"bestguess2"}\NormalTok{, }\StringTok{"lowerbound2"}\NormalTok{, }\StringTok{"upperbound2"}\NormalTok{,}
+                                         \StringTok{"bestguess3"}\NormalTok{, }\StringTok{"lowerbound3"}\NormalTok{, }\StringTok{"upperbound3"}\NormalTok{),}
+                   \DataTypeTok{timevar =} \StringTok{"Model"}\NormalTok{,}
+                   \DataTypeTok{times =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                   \DataTypeTok{v.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"bestguess"}\NormalTok{,}\StringTok{"lowerbound"}\NormalTok{,}\StringTok{"upperbound"}\NormalTok{),}
+                   \DataTypeTok{idvar =} \KeywordTok{c}\NormalTok{(}\StringTok{"x1"}\NormalTok{,}\StringTok{"x2"}\NormalTok{, }\StringTok{"y"}\NormalTok{),}
+                   \DataTypeTok{direction =} \StringTok{"long"}\NormalTok{)}
+
+\CommentTok{# change the row.names which are always combinations of the idvars}
+\KeywordTok{row.names}\NormalTok{(eu.long) <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(eu.long))}
+
+\CommentTok{# inspect data set}
+\NormalTok{eu.long}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         x1        x2         y Model bestguess lowerbound upperbound
+1  11.08120 -4.144625  8.858092     1 13.699237  8.9231907  18.475283
+2  11.66785 -4.104582 11.307531     1 11.403226  8.1521159  14.654337
+3  13.35199 -2.394544  4.608348     1  4.811964 -1.4113612  11.035289
+4  12.03189 -3.898109  9.258599     1  9.978477  7.0285045  12.928450
+5  12.29843 -4.053119  9.957680     1  8.935323  5.7545940  12.116053
+6  13.06198 -1.807875  1.159607     1  5.946962  0.7326925  11.161232
+7  12.27983 -3.405302 12.726617     1  9.008104  5.8550072  12.161200
+8  11.42176 -5.822041 16.715223     1 12.366378  8.5825423  16.150213
+9  11.12661 -4.429818  9.360133     1 13.521520  8.8894214  18.153618
+10 11.72672 -4.572302 16.892199     1 11.172839  8.0152435  14.330434
+11 11.08120 -4.144625  8.858092     2 11.130489  9.1851978  13.075781
+12 11.66785 -4.104582 11.307531     2 10.981629  9.0530726  12.910186
+13 13.35199 -2.394544  4.608348     2  4.624524  1.4277367   7.821311
+14 12.03189 -3.898109  9.258599     2 10.214059  8.3318549  12.096264
+15 12.29843 -4.053119  9.957680     2 10.790314  8.8796601  12.700968
+16 13.06198 -1.807875  1.159607     2  2.443567 -1.6335023   6.520636
+17 12.27983 -3.405302 12.726617     2  8.382040  6.3354862  10.428593
+18 11.42176 -5.822041 16.715223     2 17.366322 13.4392116  21.293433
+19 11.12661 -4.429818  9.360133     2 12.190699 10.0615797  14.319817
+20 11.72672 -4.572302 16.892199     2 12.720387 10.4629384  14.977835
+21 11.08120 -4.144625  8.858092     3  9.641748  5.4932253  13.790271
+22 11.66785 -4.104582 11.307531     3 10.589413  8.3855035  12.793322
+23 13.35199 -2.394544  4.608348     3  5.644261  1.5185017   9.770020
+24 12.03189 -3.898109  9.258599     3 10.304613  8.3545732  12.254654
+25 12.29843 -4.053119  9.957680     3 11.567548  8.8351269  14.299969
+26 13.06198 -1.807875  1.159607     3  2.261255 -1.9590606   6.481570
+27 12.27983 -3.405302 12.726617     3  8.418132  6.3096388  10.526625
+28 11.42176 -5.822041 16.715223     3 18.364911 13.6446922  23.085130
+29 11.12661 -4.429818  9.360133     3 11.100571  7.6536509  14.547492
+30 11.72672 -4.572302 16.892199     3 12.951578 10.5603200  15.342836
+\end{verbatim}
+
+Ee turn the variable model into a factor variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eu.long}\OperatorTok{$}\NormalTok{Model <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(eu.long}\OperatorTok{$}\NormalTok{Model, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Incorrect Model"}\NormalTok{, }\StringTok{"Correct Model"}\NormalTok{, }\StringTok{"Full Model"}\NormalTok{))}
+\KeywordTok{table}\NormalTok{(eu.long}\OperatorTok{$}\NormalTok{Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Incorrect Model   Correct Model      Full Model 
+             10              10              10 
+\end{verbatim}
+
+We plot using ggplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(eu.long, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x2, }\DataTypeTok{y =}\NormalTok{ y)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ bestguess, }\DataTypeTok{color =}\NormalTok{ Model)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_ribbon}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ lowerbound, }\DataTypeTok{ymax =}\NormalTok{ upperbound, }\DataTypeTok{fill =}\NormalTok{ Model), }\DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-88-1.pdf}
+
+We see that the all model predictions overlap. The incorrect model does worst and also has the largest amount of uncertainty. While it is hard to see, the correct model is closest to the real predictions and has the smallest uncertainty. Go ahead and plot the size of the residuals on your own.
+
+\hypertarget{regular-expression}{%
+\subsubsection{Regular expression}\label{regular-expression}}
+
+Regular expressions are difficult to master but very powerful when it comes to working with data. Regular expressions can be used to extract email addresses, phone numbers, country names and much more. We provide a simple example and invite you to search online for more complex tasks.
+
+We examine the \texttt{eu} data set and the regions in the UK.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unique}\NormalTok{(eu1}\OperatorTok{$}\NormalTok{region[eu1}\OperatorTok{$}\NormalTok{country}\OperatorTok{==}\StringTok{"UK"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] "NORTH EAST (ENGLAND)"                            
+ [2] "Tees Valley and Durham"                          
+ [3] "Northumberland and Tyne and Wear"                
+ [4] "NORTH WEST (ENGLAND)"                            
+ [5] "Cumbria"                                         
+ [6] "Cheshire"                                        
+ [7] "Greater Manchester"                              
+ [8] "Lancashire"                                      
+ [9] "Merseyside"                                      
+[10] "YORKSHIRE AND THE HUMBER"                        
+[11] "East Yorkshire and Northern Lincolnshire"        
+[12] "North Yorkshire"                                 
+[13] "South Yorkshire"                                 
+[14] "West Yorkshire"                                  
+[15] "EAST MIDLANDS (ENGLAND)"                         
+[16] "Derbyshire and Nottinghamshire"                  
+[17] "Leicestershire, Rutland and Northamptonshire"    
+[18] "Lincolnshire"                                    
+[19] "WEST MIDLANDS (ENGLAND)"                         
+[20] "Herefordshire, Worcestershire and Warwickshire"  
+[21] "Shropshire and Staffordshire"                    
+[22] "West Midlands"                                   
+[23] "EAST OF ENGLAND"                                 
+[24] "East Anglia"                                     
+[25] "Bedfordshire and Hertfordshire"                  
+[26] "Essex"                                           
+[27] "LONDON"                                          
+[28] "Inner London"                                    
+[29] "Outer London"                                    
+[30] "Inner London - West"                             
+[31] "Inner London - East"                             
+[32] "Outer London - East and North East"              
+[33] "Outer London - South"                            
+[34] "Outer London - West and North West"              
+[35] "SOUTH EAST (ENGLAND)"                            
+[36] "Berkshire, Buckinghamshire and Oxfordshire"      
+[37] "Surrey, East and West Sussex"                    
+[38] "Hampshire and Isle of Wight"                     
+[39] "Kent"                                            
+[40] "SOUTH WEST (ENGLAND)"                            
+[41] "Gloucestershire, Wiltshire and Bristol/Bath area"
+[42] "Dorset and Somerset"                             
+[43] "Cornwall and Isles of Scilly"                    
+[44] "Devon"                                           
+[45] "WALES"                                           
+[46] "West Wales and The Valleys"                      
+[47] "East Wales"                                      
+[48] "SCOTLAND"                                        
+[49] "North Eastern Scotland"                          
+[50] "Eastern Scotland"                                
+[51] "South Western Scotland"                          
+[52] "Highlands and Islands"                           
+[53] "NORTHERN IRELAND"                                
+[54] "Northern Ireland"                                
+[55] "EXTRA-REGIO NUTS 1"                              
+[56] "Extra-Regio NUTS 2"                              
+\end{verbatim}
+
+There are multiple regions of London in the data set. Say we wanted to aggregate wealth for all the London regions but we did not want to pick out the regions by hand. This is what regular expressions excel at. We use the \texttt{grep()} function which returns the row numbers of all London districts. Let's subset the data set to London only and then compare the wealth of London regions over time in a plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grep}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"London"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ eu1}\OperatorTok{$}\NormalTok{region, }\DataTypeTok{ignore.case =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 1877 1878 1879 1880 1881 1882 1883 1884 1885 1886 1887 1888 1889 1890
+ [15] 1891 1892 1893 1894 1895 1896 1897 1898 1899 1900 1901 1902 1903 1904
+ [29] 1905 1906 1907 1908 1909 1910 1911 1912 1913 1914 1915 1916 1917 1918
+ [43] 1919 1920 1921 1922 1923 1924 1925 1926 1927 1928 1929 1930 1931 1932
+ [57] 1933 1934 1935 1936 1937 1938 1939 1940 1941 1942 1943 1944 1945 1946
+ [71] 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957 1958 1959 1960
+ [85] 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1972 1973 1974
+ [99] 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{london <-}\StringTok{ }\NormalTok{eu1 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{slice}\NormalTok{( }\KeywordTok{grep}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"London"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ eu1}\OperatorTok{$}\NormalTok{region, }\DataTypeTok{ignore.case =} \OtherTok{TRUE}\NormalTok{) ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{( region }\OperatorTok{!=}\StringTok{ "LONDON"}\NormalTok{ )}
+
+\KeywordTok{ggplot}\NormalTok{(london, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ wealth)) }\OperatorTok{+}
+\StringTok{       }\KeywordTok{geom_line}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ wealth, }\DataTypeTok{color =}\NormalTok{ region)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 28 rows containing missing values (geom_path).
+\end{verbatim}
+
+\includegraphics{r102_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+It seems like Inner London - West is the place to be.
 
 
 \end{document}

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Data sub-setting and logical conditions | Follow-up on R</title>
   <meta name="description" content="Chapter 1 Data sub-setting and logical conditions | Follow-up on R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Data sub-setting and logical conditions | Follow-up on R" />
   <meta property="og:type" content="book" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="seminar2.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="seminar2.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -62,7 +62,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -152,6 +151,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.5" data-path="seminar2.html"><a href="seminar2.html#merging-data-sets"><i class="fa fa-check"></i><b>2.1.5</b> Merging data sets</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="seminar3.html"><a href="seminar3.html"><i class="fa fa-check"></i><b>3</b> Merging, re-shaping, and regular expressions</a><ul>
+<li class="chapter" data-level="3.1" data-path="seminar3.html"><a href="seminar3.html#seminar-1"><i class="fa fa-check"></i><b>3.1</b> Seminar</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="seminar3.html"><a href="seminar3.html#merging"><i class="fa fa-check"></i><b>3.1.1</b> Merging</a></li>
+<li class="chapter" data-level="3.1.2" data-path="seminar3.html"><a href="seminar3.html#re-shaping"><i class="fa fa-check"></i><b>3.1.2</b> Re-shaping</a></li>
+<li class="chapter" data-level="3.1.3" data-path="seminar3.html"><a href="seminar3.html#regular-expression"><i class="fa fa-check"></i><b>3.1.3</b> Regular expression</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -177,20 +183,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sub-setting" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Sub-setting</h3>
 <p>When we deal with data sets and vectors such as data set’s rows or columns, we want to be able to subset these objects. Sub-setting means, we access a specific part of the data set or vector. R comes with some small data sets included. The macroeconomic data set <code>longley</code> is one such data set. Lets have a look at what the data set contains by using the help files:</p>
-<pre class="sourceCode r"><code class="sourceCode r">?longley</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">?longley</a></code></pre></div>
 <p>A data set is two-dimensional. It’s first dimension are the rows. A 5 on the first dimension, therefore, means row 5. On the second dimension, we have columns. A 4 on the second dimension refers to column 4. We can identify each individual element in a data set by it’s row and column coordinates. In R, we subset using square brackets <code>[ row.coordinates, column.coordinates ]</code>. In the square brackets, we place the row coordinates first, and column coordinates second. The coordinates are separated by a comma. If we want to see an entire row, we leave the column coordinate unspecified. The first row of the longley data set is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="dv">1</span> , ]</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">longley[ <span class="dv">1</span> , ]</a></code></pre></div>
 <pre><code>     GNP.deflator     GNP Unemployed Armed.Forces Population Year Employed
 1947           83 234.289      235.6          159    107.608 1947   60.323</code></pre>
 <p>The second column is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ , <span class="dv">2</span> ]</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">longley[ , <span class="dv">2</span> ]</a></code></pre></div>
 <pre><code> [1] 234.289 259.426 258.054 284.599 328.975 346.999 365.385 363.112
  [9] 397.469 419.180 442.769 444.546 482.704 502.601 518.173 554.894</code></pre>
 <p>The element in the first row and second column is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="dv">1</span> , <span class="dv">2</span> ]</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">longley[ <span class="dv">1</span> , <span class="dv">2</span> ]</a></code></pre></div>
 <pre><code>[1] 234.289</code></pre>
 <p>We can view a number of adjacent rows with the colon operator like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[<span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">5</span> , ]</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">longley[<span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">5</span> , ]</a></code></pre></div>
 <pre><code>     GNP.deflator     GNP Unemployed Armed.Forces Population Year Employed
 1947         83.0 234.289      235.6        159.0    107.608 1947   60.323
 1948         88.5 259.426      232.5        145.6    108.632 1948   61.122
@@ -198,22 +204,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1950         89.5 284.599      335.1        165.0    110.929 1950   61.187
 1951         96.2 328.975      209.9        309.9    112.075 1951   63.221</code></pre>
 <p>We can view a number of non adjacent rows using the vector function <code>c()</code> like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>), ]</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">longley[ <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>), ]</a></code></pre></div>
 <pre><code>     GNP.deflator     GNP Unemployed Armed.Forces Population Year Employed
 1947         83.0 234.289      235.6        159.0    107.608 1947   60.323
 1949         88.2 258.054      368.2        161.6    109.773 1949   60.171
 1951         96.2 328.975      209.9        309.9    112.075 1951   63.221</code></pre>
 <p>Furthermore, columns in data sets have names. These are the variable names. We can obtain a list of variable names with the <code>names()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(longley)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">names</span>(longley)</a></code></pre></div>
 <pre><code>[1] &quot;GNP.deflator&quot; &quot;GNP&quot;          &quot;Unemployed&quot;   &quot;Armed.Forces&quot;
 [5] &quot;Population&quot;   &quot;Year&quot;         &quot;Employed&quot;    </code></pre>
 <p>This returns a vector of names. You may have noticed the quotation marks. Whenever you see quotation marks in R, you know this refers to a text. There are different storage or data types. Examples are numeric and character (text).</p>
 <p>We can use the name of a variable for sub-setting a data set. Suppose, we want to see the population variable. We can either use 5 in square brackets because population is the 5th column or we can place the variable name within quotation marks in the brackets.</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ , <span class="st">&quot;Population&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">longley[ , <span class="st">&quot;Population&quot;</span>]</a></code></pre></div>
 <pre><code> [1] 107.608 108.632 109.773 110.929 112.075 113.270 115.094 116.219
  [9] 117.388 118.734 120.445 121.950 123.366 125.368 127.852 130.081</code></pre>
 <p>To access multiple variable columns by the variable names, we have to use the vector function <code>c()</code> like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ , <span class="kw">c</span>(<span class="st">&quot;GNP&quot;</span>, <span class="st">&quot;Armed.Forces&quot;</span>, <span class="st">&quot;Population&quot;</span>) ]</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">longley[ , <span class="kw">c</span>(<span class="st">&quot;GNP&quot;</span>, <span class="st">&quot;Armed.Forces&quot;</span>, <span class="st">&quot;Population&quot;</span>) ]</a></code></pre></div>
 <pre><code>         GNP Armed.Forces Population
 1947 234.289        159.0    107.608
 1948 259.426        145.6    108.632
@@ -232,18 +238,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1961 518.173        257.2    127.852
 1962 554.894        282.7    130.081</code></pre>
 <p>Finally, we can also access a column in a data set using the dollar sign operator <code>$</code> like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley<span class="op">$</span>Population</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">longley<span class="op">$</span>Population</a></code></pre></div>
 <pre><code> [1] 107.608 108.632 109.773 110.929 112.075 113.270 115.094 116.219
  [9] 117.388 118.734 120.445 121.950 123.366 125.368 127.852 130.081</code></pre>
 <p>The population column is a vector. Vectors are 1-dimensional. We can subset vectors in the same way that we subset data sets except that we only need 1 coordinate to uniquely identify every element. Let’s access the first element in the population column in three different but equivalent ways.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># option 1s</span>
-longley<span class="op">$</span>Population[<span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># option 1s</span></a>
+<a class="sourceLine" id="cb20-2" title="2">longley<span class="op">$</span>Population[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>[1] 107.608</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># option 2</span>
-longley[<span class="dv">1</span> , <span class="dv">5</span>]</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># option 2</span></a>
+<a class="sourceLine" id="cb22-2" title="2">longley[<span class="dv">1</span> , <span class="dv">5</span>]</a></code></pre></div>
 <pre><code>[1] 107.608</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># option 3</span>
-longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># option 3</span></a>
+<a class="sourceLine" id="cb24-2" title="2">longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</span>]</a></code></pre></div>
 <pre><code>[1] 107.608</code></pre>
 <p>Finally, two useful sub-setting tricks:</p>
 <ol style="list-style-type: decimal">
@@ -251,7 +257,7 @@ longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</spa
 <li>with the <code>length()</code> function we can find the last element of a vector</li>
 </ol>
 <p>So, all rows in the longley data set except the first 5 would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="dv">-1</span> <span class="op">:</span><span class="st"> </span><span class="dv">-5</span>, ]</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">longley[ <span class="dv">-1</span> <span class="op">:</span><span class="st"> </span><span class="dv">-5</span>, ]</a></code></pre></div>
 <pre><code>     GNP.deflator     GNP Unemployed Armed.Forces Population Year Employed
 1952         98.1 346.999      193.2        359.4    113.270 1952   63.639
 1953         99.0 365.385      187.0        354.7    115.094 1953   64.989
@@ -265,21 +271,21 @@ longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</spa
 1961        115.7 518.173      480.6        257.2    127.852 1961   69.331
 1962        116.9 554.894      400.7        282.7    130.081 1962   70.551</code></pre>
 <p>We can get the length of a vector using the <code>length()</code> function like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>( longley[, <span class="dv">1</span>] )</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">length</span>( longley[, <span class="dv">1</span>] )</a></code></pre></div>
 <pre><code>[1] 16</code></pre>
 <p>That is the length of the first column in the longley data set and because a data set is rectangular it gives us the number of rows in the data set as well. We get the last row in the longley data set like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="kw">length</span>( longley[ , <span class="dv">1</span>] ) , ]</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">longley[ <span class="kw">length</span>( longley[ , <span class="dv">1</span>] ) , ]</a></code></pre></div>
 <pre><code>     GNP.deflator     GNP Unemployed Armed.Forces Population Year Employed
 1962        116.9 554.894      400.7        282.7    130.081 1962   70.551</code></pre>
 <p>To get the last element in the population vector of the longley data set, we would code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="kw">length</span>(longley[,<span class="dv">1</span>]), <span class="st">&quot;Population&quot;</span> ]</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">longley[ <span class="kw">length</span>(longley[,<span class="dv">1</span>]), <span class="st">&quot;Population&quot;</span> ]</a></code></pre></div>
 <pre><code>[1] 130.081</code></pre>
 <p>There are often many different approaches that will do the same thing. In does not matter how you get to a solution as long as get there. For instance, the <code>nrow()</code> function returns the number of rows in a data set or matrix object. So we could get the last element in the population vector using <code>nrow()</code> instead of <code>length()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">longley[ <span class="kw">nrow</span>(longley), <span class="st">&quot;Population&quot;</span> ]</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">longley[ <span class="kw">nrow</span>(longley), <span class="st">&quot;Population&quot;</span> ]</a></code></pre></div>
 <pre><code>[1] 130.081</code></pre>
 <p>Sub-setting is essential for understanding data and manipulating it.</p>
 <p>Finding the last column of the longley data set can be done using the <code>ncol()</code> function. The function returns the number of columns in the object that is supplied to the function. If we use that number in sub-setting, we can access the last column.</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r">longley[ , <span class="kw">ncol</span>(longley) ]</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">longley[ , <span class="kw">ncol</span>(longley) ]</a></code></pre></div>
 <pre><code> [1] 60.323 61.122 60.171 61.187 63.221 63.639 64.989 63.761 66.019 67.857
 [11] 68.169 66.513 68.655 69.564 69.331 70.551</code></pre>
 </div>
@@ -287,10 +293,10 @@ longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</spa
 <h3><span class="header-section-number">1.1.2</span> Logical conditions</h3>
 <p>We now load regional data from the European Union from the <a href="http://qog.pol.gu.se/">Quality of Government Institute</a> to illustrate logical conditions and dealing with missing values. The data set is very large in the sense that it contains many different columns (variables)</p>
 <div class="container btn-container">
-<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button></p>
+<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('qog_eureg_long_sep16.csv');">Download Data</button></p>
 </div>
 <p>A full codebook of the data set is available online (<a href="https://www.qogdata.pol.gu.se/data/qog_eureg_sep16.pdf">codebook</a>)</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Before, we start working with the data set, do the following tasks on your own:</p>
 <ol style="list-style-type: decimal">
 <li>check the dimensions of <code>eu</code></li>
@@ -303,17 +309,17 @@ longley[<span class="dv">1</span> , <span class="st">&quot;Population&quot;</spa
 <p>The <code>dim()</code> function returns two numbers. The first is the number of rows and the second is the number of columns (if the object is two-dimensional). The function could also be used on arrays in which case it would also return the number of layers. We could have also found the number of rows using <code>nrow()</code> and the number of columns using <code>ncol()</code>. Or we could have used the <code>length()</code> function with sub-setting. For example, <code>length(eu[,1])</code> returns the length of the first column of the <code>u which is equal to the number of rows in the dataset. Equally,</code>length(eu[1,])` returns the length of the first row which is equal to the number of columns.</p>
 <p>The <code>names()</code> function can be used on several objects such as data frames and lists. Here, <code>names()</code> returns the column names of the data set. In the case that you are dealing with a matrix instead of data frame — you can assess this by using <code>is.data.frame()</code> and <code>is.matrix()</code> — you would use the <code>colnames()</code> function for the column names. Here, we have so many variables that <code>names()</code> would fill our screen with a very long vector of variable names. Therefore, we subset the names vector to only display the first 5 variable names</p>
 <p>We use <code>[]</code> for sub-setting. So <code>eu[1:6, 1:4]</code> returns the first six rows and the first four columns of the data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the dimensions: rows (observations) and columns (variables) </span>
-<span class="kw">dim</span>(eu)</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># the dimensions: rows (observations) and columns (variables) </span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">dim</span>(eu)</a></code></pre></div>
 <pre><code>[1] 13884   444</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the variable names</span>
-<span class="kw">names</span>(eu)[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>]</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># the variable names</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">names</span>(eu)[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>]</a></code></pre></div>
 <pre><code> [1] &quot;region_code&quot;    &quot;region_code_n&quot;  &quot;region_name&quot;    &quot;year&quot;          
  [5] &quot;NUTS_level&quot;     &quot;NUTS0&quot;          &quot;NUTS0_n&quot;        &quot;NUTS1&quot;         
  [9] &quot;NUTS1_n&quot;        &quot;NUTS2&quot;          &quot;NUTS2_n&quot;        &quot;version&quot;       
 [13] &quot;demo_cnmigratn&quot; &quot;demo_d2jan_f&quot;   &quot;demo_d2jan_m&quot;  </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># top 6 rows of the data</span>
-eu[<span class="dv">120</span><span class="op">:</span><span class="dv">130</span>, <span class="kw">c</span>(<span class="st">&quot;NUTS0&quot;</span>, <span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># top 6 rows of the data</span></a>
+<a class="sourceLine" id="cb43-2" title="2">eu[<span class="dv">120</span><span class="op">:</span><span class="dv">130</span>, <span class="kw">c</span>(<span class="st">&quot;NUTS0&quot;</span>, <span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)]</a></code></pre></div>
 <pre><code>    NUTS0 region_name econ_2gdp_eur_hab
 120    AT        Wien             40800
 121    AT        Wien             42700
@@ -326,7 +332,7 @@ eu[<span class="dv">120</span><span class="op">:</span><span class="dv">130</spa
 128    AT        Wien             47300
 129    AT        Wien             47300
 130    AT        Wien                NA</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">eu<span class="op">$</span>econ_2gdp_eur_hab</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">eu<span class="op">$</span>econ_2gdp_eur_hab</a></code></pre></div>
 <pre><code>    [1]     NA     NA     NA     NA     NA     NA     NA     NA     NA
    [10]     NA  26600  27400  28000  28500  29600  30800  32200  34000
    [19]  35100  34300  35200  36800  37600  38100  38500     NA     NA
@@ -1939,25 +1945,25 @@ eu[<span class="dv">120</span><span class="op">:</span><span class="dv">130</spa
 </tbody>
 </table>
 <p>To illustrate the difference between element-wise operations and evaluating the first element only, we create two vectors <code>x</code> and <code>y</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span> )
-y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)
-
-<span class="co"># element-wise AND</span>
-x <span class="op">&amp;</span><span class="st"> </span>y</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span> )</a>
+<a class="sourceLine" id="cb47-2" title="2">y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb47-3" title="3"></a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="co"># element-wise AND</span></a>
+<a class="sourceLine" id="cb47-5" title="5">x <span class="op">&amp;</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first observations AND</span>
-x <span class="op">&amp;&amp;</span><span class="st"> </span>y</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># first observations AND</span></a>
+<a class="sourceLine" id="cb49-2" title="2">x <span class="op">&amp;&amp;</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p>We see that the difference is which elements of a vector are to be compared. Usually we use element wise comparison. Furthermore, we can use the functions <code>all()</code> and <code>any()</code> to evaluate whether all elements of a vector are the same or whether any element is different (we could use both <code>all()</code> and <code>any()</code> for this).</p>
 <p>On your own, compare whether all elements are the same in <code>x</code> and <code>y</code>.</p>
 <details>
 <p><summary>Reveal content</summary></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>( x <span class="op">==</span><span class="st"> </span>y)</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">all</span>( x <span class="op">==</span><span class="st"> </span>y)</a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 The answer is that the vectors <code>x</code> and <code>y</code> differ in some elements. Let’s find out where the differences lie.
 </details>
 <p>Let’s assume we want to know which elements of two vectors are equal. This is often necessary for merging data sets. Let’s say we have two data sets and both contain the string “UK” as a country identifier for the United Kingdom. We now want to know which observations in both data sets refer to the UK. We can do this with relational operators and the <code>which()</code> function. Lets’ get back to our mini-example. We want to compare which elements of <code>x</code> are different from the elements in <code>y</code>. Try to do this on your own.</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r"><span class="kw">which</span>(x <span class="op">!=</span><span class="st"> </span>y)</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">which</span>(x <span class="op">!=</span><span class="st"> </span>y)</a></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>Notice that our code compares the first element of <code>x</code> with the first element of <code>y</code>, the second element of <code>x</code> with the second element of <code>y</code> and so on.</p>
 <p>Let’s apply our knowledge to the <code>eu</code> data set. You have the following tasks.</p>
@@ -1970,18 +1976,18 @@ The answer is that the vectors <code>x</code> and <code>y</code> differ in some 
 </ol>
 <details>
 <p><summary>Reveal content</summary></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(eu<span class="op">$</span>NUTS0)</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">table</span>(eu<span class="op">$</span>NUTS0)</a></code></pre></div>
 <pre><code>
   AT   BE   BG   CY   CZ   DE   DK   EE   EL   ES   FI   FR   GR   HR   HU 
  390  442  468  130  312 1664  260  130  806  754  338 1144  520  156  338 
   IE   IT   LT   LU   LV   MT   NL   PL   PT   RO   SE   SI   SK   UK 
  156 1040  130  130  130  130  494  650  338  416  390  234  208 1586 </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">uk &lt;-<span class="st"> </span>eu[ eu<span class="op">$</span>NUTS0 <span class="op">==</span><span class="st"> &quot;UK&quot;</span> , ]
-
-<span class="kw">summary</span>(uk<span class="op">$</span>econ_2gdp_eur_hab)</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">uk &lt;-<span class="st"> </span>eu[ eu<span class="op">$</span>NUTS0 <span class="op">==</span><span class="st"> &quot;UK&quot;</span> , ]</a>
+<a class="sourceLine" id="cb57-2" title="2"></a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="kw">summary</span>(uk<span class="op">$</span>econ_2gdp_eur_hab)</a></code></pre></div>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
   17000   23900   26400   30240   30350  172600     791 </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">uk[ (uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&gt;</span><span class="st"> </span><span class="dv">26400</span> <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30350</span>) <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>,  <span class="kw">c</span>(<span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">uk[ (uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&gt;</span><span class="st"> </span><span class="dv">26400</span> <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30350</span>) <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>,  <span class="kw">c</span>(<span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)]</a></code></pre></div>
 <pre><code>                                   region_name econ_2gdp_eur_hab
 12401         Northumberland and Tyne and Wear             26800
 12427                     NORTH WEST (ENGLAND)             29400
@@ -2010,7 +2016,7 @@ NA.5                                      &lt;NA&gt;                NA
 NA.6                                      &lt;NA&gt;                NA
 NA.7                                      &lt;NA&gt;                NA</code></pre>
 <p>The data set is quite messy. You can see that R displays a first column with strange content. These are row names and have no further significance for us. The row names carry over from the original <code>eu</code> data set. You can view the vector of row names by running the following R code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(uk[ (uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&gt;</span><span class="st"> </span><span class="dv">26400</span> <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30350</span>) <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>,  <span class="kw">c</span>(<span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)])</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">rownames</span>(uk[ (uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&gt;</span><span class="st"> </span><span class="dv">26400</span> <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>econ_2gdp_eur_hab <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30350</span>) <span class="op">&amp;</span><span class="st"> </span>uk<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>,  <span class="kw">c</span>(<span class="st">&quot;region_name&quot;</span>, <span class="st">&quot;econ_2gdp_eur_hab&quot;</span>)])</a></code></pre></div>
 <pre><code> [1] &quot;12401&quot; &quot;12427&quot; &quot;12453&quot; &quot;NA&quot;    &quot;12505&quot; &quot;NA.1&quot;  &quot;12635&quot; &quot;12661&quot;
  [9] &quot;12739&quot; &quot;12765&quot; &quot;12791&quot; &quot;12869&quot; &quot;12947&quot; &quot;13051&quot; &quot;NA.2&quot;  &quot;NA.3&quot; 
 [17] &quot;13389&quot; &quot;13467&quot; &quot;13519&quot; &quot;13597&quot; &quot;NA.4&quot;  &quot;13701&quot; &quot;NA.5&quot;  &quot;13779&quot;
@@ -2021,17 +2027,17 @@ NA.7                                      &lt;NA&gt;                NA</code></p
 <h3><span class="header-section-number">1.1.3</span> Re-naming variables</h3>
 <p>We want to rename <code>econ_2gdp_eur_hab</code> into something more meaningful. The new name should be <em>wealth</em>. We can use the <code>names()</code> function to get a vector of variable names like so: <code>names(eu)</code>.</p>
 <p>We want to change the element of that vector which is <code>econ_2gdp_eur_hab</code> and we need the <code>which()</code> function to achieve this. Try to solve the problem on your own.</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r"><span class="kw">which</span>( <span class="kw">names</span>(eu) <span class="op">==</span><span class="st">  &quot;econ_2gdp_eur_hab&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">which</span>( <span class="kw">names</span>(eu) <span class="op">==</span><span class="st">  &quot;econ_2gdp_eur_hab&quot;</span>)</a></code></pre></div>
 <pre><code>[1] 36</code></pre>
 <p>Great, now we know which column to look at. Now to rename the variable</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r"><span class="kw">names</span>(eu)[ <span class="kw">which</span>( <span class="kw">names</span>(eu) <span class="op">==</span><span class="st">  &quot;econ_2gdp_eur_hab&quot;</span>) ] &lt;-<span class="st"> &quot;wealth&quot;</span></code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">names</span>(eu)[ <span class="kw">which</span>( <span class="kw">names</span>(eu) <span class="op">==</span><span class="st">  &quot;econ_2gdp_eur_hab&quot;</span>) ] &lt;-<span class="st"> &quot;wealth&quot;</span></a></code></pre></div>
 <p>We now check the variable names to confirm that we successfully changed the name.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(eu)[<span class="dv">36</span>]</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">names</span>(eu)[<span class="dv">36</span>]</a></code></pre></div>
 <pre><code>[1] &quot;wealth&quot;</code></pre>
 <div id="missing-data" class="section level4">
 <h4><span class="header-section-number">1.1.3.1</span> Missing data</h4>
 <p>Let’s have a look at the summary function on the <code>wealth</code> variable within the <code>eu</code> data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(eu<span class="op">$</span>wealth)</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">summary</span>(eu<span class="op">$</span>wealth)</a></code></pre></div>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
    1300   14600   23800   23450   30000  172600    7896 </code></pre>
 <p>The <code>summary()</code> function informs us that there are 7896 missing values. We cannot calculate with missing values. For instance, <code>mean(eu$wealth)</code> will return <code>NA</code> unless we specifically instruct the <code>mean()</code> function to ignore missing values like so: <code>mean( eu$wealth, na.rm = TRUE )</code>. Some functions like <code>lm()</code> will just throw out missing values without informing us. Whenever we use <code>wealth</code> in calculation, we must remove missing values or fill in some estimates for the missing values.</p>
@@ -2039,45 +2045,45 @@ NA.7                                      &lt;NA&gt;                NA</code></p
 <p>However, removing missing values from a variable that we are interested in is fine. Remember though that statistical analyzes become less accurate (variance increases and bias may increase) through list-wise deletion. For statistics, imputing (estimating) missing values is often a better solution. We remove missing values from the <code>wealth</code> variable.</p>
 <p>The function <code>is.na()</code> returns TRUE or FALSE for every element in the vector that we supply where TRUE means that the value is missing. We could reverse <code>is.na()</code> to mean is <strong>not</strong> NA like so: <code>!is.na()</code>.</p>
 <p>Try this on your own. But combine it with the <code>table()</code> function. So that instead of getting a very long vector of TRUE/FALSE we see the number of missings and non-missings.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth))</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">table</span>(<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth))</a></code></pre></div>
 <pre><code>
 FALSE  TRUE 
  7896  5988 </code></pre>
 <p>We can subset our data set to include only those observations that are not missing. Try this on your own:</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r">eu &lt;-<span class="st"> </span>eu[<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth), ]</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">eu &lt;-<span class="st"> </span>eu[<span class="op">!</span><span class="kw">is.na</span>(eu<span class="op">$</span>wealth), ]</a></code></pre></div>
 <p>We have now successfully removed missing values from the <code>wealth</code> variable which will make working with the variable a lot easier. We produce a few simple plots to describe our data which would require a lot more code had we not removed missing values.</p>
 </div>
 <div id="simple-plots" class="section level4">
 <h4><span class="header-section-number">1.1.3.2</span> Simple plots</h4>
 <p>With the missing values removed from the <code>wealth</code> variable, we can now easily plot the distribution of that variable. The <code>density()</code> function will estimate the density of a variable which we can combine with the <code>plot()</code> function to give us an idea about the general distribution of that variable.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  <span class="kw">density</span>(eu<span class="op">$</span>wealth),
-  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,
-  <span class="dt">main =</span> <span class="st">&quot;Distribution of Wealth in the EU&quot;</span>
-)</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb73-2" title="2">  <span class="kw">density</span>(eu<span class="op">$</span>wealth),</a>
+<a class="sourceLine" id="cb73-3" title="3">  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</a>
+<a class="sourceLine" id="cb73-4" title="4">  <span class="dt">main =</span> <span class="st">&quot;Distribution of Wealth in the EU&quot;</span></a>
+<a class="sourceLine" id="cb73-5" title="5">)</a></code></pre></div>
 <p><img src="r102_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Is this distribution right-skewed or positively skewed? Put differently, are there a few observations that are very wealthy but most are not? To illustrate let’s add both the median and the mean to the plot. Recall that the mean is susceptible to outliers and hence in a right-skewed distribution the mean is greater than the median.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
-<span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">median</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
-<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Median&quot;</span>),  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">median</span>(eu<span class="op">$</span>wealth),<span class="dv">10</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">4e-05</span>, <span class="dt">length.out =</span> <span class="dv">10</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Median&quot;</span>),  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="r102_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>In this case median and mean are relatively close together, pointing to a relatively symmetric distribution. Keep in mind though that our unit of observation is the region-year. For instance, Essex in 1994.</p>
 <p>Let’s plot over-time development of <code>wealth</code> in Essex. On the x-axis, we plot time and on the y-axis, we plot <code>wealth</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  <span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
-  <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
-  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Wealth in Euro&quot;</span>,
-  <span class="dt">main =</span> <span class="st">&quot;GDP per person in Essex adjusted by prices&quot;</span>,
-  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,
-  <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,
-  <span class="dt">pch =</span> <span class="dv">16</span>,
-  <span class="dt">cex =</span> <span class="fl">1.5</span>
-)
-<span class="kw">lines</span>(<span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
-      <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],
-      <span class="dt">lwd =</span> <span class="dv">2</span>,
-      <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb75-2" title="2">  <span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],</a>
+<a class="sourceLine" id="cb75-3" title="3">  <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],</a>
+<a class="sourceLine" id="cb75-4" title="4">  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb75-5" title="5">  <span class="dt">ylab =</span> <span class="st">&quot;Wealth in Euro&quot;</span>,</a>
+<a class="sourceLine" id="cb75-6" title="6">  <span class="dt">main =</span> <span class="st">&quot;GDP per person in Essex adjusted by prices&quot;</span>,</a>
+<a class="sourceLine" id="cb75-7" title="7">  <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</a>
+<a class="sourceLine" id="cb75-8" title="8">  <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb75-9" title="9">  <span class="dt">pch =</span> <span class="dv">16</span>,</a>
+<a class="sourceLine" id="cb75-10" title="10">  <span class="dt">cex =</span> <span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb75-11" title="11">)</a>
+<a class="sourceLine" id="cb75-12" title="12"><span class="kw">lines</span>(<span class="dt">x =</span> eu<span class="op">$</span>year[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],</a>
+<a class="sourceLine" id="cb75-13" title="13">      <span class="dt">y =</span> eu<span class="op">$</span>wealth[eu<span class="op">$</span>region_name<span class="op">==</span><span class="st">&quot;Essex&quot;</span>],</a>
+<a class="sourceLine" id="cb75-14" title="14">      <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb75-15" title="15">      <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a></code></pre></div>
 <p><img src="r102_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>It seems that per person wealth in Essex was not quite back at pre financial crisis levels in 2014. We might want to compare Essex to the rest of the UK. Doing so efficiently means that we have to aggregate wealth data to the UK level for each year. We could write code for this but doing such manipulations is one strong suits of the tidyverse which we introduce in the next part of this course.</p>
 
@@ -2144,8 +2150,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

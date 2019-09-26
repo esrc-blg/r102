@@ -27,17 +27,10 @@ Participants are expected to have used R and RStudio before.
 
 1. Data sub-setting, logical conditions, missing values, simple plots
 2. Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating
-3. Merging data
-4. Reshaping data
-5. Regular expressions
+3. Merging data, re-shaping data, regular expressions
 
 ***Acknowledgements***
 
 The ESRC Business and Local Government Data Research Centre is funded by the [Economic and Social Research Council (ESRC)](https://esrc.ukri.org).
 
 ----
-
-<div class="container btn-container">
-<button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/ml101/raw/master/data/data.zip');">placeholder</button>
-<button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/ml101/raw/master/slides/slides.pdf');">placeholder</button>
-</div>

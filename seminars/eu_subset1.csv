@@ -1,0 +1,2325 @@
+"year","country","region","wealth","quality.of.government"
+2000,"DE","BADEN-WÜRTTEMBERG",29700,NA
+2001,"DE","BADEN-WÜRTTEMBERG",30900,NA
+2002,"DE","BADEN-WÜRTTEMBERG",31000,NA
+2003,"DE","BADEN-WÜRTTEMBERG",31100,NA
+2004,"DE","BADEN-WÜRTTEMBERG",31400,NA
+2005,"DE","BADEN-WÜRTTEMBERG",31700,NA
+2006,"DE","BADEN-WÜRTTEMBERG",33700,NA
+2007,"DE","BADEN-WÜRTTEMBERG",35600,NA
+2008,"DE","BADEN-WÜRTTEMBERG",36000,NA
+2009,"DE","BADEN-WÜRTTEMBERG",33600,NA
+2010,"DE","BADEN-WÜRTTEMBERG",36400,1.01053
+2011,"DE","BADEN-WÜRTTEMBERG",38700,NA
+2012,"DE","BADEN-WÜRTTEMBERG",39200,NA
+2013,"DE","BADEN-WÜRTTEMBERG",39900,0.980281
+2000,"DE","Stuttgart",33300,NA
+2001,"DE","Stuttgart",35000,NA
+2002,"DE","Stuttgart",34800,NA
+2003,"DE","Stuttgart",35200,NA
+2004,"DE","Stuttgart",35200,NA
+2005,"DE","Stuttgart",35100,NA
+2006,"DE","Stuttgart",37700,NA
+2007,"DE","Stuttgart",40200,NA
+2008,"DE","Stuttgart",39800,NA
+2009,"DE","Stuttgart",36600,NA
+2010,"DE","Stuttgart",40500,NA
+2011,"DE","Stuttgart",43000,NA
+2012,"DE","Stuttgart",43900,NA
+2013,"DE","Stuttgart",44700,NA
+2000,"DE","Karlsruhe",29600,NA
+2001,"DE","Karlsruhe",30600,NA
+2002,"DE","Karlsruhe",31000,NA
+2003,"DE","Karlsruhe",31000,NA
+2004,"DE","Karlsruhe",31500,NA
+2005,"DE","Karlsruhe",32200,NA
+2006,"DE","Karlsruhe",33900,NA
+2007,"DE","Karlsruhe",35400,NA
+2008,"DE","Karlsruhe",36300,NA
+2009,"DE","Karlsruhe",34500,NA
+2010,"DE","Karlsruhe",36500,NA
+2011,"DE","Karlsruhe",38500,NA
+2012,"DE","Karlsruhe",38700,NA
+2013,"DE","Karlsruhe",39000,NA
+2000,"DE","Freiburg",25600,NA
+2001,"DE","Freiburg",26200,NA
+2002,"DE","Freiburg",26300,NA
+2003,"DE","Freiburg",26300,NA
+2004,"DE","Freiburg",26700,NA
+2005,"DE","Freiburg",27100,NA
+2006,"DE","Freiburg",28500,NA
+2007,"DE","Freiburg",29800,NA
+2008,"DE","Freiburg",30600,NA
+2009,"DE","Freiburg",28900,NA
+2010,"DE","Freiburg",30800,NA
+2011,"DE","Freiburg",32800,NA
+2012,"DE","Freiburg",33100,NA
+2013,"DE","Freiburg",33900,NA
+2000,"DE","Tübingen",27000,NA
+2001,"DE","Tübingen",27900,NA
+2002,"DE","Tübingen",28000,NA
+2003,"DE","Tübingen",28100,NA
+2004,"DE","Tübingen",28800,NA
+2005,"DE","Tübingen",29300,NA
+2006,"DE","Tübingen",30800,NA
+2007,"DE","Tübingen",32700,NA
+2008,"DE","Tübingen",33700,NA
+2009,"DE","Tübingen",31300,NA
+2010,"DE","Tübingen",34100,NA
+2011,"DE","Tübingen",36500,NA
+2012,"DE","Tübingen",36800,NA
+2013,"DE","Tübingen",37600,NA
+2000,"DE","BAYERN",29700,NA
+2001,"DE","BAYERN",30600,NA
+2002,"DE","BAYERN",31200,NA
+2003,"DE","BAYERN",30900,NA
+2004,"DE","BAYERN",31800,NA
+2005,"DE","BAYERN",32300,NA
+2006,"DE","BAYERN",33600,NA
+2007,"DE","BAYERN",35200,NA
+2008,"DE","BAYERN",35500,NA
+2009,"DE","BAYERN",34700,NA
+2010,"DE","BAYERN",36600,0.727395
+2011,"DE","BAYERN",38600,NA
+2012,"DE","BAYERN",39400,NA
+2013,"DE","BAYERN",40300,1.04461
+2000,"DE","Oberbayern",38600,NA
+2001,"DE","Oberbayern",40000,NA
+2002,"DE","Oberbayern",40400,NA
+2003,"DE","Oberbayern",39800,NA
+2004,"DE","Oberbayern",40900,NA
+2005,"DE","Oberbayern",41500,NA
+2006,"DE","Oberbayern",42900,NA
+2007,"DE","Oberbayern",45000,NA
+2008,"DE","Oberbayern",44300,NA
+2009,"DE","Oberbayern",43300,NA
+2010,"DE","Oberbayern",45100,NA
+2011,"DE","Oberbayern",47700,NA
+2012,"DE","Oberbayern",48600,NA
+2013,"DE","Oberbayern",50000,NA
+2000,"DE","Niederbayern",23400,NA
+2001,"DE","Niederbayern",24800,NA
+2002,"DE","Niederbayern",25200,NA
+2003,"DE","Niederbayern",24900,NA
+2004,"DE","Niederbayern",26000,NA
+2005,"DE","Niederbayern",26400,NA
+2006,"DE","Niederbayern",27300,NA
+2007,"DE","Niederbayern",28900,NA
+2008,"DE","Niederbayern",29400,NA
+2009,"DE","Niederbayern",28800,NA
+2010,"DE","Niederbayern",31300,NA
+2011,"DE","Niederbayern",33100,NA
+2012,"DE","Niederbayern",33100,NA
+2013,"DE","Niederbayern",33900,NA
+2000,"DE","Oberpfalz",24800,NA
+2001,"DE","Oberpfalz",25100,NA
+2002,"DE","Oberpfalz",25800,NA
+2003,"DE","Oberpfalz",25800,NA
+2004,"DE","Oberpfalz",26400,NA
+2005,"DE","Oberpfalz",27200,NA
+2006,"DE","Oberpfalz",28200,NA
+2007,"DE","Oberpfalz",30100,NA
+2008,"DE","Oberpfalz",31200,NA
+2009,"DE","Oberpfalz",30300,NA
+2010,"DE","Oberpfalz",32600,NA
+2011,"DE","Oberpfalz",34300,NA
+2012,"DE","Oberpfalz",35000,NA
+2013,"DE","Oberpfalz",35600,NA
+2000,"DE","Oberfranken",22900,NA
+2001,"DE","Oberfranken",23800,NA
+2002,"DE","Oberfranken",23800,NA
+2003,"DE","Oberfranken",23500,NA
+2004,"DE","Oberfranken",24300,NA
+2005,"DE","Oberfranken",24400,NA
+2006,"DE","Oberfranken",26000,NA
+2007,"DE","Oberfranken",27000,NA
+2008,"DE","Oberfranken",27400,NA
+2009,"DE","Oberfranken",27600,NA
+2010,"DE","Oberfranken",29000,NA
+2011,"DE","Oberfranken",30300,NA
+2012,"DE","Oberfranken",31000,NA
+2013,"DE","Oberfranken",31500,NA
+2000,"DE","Mittelfranken",28300,NA
+2001,"DE","Mittelfranken",28200,NA
+2002,"DE","Mittelfranken",29200,NA
+2003,"DE","Mittelfranken",29000,NA
+2004,"DE","Mittelfranken",30300,NA
+2005,"DE","Mittelfranken",30100,NA
+2006,"DE","Mittelfranken",31100,NA
+2007,"DE","Mittelfranken",32500,NA
+2008,"DE","Mittelfranken",33500,NA
+2009,"DE","Mittelfranken",33100,NA
+2010,"DE","Mittelfranken",34600,NA
+2011,"DE","Mittelfranken",36300,NA
+2012,"DE","Mittelfranken",37200,NA
+2013,"DE","Mittelfranken",37600,NA
+2000,"DE","Unterfranken",25200,NA
+2001,"DE","Unterfranken",26300,NA
+2002,"DE","Unterfranken",26800,NA
+2003,"DE","Unterfranken",26800,NA
+2004,"DE","Unterfranken",27300,NA
+2005,"DE","Unterfranken",28200,NA
+2006,"DE","Unterfranken",29200,NA
+2007,"DE","Unterfranken",30600,NA
+2008,"DE","Unterfranken",31000,NA
+2009,"DE","Unterfranken",29800,NA
+2010,"DE","Unterfranken",31800,NA
+2011,"DE","Unterfranken",34000,NA
+2012,"DE","Unterfranken",34600,NA
+2013,"DE","Unterfranken",35100,NA
+2000,"DE","Schwaben",25200,NA
+2001,"DE","Schwaben",26100,NA
+2002,"DE","Schwaben",27000,NA
+2003,"DE","Schwaben",26500,NA
+2004,"DE","Schwaben",27200,NA
+2005,"DE","Schwaben",27700,NA
+2006,"DE","Schwaben",29100,NA
+2007,"DE","Schwaben",30000,NA
+2008,"DE","Schwaben",30900,NA
+2009,"DE","Schwaben",30000,NA
+2010,"DE","Schwaben",31700,NA
+2011,"DE","Schwaben",33200,NA
+2012,"DE","Schwaben",34100,NA
+2013,"DE","Schwaben",34900,NA
+2000,"DE","BERLIN",25400,NA
+2001,"DE","BERLIN",25700,NA
+2002,"DE","BERLIN",25700,NA
+2003,"DE","BERLIN",25500,NA
+2004,"DE","BERLIN",25500,NA
+2005,"DE","BERLIN",26000,NA
+2006,"DE","BERLIN",26900,NA
+2007,"DE","BERLIN",28200,NA
+2008,"DE","BERLIN",29400,NA
+2009,"DE","BERLIN",29400,NA
+2010,"DE","BERLIN",30500,1.01043
+2011,"DE","BERLIN",32800,NA
+2012,"DE","BERLIN",32700,NA
+2013,"DE","BERLIN",33200,0.469975
+2000,"DE","Berlin",25400,NA
+2001,"DE","Berlin",25700,NA
+2002,"DE","Berlin",25700,NA
+2003,"DE","Berlin",25500,NA
+2004,"DE","Berlin",25500,NA
+2005,"DE","Berlin",26000,NA
+2006,"DE","Berlin",26900,NA
+2007,"DE","Berlin",28200,NA
+2008,"DE","Berlin",29400,NA
+2009,"DE","Berlin",29400,NA
+2010,"DE","Berlin",30500,NA
+2011,"DE","Berlin",32800,NA
+2012,"DE","Berlin",32700,NA
+2013,"DE","Berlin",33200,NA
+2000,"DE","BRANDENBURG",17400,NA
+2001,"DE","BRANDENBURG",17800,NA
+2002,"DE","BRANDENBURG",18200,NA
+2003,"DE","BRANDENBURG",18400,NA
+2004,"DE","BRANDENBURG",18900,NA
+2005,"DE","BRANDENBURG",19300,NA
+2006,"DE","BRANDENBURG",20200,NA
+2007,"DE","BRANDENBURG",21200,NA
+2008,"DE","BRANDENBURG",22100,NA
+2009,"DE","BRANDENBURG",21700,NA
+2010,"DE","BRANDENBURG",22800,1.00841
+2011,"DE","BRANDENBURG",23500,NA
+2012,"DE","BRANDENBURG",24100,NA
+2013,"DE","BRANDENBURG",24700,0.573457
+2000,"DE","Brandenburg",17400,NA
+2001,"DE","Brandenburg",17800,NA
+2002,"DE","Brandenburg",18200,NA
+2003,"DE","Brandenburg",18400,NA
+2004,"DE","Brandenburg",18900,NA
+2005,"DE","Brandenburg",19300,NA
+2006,"DE","Brandenburg",20200,NA
+2007,"DE","Brandenburg",21200,NA
+2008,"DE","Brandenburg",22100,NA
+2009,"DE","Brandenburg",21700,NA
+2010,"DE","Brandenburg",22800,NA
+2011,"DE","Brandenburg",23500,NA
+2012,"DE","Brandenburg",24100,NA
+2013,"DE","Brandenburg",24700,NA
+2000,"DE","Brandenburg - Nordost",NA,NA
+2001,"DE","Brandenburg - Nordost",NA,NA
+2002,"DE","Brandenburg - Nordost",NA,NA
+2003,"DE","Brandenburg - Nordost",NA,NA
+2004,"DE","Brandenburg - Nordost",NA,NA
+2005,"DE","Brandenburg - Nordost",NA,NA
+2006,"DE","Brandenburg - Nordost",NA,NA
+2007,"DE","Brandenburg - Nordost",NA,NA
+2008,"DE","Brandenburg - Nordost",NA,NA
+2009,"DE","Brandenburg - Nordost",NA,NA
+2010,"DE","Brandenburg - Nordost",NA,NA
+2011,"DE","Brandenburg - Nordost",NA,NA
+2012,"DE","Brandenburg - Nordost",NA,NA
+2013,"DE","Brandenburg - Nordost",NA,NA
+2000,"DE","Brandenburg - Südwest",NA,NA
+2001,"DE","Brandenburg - Südwest",NA,NA
+2002,"DE","Brandenburg - Südwest",NA,NA
+2003,"DE","Brandenburg - Südwest",NA,NA
+2004,"DE","Brandenburg - Südwest",NA,NA
+2005,"DE","Brandenburg - Südwest",NA,NA
+2006,"DE","Brandenburg - Südwest",NA,NA
+2007,"DE","Brandenburg - Südwest",NA,NA
+2008,"DE","Brandenburg - Südwest",NA,NA
+2009,"DE","Brandenburg - Südwest",NA,NA
+2010,"DE","Brandenburg - Südwest",NA,NA
+2011,"DE","Brandenburg - Südwest",NA,NA
+2012,"DE","Brandenburg - Südwest",NA,NA
+2013,"DE","Brandenburg - Südwest",NA,NA
+2000,"DE","BREMEN",34100,NA
+2001,"DE","BREMEN",35400,NA
+2002,"DE","BREMEN",36500,NA
+2003,"DE","BREMEN",37300,NA
+2004,"DE","BREMEN",37700,NA
+2005,"DE","BREMEN",38300,NA
+2006,"DE","BREMEN",40100,NA
+2007,"DE","BREMEN",41700,NA
+2008,"DE","BREMEN",42500,NA
+2009,"DE","BREMEN",38900,NA
+2010,"DE","BREMEN",41500,0.981307
+2011,"DE","BREMEN",42700,NA
+2012,"DE","BREMEN",44500,NA
+2013,"DE","BREMEN",45000,0.833508
+2000,"DE","Bremen",34100,NA
+2001,"DE","Bremen",35400,NA
+2002,"DE","Bremen",36500,NA
+2003,"DE","Bremen",37300,NA
+2004,"DE","Bremen",37700,NA
+2005,"DE","Bremen",38300,NA
+2006,"DE","Bremen",40100,NA
+2007,"DE","Bremen",41700,NA
+2008,"DE","Bremen",42500,NA
+2009,"DE","Bremen",38900,NA
+2010,"DE","Bremen",41500,NA
+2011,"DE","Bremen",42700,NA
+2012,"DE","Bremen",44500,NA
+2013,"DE","Bremen",45000,NA
+2000,"DE","HAMBURG",45900,NA
+2001,"DE","HAMBURG",48300,NA
+2002,"DE","HAMBURG",49000,NA
+2003,"DE","HAMBURG",49100,NA
+2004,"DE","HAMBURG",50100,NA
+2005,"DE","HAMBURG",51200,NA
+2006,"DE","HAMBURG",51700,NA
+2007,"DE","HAMBURG",53200,NA
+2008,"DE","HAMBURG",54600,NA
+2009,"DE","HAMBURG",52300,NA
+2010,"DE","HAMBURG",54200,0.989847
+2011,"DE","HAMBURG",56100,NA
+2012,"DE","HAMBURG",56600,NA
+2013,"DE","HAMBURG",57400,0.766649
+2000,"DE","Hamburg",45900,NA
+2001,"DE","Hamburg",48300,NA
+2002,"DE","Hamburg",49000,NA
+2003,"DE","Hamburg",49100,NA
+2004,"DE","Hamburg",50100,NA
+2005,"DE","Hamburg",51200,NA
+2006,"DE","Hamburg",51700,NA
+2007,"DE","Hamburg",53200,NA
+2008,"DE","Hamburg",54600,NA
+2009,"DE","Hamburg",52300,NA
+2010,"DE","Hamburg",54200,NA
+2011,"DE","Hamburg",56100,NA
+2012,"DE","Hamburg",56600,NA
+2013,"DE","Hamburg",57400,NA
+2000,"DE","HESSEN",32400,NA
+2001,"DE","HESSEN",33500,NA
+2002,"DE","HESSEN",33700,NA
+2003,"DE","HESSEN",34500,NA
+2004,"DE","HESSEN",35000,NA
+2005,"DE","HESSEN",35300,NA
+2006,"DE","HESSEN",36500,NA
+2007,"DE","HESSEN",38100,NA
+2008,"DE","HESSEN",38600,NA
+2009,"DE","HESSEN",36800,NA
+2010,"DE","HESSEN",38200,0.641472
+2011,"DE","HESSEN",39400,NA
+2012,"DE","HESSEN",39500,NA
+2013,"DE","HESSEN",40400,0.840277
+2000,"DE","Darmstadt",37700,NA
+2001,"DE","Darmstadt",39100,NA
+2002,"DE","Darmstadt",39000,NA
+2003,"DE","Darmstadt",40000,NA
+2004,"DE","Darmstadt",40500,NA
+2005,"DE","Darmstadt",40700,NA
+2006,"DE","Darmstadt",42100,NA
+2007,"DE","Darmstadt",43700,NA
+2008,"DE","Darmstadt",44200,NA
+2009,"DE","Darmstadt",42100,NA
+2010,"DE","Darmstadt",43400,NA
+2011,"DE","Darmstadt",44800,NA
+2012,"DE","Darmstadt",44700,NA
+2013,"DE","Darmstadt",45500,NA
+2000,"DE","Gießen",23500,NA
+2001,"DE","Gießen",24100,NA
+2002,"DE","Gießen",24400,NA
+2003,"DE","Gießen",24700,NA
+2004,"DE","Gießen",25500,NA
+2005,"DE","Gießen",25900,NA
+2006,"DE","Gießen",26700,NA
+2007,"DE","Gießen",28300,NA
+2008,"DE","Gießen",29200,NA
+2009,"DE","Gießen",27200,NA
+2010,"DE","Gießen",28300,NA
+2011,"DE","Gießen",29300,NA
+2012,"DE","Gießen",29500,NA
+2013,"DE","Gießen",30300,NA
+2000,"DE","Kassel",24400,NA
+2001,"DE","Kassel",25100,NA
+2002,"DE","Kassel",25700,NA
+2003,"DE","Kassel",26600,NA
+2004,"DE","Kassel",26800,NA
+2005,"DE","Kassel",26900,NA
+2006,"DE","Kassel",28100,NA
+2007,"DE","Kassel",29300,NA
+2008,"DE","Kassel",29700,NA
+2009,"DE","Kassel",28700,NA
+2010,"DE","Kassel",30300,NA
+2011,"DE","Kassel",31000,NA
+2012,"DE","Kassel",31500,NA
+2013,"DE","Kassel",32700,NA
+2000,"DE","MECKLENBURG-VORPOMMERN",16700,NA
+2001,"DE","MECKLENBURG-VORPOMMERN",17100,NA
+2002,"DE","MECKLENBURG-VORPOMMERN",17500,NA
+2003,"DE","MECKLENBURG-VORPOMMERN",17800,NA
+2004,"DE","MECKLENBURG-VORPOMMERN",18200,NA
+2005,"DE","MECKLENBURG-VORPOMMERN",18400,NA
+2006,"DE","MECKLENBURG-VORPOMMERN",19100,NA
+2007,"DE","MECKLENBURG-VORPOMMERN",20300,NA
+2008,"DE","MECKLENBURG-VORPOMMERN",21100,NA
+2009,"DE","MECKLENBURG-VORPOMMERN",21100,NA
+2010,"DE","MECKLENBURG-VORPOMMERN",21800,0.977281
+2011,"DE","MECKLENBURG-VORPOMMERN",22600,NA
+2012,"DE","MECKLENBURG-VORPOMMERN",22900,NA
+2013,"DE","MECKLENBURG-VORPOMMERN",23400,0.830991
+2000,"DE","Mecklenburg-Vorpommern",16700,NA
+2001,"DE","Mecklenburg-Vorpommern",17100,NA
+2002,"DE","Mecklenburg-Vorpommern",17500,NA
+2003,"DE","Mecklenburg-Vorpommern",17800,NA
+2004,"DE","Mecklenburg-Vorpommern",18200,NA
+2005,"DE","Mecklenburg-Vorpommern",18400,NA
+2006,"DE","Mecklenburg-Vorpommern",19100,NA
+2007,"DE","Mecklenburg-Vorpommern",20300,NA
+2008,"DE","Mecklenburg-Vorpommern",21100,NA
+2009,"DE","Mecklenburg-Vorpommern",21100,NA
+2010,"DE","Mecklenburg-Vorpommern",21800,NA
+2011,"DE","Mecklenburg-Vorpommern",22600,NA
+2012,"DE","Mecklenburg-Vorpommern",22900,NA
+2013,"DE","Mecklenburg-Vorpommern",23400,NA
+2000,"DE","NIEDERSACHSEN",23500,NA
+2001,"DE","NIEDERSACHSEN",23800,NA
+2002,"DE","NIEDERSACHSEN",23600,NA
+2003,"DE","NIEDERSACHSEN",23700,NA
+2004,"DE","NIEDERSACHSEN",24300,NA
+2005,"DE","NIEDERSACHSEN",24900,NA
+2006,"DE","NIEDERSACHSEN",26000,NA
+2007,"DE","NIEDERSACHSEN",27200,NA
+2008,"DE","NIEDERSACHSEN",28100,NA
+2009,"DE","NIEDERSACHSEN",26900,NA
+2010,"DE","NIEDERSACHSEN",28700,0.96446
+2011,"DE","NIEDERSACHSEN",30300,NA
+2012,"DE","NIEDERSACHSEN",31000,NA
+2013,"DE","NIEDERSACHSEN",31800,1.062073
+2000,"DE","Braunschweig",25900,NA
+2001,"DE","Braunschweig",26600,NA
+2002,"DE","Braunschweig",25700,NA
+2003,"DE","Braunschweig",26100,NA
+2004,"DE","Braunschweig",26900,NA
+2005,"DE","Braunschweig",27700,NA
+2006,"DE","Braunschweig",28700,NA
+2007,"DE","Braunschweig",30600,NA
+2008,"DE","Braunschweig",30900,NA
+2009,"DE","Braunschweig",28800,NA
+2010,"DE","Braunschweig",32100,NA
+2011,"DE","Braunschweig",35000,NA
+2012,"DE","Braunschweig",35700,NA
+2013,"DE","Braunschweig",37900,NA
+2000,"DE","Hannover",25800,NA
+2001,"DE","Hannover",26000,NA
+2002,"DE","Hannover",26300,NA
+2003,"DE","Hannover",26300,NA
+2004,"DE","Hannover",26600,NA
+2005,"DE","Hannover",27800,NA
+2006,"DE","Hannover",29200,NA
+2007,"DE","Hannover",29800,NA
+2008,"DE","Hannover",30800,NA
+2009,"DE","Hannover",29700,NA
+2010,"DE","Hannover",31100,NA
+2011,"DE","Hannover",32900,NA
+2012,"DE","Hannover",33300,NA
+2013,"DE","Hannover",33900,NA
+2000,"DE","Lüneburg",18900,NA
+2001,"DE","Lüneburg",19000,NA
+2002,"DE","Lüneburg",19000,NA
+2003,"DE","Lüneburg",19000,NA
+2004,"DE","Lüneburg",19400,NA
+2005,"DE","Lüneburg",19500,NA
+2006,"DE","Lüneburg",20300,NA
+2007,"DE","Lüneburg",21400,NA
+2008,"DE","Lüneburg",22000,NA
+2009,"DE","Lüneburg",21600,NA
+2010,"DE","Lüneburg",22400,NA
+2011,"DE","Lüneburg",23300,NA
+2012,"DE","Lüneburg",24200,NA
+2013,"DE","Lüneburg",24700,NA
+2000,"DE","Weser-Ems",22900,NA
+2001,"DE","Weser-Ems",23400,NA
+2002,"DE","Weser-Ems",23100,NA
+2003,"DE","Weser-Ems",23100,NA
+2004,"DE","Weser-Ems",24000,NA
+2005,"DE","Weser-Ems",24100,NA
+2006,"DE","Weser-Ems",25300,NA
+2007,"DE","Weser-Ems",26700,NA
+2008,"DE","Weser-Ems",28000,NA
+2009,"DE","Weser-Ems",27000,NA
+2010,"DE","Weser-Ems",28600,NA
+2011,"DE","Weser-Ems",29900,NA
+2012,"DE","Weser-Ems",30500,NA
+2013,"DE","Weser-Ems",30900,NA
+2000,"DE","NORDRHEIN-WESTFALEN",26200,NA
+2001,"DE","NORDRHEIN-WESTFALEN",26800,NA
+2002,"DE","NORDRHEIN-WESTFALEN",27300,NA
+2003,"DE","NORDRHEIN-WESTFALEN",27300,NA
+2004,"DE","NORDRHEIN-WESTFALEN",28100,NA
+2005,"DE","NORDRHEIN-WESTFALEN",28500,NA
+2006,"DE","NORDRHEIN-WESTFALEN",29500,NA
+2007,"DE","NORDRHEIN-WESTFALEN",31400,NA
+2008,"DE","NORDRHEIN-WESTFALEN",32300,NA
+2009,"DE","NORDRHEIN-WESTFALEN",31200,NA
+2010,"DE","NORDRHEIN-WESTFALEN",32300,0.729913
+2011,"DE","NORDRHEIN-WESTFALEN",33600,NA
+2012,"DE","NORDRHEIN-WESTFALEN",34100,NA
+2013,"DE","NORDRHEIN-WESTFALEN",34600,0.709927
+2000,"DE","Düsseldorf",28100,NA
+2001,"DE","Düsseldorf",29200,NA
+2002,"DE","Düsseldorf",29600,NA
+2003,"DE","Düsseldorf",29900,NA
+2004,"DE","Düsseldorf",30800,NA
+2005,"DE","Düsseldorf",31200,NA
+2006,"DE","Düsseldorf",32000,NA
+2007,"DE","Düsseldorf",34300,NA
+2008,"DE","Düsseldorf",35900,NA
+2009,"DE","Düsseldorf",34400,NA
+2010,"DE","Düsseldorf",35100,NA
+2011,"DE","Düsseldorf",36300,NA
+2012,"DE","Düsseldorf",36900,NA
+2013,"DE","Düsseldorf",37400,NA
+2000,"DE","Köln",29400,NA
+2001,"DE","Köln",29800,NA
+2002,"DE","Köln",30900,NA
+2003,"DE","Köln",30200,NA
+2004,"DE","Köln",30800,NA
+2005,"DE","Köln",30800,NA
+2006,"DE","Köln",32100,NA
+2007,"DE","Köln",34000,NA
+2008,"DE","Köln",34200,NA
+2009,"DE","Köln",33800,NA
+2010,"DE","Köln",34700,NA
+2011,"DE","Köln",36000,NA
+2012,"DE","Köln",36200,NA
+2013,"DE","Köln",36900,NA
+2000,"DE","Münster",22400,NA
+2001,"DE","Münster",22900,NA
+2002,"DE","Münster",23000,NA
+2003,"DE","Münster",23300,NA
+2004,"DE","Münster",24300,NA
+2005,"DE","Münster",24800,NA
+2006,"DE","Münster",25900,NA
+2007,"DE","Münster",27400,NA
+2008,"DE","Münster",28500,NA
+2009,"DE","Münster",27200,NA
+2010,"DE","Münster",28500,NA
+2011,"DE","Münster",29400,NA
+2012,"DE","Münster",29900,NA
+2013,"DE","Münster",30300,NA
+2000,"DE","Detmold",25900,NA
+2001,"DE","Detmold",26100,NA
+2002,"DE","Detmold",26200,NA
+2003,"DE","Detmold",26200,NA
+2004,"DE","Detmold",26700,NA
+2005,"DE","Detmold",27500,NA
+2006,"DE","Detmold",28400,NA
+2007,"DE","Detmold",30500,NA
+2008,"DE","Detmold",31000,NA
+2009,"DE","Detmold",29900,NA
+2010,"DE","Detmold",30900,NA
+2011,"DE","Detmold",32400,NA
+2012,"DE","Detmold",33200,NA
+2013,"DE","Detmold",34000,NA
+2000,"DE","Arnsberg",23000,NA
+2001,"DE","Arnsberg",23200,NA
+2002,"DE","Arnsberg",23500,NA
+2003,"DE","Arnsberg",23800,NA
+2004,"DE","Arnsberg",24500,NA
+2005,"DE","Arnsberg",25200,NA
+2006,"DE","Arnsberg",26200,NA
+2007,"DE","Arnsberg",27700,NA
+2008,"DE","Arnsberg",28600,NA
+2009,"DE","Arnsberg",27400,NA
+2010,"DE","Arnsberg",28900,NA
+2011,"DE","Arnsberg",30500,NA
+2012,"DE","Arnsberg",30900,NA
+2013,"DE","Arnsberg",31400,NA
+2000,"DE","RHEINLAND-PFALZ",23600,NA
+2001,"DE","RHEINLAND-PFALZ",23700,NA
+2002,"DE","RHEINLAND-PFALZ",24200,NA
+2003,"DE","RHEINLAND-PFALZ",24300,NA
+2004,"DE","RHEINLAND-PFALZ",25100,NA
+2005,"DE","RHEINLAND-PFALZ",25200,NA
+2006,"DE","RHEINLAND-PFALZ",26300,NA
+2007,"DE","RHEINLAND-PFALZ",27500,NA
+2008,"DE","RHEINLAND-PFALZ",28100,NA
+2009,"DE","RHEINLAND-PFALZ",27500,NA
+2010,"DE","RHEINLAND-PFALZ",29100,0.848129
+2011,"DE","RHEINLAND-PFALZ",30100,NA
+2012,"DE","RHEINLAND-PFALZ",30700,NA
+2013,"DE","RHEINLAND-PFALZ",31200,1.025997
+2000,"DE","Koblenz",22400,NA
+2001,"DE","Koblenz",22500,NA
+2002,"DE","Koblenz",23100,NA
+2003,"DE","Koblenz",23200,NA
+2004,"DE","Koblenz",23900,NA
+2005,"DE","Koblenz",24200,NA
+2006,"DE","Koblenz",25300,NA
+2007,"DE","Koblenz",26300,NA
+2008,"DE","Koblenz",26900,NA
+2009,"DE","Koblenz",26300,NA
+2010,"DE","Koblenz",27900,NA
+2011,"DE","Koblenz",28600,NA
+2012,"DE","Koblenz",29200,NA
+2013,"DE","Koblenz",29700,NA
+2000,"DE","Trier",20500,NA
+2001,"DE","Trier",20800,NA
+2002,"DE","Trier",21400,NA
+2003,"DE","Trier",21900,NA
+2004,"DE","Trier",22600,NA
+2005,"DE","Trier",22700,NA
+2006,"DE","Trier",23400,NA
+2007,"DE","Trier",24300,NA
+2008,"DE","Trier",25000,NA
+2009,"DE","Trier",24500,NA
+2010,"DE","Trier",25400,NA
+2011,"DE","Trier",26200,NA
+2012,"DE","Trier",26600,NA
+2013,"DE","Trier",27700,NA
+2000,"DE","Rheinhessen-Pfalz",25400,NA
+2001,"DE","Rheinhessen-Pfalz",25300,NA
+2002,"DE","Rheinhessen-Pfalz",25700,NA
+2003,"DE","Rheinhessen-Pfalz",25700,NA
+2004,"DE","Rheinhessen-Pfalz",26600,NA
+2005,"DE","Rheinhessen-Pfalz",26700,NA
+2006,"DE","Rheinhessen-Pfalz",27700,NA
+2007,"DE","Rheinhessen-Pfalz",29200,NA
+2008,"DE","Rheinhessen-Pfalz",29700,NA
+2009,"DE","Rheinhessen-Pfalz",29200,NA
+2010,"DE","Rheinhessen-Pfalz",31000,NA
+2011,"DE","Rheinhessen-Pfalz",32100,NA
+2012,"DE","Rheinhessen-Pfalz",33000,NA
+2013,"DE","Rheinhessen-Pfalz",33300,NA
+2000,"DE","SAARLAND",24000,NA
+2001,"DE","SAARLAND",24600,NA
+2002,"DE","SAARLAND",24700,NA
+2003,"DE","SAARLAND",25000,NA
+2004,"DE","SAARLAND",26200,NA
+2005,"DE","SAARLAND",27600,NA
+2006,"DE","SAARLAND",28900,NA
+2007,"DE","SAARLAND",30600,NA
+2008,"DE","SAARLAND",31200,NA
+2009,"DE","SAARLAND",28400,NA
+2010,"DE","SAARLAND",30300,1.08508
+2011,"DE","SAARLAND",32100,NA
+2012,"DE","SAARLAND",32600,NA
+2013,"DE","SAARLAND",32900,1.018566
+2000,"DE","Saarland",24000,NA
+2001,"DE","Saarland",24600,NA
+2002,"DE","Saarland",24700,NA
+2003,"DE","Saarland",25000,NA
+2004,"DE","Saarland",26200,NA
+2005,"DE","Saarland",27600,NA
+2006,"DE","Saarland",28900,NA
+2007,"DE","Saarland",30600,NA
+2008,"DE","Saarland",31200,NA
+2009,"DE","Saarland",28400,NA
+2010,"DE","Saarland",30300,NA
+2011,"DE","Saarland",32100,NA
+2012,"DE","Saarland",32600,NA
+2013,"DE","Saarland",32900,NA
+2000,"DE","SACHSEN",17200,NA
+2001,"DE","SACHSEN",17900,NA
+2002,"DE","SACHSEN",18800,NA
+2003,"DE","SACHSEN",19300,NA
+2004,"DE","SACHSEN",20000,NA
+2005,"DE","SACHSEN",20100,NA
+2006,"DE","SACHSEN",21200,NA
+2007,"DE","SACHSEN",22300,NA
+2008,"DE","SACHSEN",22800,NA
+2009,"DE","SACHSEN",22200,NA
+2010,"DE","SACHSEN",23300,1.13183
+2011,"DE","SACHSEN",24500,NA
+2012,"DE","SACHSEN",25100,NA
+2013,"DE","SACHSEN",26000,0.78794
+2000,"DE","Chemnitz",NA,NA
+2001,"DE","Chemnitz",NA,NA
+2002,"DE","Chemnitz",NA,NA
+2003,"DE","Chemnitz",NA,NA
+2004,"DE","Chemnitz",NA,NA
+2005,"DE","Chemnitz",NA,NA
+2006,"DE","Chemnitz",NA,NA
+2007,"DE","Chemnitz",NA,NA
+2008,"DE","Chemnitz",NA,NA
+2009,"DE","Chemnitz",NA,NA
+2010,"DE","Chemnitz",NA,NA
+2011,"DE","Chemnitz",NA,NA
+2012,"DE","Chemnitz",NA,NA
+2013,"DE","Chemnitz",NA,NA
+2000,"DE","Dresden",17500,NA
+2001,"DE","Dresden",18400,NA
+2002,"DE","Dresden",19500,NA
+2003,"DE","Dresden",20200,NA
+2004,"DE","Dresden",21000,NA
+2005,"DE","Dresden",21000,NA
+2006,"DE","Dresden",21800,NA
+2007,"DE","Dresden",23000,NA
+2008,"DE","Dresden",23200,NA
+2009,"DE","Dresden",22700,NA
+2010,"DE","Dresden",23600,NA
+2011,"DE","Dresden",24500,NA
+2012,"DE","Dresden",25100,NA
+2013,"DE","Dresden",26200,NA
+2000,"DE","Leipzig",NA,NA
+2001,"DE","Leipzig",NA,NA
+2002,"DE","Leipzig",NA,NA
+2003,"DE","Leipzig",NA,NA
+2004,"DE","Leipzig",NA,NA
+2005,"DE","Leipzig",NA,NA
+2006,"DE","Leipzig",NA,NA
+2007,"DE","Leipzig",NA,NA
+2008,"DE","Leipzig",NA,NA
+2009,"DE","Leipzig",NA,NA
+2010,"DE","Leipzig",NA,NA
+2011,"DE","Leipzig",NA,NA
+2012,"DE","Leipzig",NA,NA
+2013,"DE","Leipzig",NA,NA
+2000,"DE","Chemnitz",16200,NA
+2001,"DE","Chemnitz",16700,NA
+2002,"DE","Chemnitz",17400,NA
+2003,"DE","Chemnitz",17900,NA
+2004,"DE","Chemnitz",18500,NA
+2005,"DE","Chemnitz",18700,NA
+2006,"DE","Chemnitz",20000,NA
+2007,"DE","Chemnitz",21100,NA
+2008,"DE","Chemnitz",21600,NA
+2009,"DE","Chemnitz",20800,NA
+2010,"DE","Chemnitz",22100,NA
+2011,"DE","Chemnitz",23100,NA
+2012,"DE","Chemnitz",23500,NA
+2013,"DE","Chemnitz",24000,NA
+2000,"DE","Leipzig",18500,NA
+2001,"DE","Leipzig",19100,NA
+2002,"DE","Leipzig",19900,NA
+2003,"DE","Leipzig",20200,NA
+2004,"DE","Leipzig",20700,NA
+2005,"DE","Leipzig",20800,NA
+2006,"DE","Leipzig",22200,NA
+2007,"DE","Leipzig",23300,NA
+2008,"DE","Leipzig",23900,NA
+2009,"DE","Leipzig",23700,NA
+2010,"DE","Leipzig",24700,NA
+2011,"DE","Leipzig",26600,NA
+2012,"DE","Leipzig",27500,NA
+2013,"DE","Leipzig",28700,NA
+2000,"DE","SACHSEN-ANHALT",16300,NA
+2001,"DE","SACHSEN-ANHALT",16800,NA
+2002,"DE","SACHSEN-ANHALT",17600,NA
+2003,"DE","SACHSEN-ANHALT",18000,NA
+2004,"DE","SACHSEN-ANHALT",18500,NA
+2005,"DE","SACHSEN-ANHALT",18800,NA
+2006,"DE","SACHSEN-ANHALT",19800,NA
+2007,"DE","SACHSEN-ANHALT",21000,NA
+2008,"DE","SACHSEN-ANHALT",21600,NA
+2009,"DE","SACHSEN-ANHALT",20900,NA
+2010,"DE","SACHSEN-ANHALT",22400,0.889376
+2011,"DE","SACHSEN-ANHALT",22800,NA
+2012,"DE","SACHSEN-ANHALT",23800,NA
+2013,"DE","SACHSEN-ANHALT",24400,0.374654
+2000,"DE","Sachsen-Anhalt",16300,NA
+2001,"DE","Sachsen-Anhalt",16800,NA
+2002,"DE","Sachsen-Anhalt",17600,NA
+2003,"DE","Sachsen-Anhalt",18000,NA
+2004,"DE","Sachsen-Anhalt",18500,NA
+2005,"DE","Sachsen-Anhalt",18800,NA
+2006,"DE","Sachsen-Anhalt",19800,NA
+2007,"DE","Sachsen-Anhalt",21000,NA
+2008,"DE","Sachsen-Anhalt",21600,NA
+2009,"DE","Sachsen-Anhalt",20900,NA
+2010,"DE","Sachsen-Anhalt",22400,NA
+2011,"DE","Sachsen-Anhalt",22800,NA
+2012,"DE","Sachsen-Anhalt",23800,NA
+2013,"DE","Sachsen-Anhalt",24400,NA
+2000,"DE","Dessau ",NA,NA
+2001,"DE","Dessau ",NA,NA
+2002,"DE","Dessau ",NA,NA
+2003,"DE","Dessau ",NA,NA
+2004,"DE","Dessau ",NA,NA
+2005,"DE","Dessau ",NA,NA
+2006,"DE","Dessau ",NA,NA
+2007,"DE","Dessau ",NA,NA
+2008,"DE","Dessau ",NA,NA
+2009,"DE","Dessau ",NA,NA
+2010,"DE","Dessau ",NA,NA
+2011,"DE","Dessau ",NA,NA
+2012,"DE","Dessau ",NA,NA
+2013,"DE","Dessau ",NA,NA
+2000,"DE","Halle",NA,NA
+2001,"DE","Halle",NA,NA
+2002,"DE","Halle",NA,NA
+2003,"DE","Halle",NA,NA
+2004,"DE","Halle",NA,NA
+2005,"DE","Halle",NA,NA
+2006,"DE","Halle",NA,NA
+2007,"DE","Halle",NA,NA
+2008,"DE","Halle",NA,NA
+2009,"DE","Halle",NA,NA
+2010,"DE","Halle",NA,NA
+2011,"DE","Halle",NA,NA
+2012,"DE","Halle",NA,NA
+2013,"DE","Halle",NA,NA
+2000,"DE","Magdeburg",NA,NA
+2001,"DE","Magdeburg",NA,NA
+2002,"DE","Magdeburg",NA,NA
+2003,"DE","Magdeburg",NA,NA
+2004,"DE","Magdeburg",NA,NA
+2005,"DE","Magdeburg",NA,NA
+2006,"DE","Magdeburg",NA,NA
+2007,"DE","Magdeburg",NA,NA
+2008,"DE","Magdeburg",NA,NA
+2009,"DE","Magdeburg",NA,NA
+2010,"DE","Magdeburg",NA,NA
+2011,"DE","Magdeburg",NA,NA
+2012,"DE","Magdeburg",NA,NA
+2013,"DE","Magdeburg",NA,NA
+2000,"DE","SCHLESWIG-HOLSTEIN",23300,NA
+2001,"DE","SCHLESWIG-HOLSTEIN",23900,NA
+2002,"DE","SCHLESWIG-HOLSTEIN",23600,NA
+2003,"DE","SCHLESWIG-HOLSTEIN",23800,NA
+2004,"DE","SCHLESWIG-HOLSTEIN",24300,NA
+2005,"DE","SCHLESWIG-HOLSTEIN",24400,NA
+2006,"DE","SCHLESWIG-HOLSTEIN",25200,NA
+2007,"DE","SCHLESWIG-HOLSTEIN",25900,NA
+2008,"DE","SCHLESWIG-HOLSTEIN",26700,NA
+2009,"DE","SCHLESWIG-HOLSTEIN",26000,NA
+2010,"DE","SCHLESWIG-HOLSTEIN",26600,1.31839
+2011,"DE","SCHLESWIG-HOLSTEIN",27400,NA
+2012,"DE","SCHLESWIG-HOLSTEIN",28500,NA
+2013,"DE","SCHLESWIG-HOLSTEIN",29000,1.091931
+2000,"DE","Schleswig-Holstein",23300,NA
+2001,"DE","Schleswig-Holstein",23900,NA
+2002,"DE","Schleswig-Holstein",23600,NA
+2003,"DE","Schleswig-Holstein",23800,NA
+2004,"DE","Schleswig-Holstein",24300,NA
+2005,"DE","Schleswig-Holstein",24400,NA
+2006,"DE","Schleswig-Holstein",25200,NA
+2007,"DE","Schleswig-Holstein",25900,NA
+2008,"DE","Schleswig-Holstein",26700,NA
+2009,"DE","Schleswig-Holstein",26000,NA
+2010,"DE","Schleswig-Holstein",26600,NA
+2011,"DE","Schleswig-Holstein",27400,NA
+2012,"DE","Schleswig-Holstein",28500,NA
+2013,"DE","Schleswig-Holstein",29000,NA
+2000,"DE","THÜRINGEN",16400,NA
+2001,"DE","THÜRINGEN",17000,NA
+2002,"DE","THÜRINGEN",17400,NA
+2003,"DE","THÜRINGEN",17900,NA
+2004,"DE","THÜRINGEN",18500,NA
+2005,"DE","THÜRINGEN",18700,NA
+2006,"DE","THÜRINGEN",19600,NA
+2007,"DE","THÜRINGEN",20700,NA
+2008,"DE","THÜRINGEN",21200,NA
+2009,"DE","THÜRINGEN",20500,NA
+2010,"DE","THÜRINGEN",21900,1.38499
+2011,"DE","THÜRINGEN",23300,NA
+2012,"DE","THÜRINGEN",23800,NA
+2013,"DE","THÜRINGEN",24400,0.487858
+2000,"DE","Thüringen",16400,NA
+2001,"DE","Thüringen",17000,NA
+2002,"DE","Thüringen",17400,NA
+2003,"DE","Thüringen",17900,NA
+2004,"DE","Thüringen",18500,NA
+2005,"DE","Thüringen",18700,NA
+2006,"DE","Thüringen",19600,NA
+2007,"DE","Thüringen",20700,NA
+2008,"DE","Thüringen",21200,NA
+2009,"DE","Thüringen",20500,NA
+2010,"DE","Thüringen",21900,NA
+2011,"DE","Thüringen",23300,NA
+2012,"DE","Thüringen",23800,NA
+2013,"DE","Thüringen",24400,NA
+2000,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2001,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2002,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2003,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2004,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2005,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2006,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2007,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2008,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2009,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2010,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2011,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2012,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2013,"DE","EXTRA-REGIO NUTS 1",NA,NA
+2000,"DE","Extra-Regio NUTS 2",NA,NA
+2001,"DE","Extra-Regio NUTS 2",NA,NA
+2002,"DE","Extra-Regio NUTS 2",NA,NA
+2003,"DE","Extra-Regio NUTS 2",NA,NA
+2004,"DE","Extra-Regio NUTS 2",NA,NA
+2005,"DE","Extra-Regio NUTS 2",NA,NA
+2006,"DE","Extra-Regio NUTS 2",NA,NA
+2007,"DE","Extra-Regio NUTS 2",NA,NA
+2008,"DE","Extra-Regio NUTS 2",NA,NA
+2009,"DE","Extra-Regio NUTS 2",NA,NA
+2010,"DE","Extra-Regio NUTS 2",NA,NA
+2011,"DE","Extra-Regio NUTS 2",NA,NA
+2012,"DE","Extra-Regio NUTS 2",NA,NA
+2013,"DE","Extra-Regio NUTS 2",NA,NA
+2000,"FR","ÎLE DE FRANCE",38100,NA
+2001,"FR","ÎLE DE FRANCE",39100,NA
+2002,"FR","ÎLE DE FRANCE",40200,NA
+2003,"FR","ÎLE DE FRANCE",40700,NA
+2004,"FR","ÎLE DE FRANCE",41800,NA
+2005,"FR","ÎLE DE FRANCE",43300,NA
+2006,"FR","ÎLE DE FRANCE",44600,NA
+2007,"FR","ÎLE DE FRANCE",47500,NA
+2008,"FR","ÎLE DE FRANCE",50900,NA
+2009,"FR","ÎLE DE FRANCE",48800,NA
+2010,"FR","ÎLE DE FRANCE",51600,NA
+2011,"FR","ÎLE DE FRANCE",51800,NA
+2012,"FR","ÎLE DE FRANCE",52700,NA
+2013,"FR","ÎLE DE FRANCE",53600,NA
+2000,"FR","Île de France",38100,NA
+2001,"FR","Île de France",39100,NA
+2002,"FR","Île de France",40200,NA
+2003,"FR","Île de France",40700,NA
+2004,"FR","Île de France",41800,NA
+2005,"FR","Île de France",43300,NA
+2006,"FR","Île de France",44600,NA
+2007,"FR","Île de France",47500,NA
+2008,"FR","Île de France",50900,NA
+2009,"FR","Île de France",48800,NA
+2010,"FR","Île de France",51600,0.69526
+2011,"FR","Île de France",51800,NA
+2012,"FR","Île de France",52700,NA
+2013,"FR","Île de France",53600,0.551796
+2000,"FR","BASSIN PARISIEN",21600,NA
+2001,"FR","BASSIN PARISIEN",22100,NA
+2002,"FR","BASSIN PARISIEN",22600,NA
+2003,"FR","BASSIN PARISIEN",23100,NA
+2004,"FR","BASSIN PARISIEN",24000,NA
+2005,"FR","BASSIN PARISIEN",24400,NA
+2006,"FR","BASSIN PARISIEN",25200,NA
+2007,"FR","BASSIN PARISIEN",26400,NA
+2008,"FR","BASSIN PARISIEN",26000,NA
+2009,"FR","BASSIN PARISIEN",25000,NA
+2010,"FR","BASSIN PARISIEN",25400,NA
+2011,"FR","BASSIN PARISIEN",26300,NA
+2012,"FR","BASSIN PARISIEN",26300,NA
+2013,"FR","BASSIN PARISIEN",26400,NA
+2000,"FR","Champagne-Ardenne",23200,NA
+2001,"FR","Champagne-Ardenne",23300,NA
+2002,"FR","Champagne-Ardenne",23700,NA
+2003,"FR","Champagne-Ardenne",23900,NA
+2004,"FR","Champagne-Ardenne",25600,NA
+2005,"FR","Champagne-Ardenne",25900,NA
+2006,"FR","Champagne-Ardenne",26600,NA
+2007,"FR","Champagne-Ardenne",28000,NA
+2008,"FR","Champagne-Ardenne",27700,NA
+2009,"FR","Champagne-Ardenne",26200,NA
+2010,"FR","Champagne-Ardenne",26500,0.314171
+2011,"FR","Champagne-Ardenne",28300,NA
+2012,"FR","Champagne-Ardenne",27500,NA
+2013,"FR","Champagne-Ardenne",27600,0.402989
+2000,"FR","Picardie",20200,NA
+2001,"FR","Picardie",20700,NA
+2002,"FR","Picardie",21200,NA
+2003,"FR","Picardie",21700,NA
+2004,"FR","Picardie",22100,NA
+2005,"FR","Picardie",22600,NA
+2006,"FR","Picardie",23100,NA
+2007,"FR","Picardie",24200,NA
+2008,"FR","Picardie",23900,NA
+2009,"FR","Picardie",23000,NA
+2010,"FR","Picardie",23500,0.614968
+2011,"FR","Picardie",24200,NA
+2012,"FR","Picardie",24400,NA
+2013,"FR","Picardie",24100,0.403292
+2000,"FR","Haute-Normandie",22300,NA
+2001,"FR","Haute-Normandie",22800,NA
+2002,"FR","Haute-Normandie",23300,NA
+2003,"FR","Haute-Normandie",23900,NA
+2004,"FR","Haute-Normandie",24800,NA
+2005,"FR","Haute-Normandie",25300,NA
+2006,"FR","Haute-Normandie",26100,NA
+2007,"FR","Haute-Normandie",27500,NA
+2008,"FR","Haute-Normandie",27000,NA
+2009,"FR","Haute-Normandie",25900,NA
+2010,"FR","Haute-Normandie",26600,0.249004
+2011,"FR","Haute-Normandie",27500,NA
+2012,"FR","Haute-Normandie",27700,NA
+2013,"FR","Haute-Normandie",27900,0.465732
+2000,"FR","Centre",21900,NA
+2001,"FR","Centre",22700,NA
+2002,"FR","Centre",23100,NA
+2003,"FR","Centre",23600,NA
+2004,"FR","Centre",24500,NA
+2005,"FR","Centre",24900,NA
+2006,"FR","Centre",25800,NA
+2007,"FR","Centre",26700,NA
+2008,"FR","Centre",26100,NA
+2009,"FR","Centre",25400,NA
+2010,"FR","Centre",25700,0.765379
+2011,"FR","Centre",26500,NA
+2012,"FR","Centre",26600,NA
+2013,"FR","Centre",26700,0.947852
+2000,"FR","Basse-Normandie",20500,NA
+2001,"FR","Basse-Normandie",20900,NA
+2002,"FR","Basse-Normandie",21500,NA
+2003,"FR","Basse-Normandie",22200,NA
+2004,"FR","Basse-Normandie",23200,NA
+2005,"FR","Basse-Normandie",23600,NA
+2006,"FR","Basse-Normandie",24500,NA
+2007,"FR","Basse-Normandie",25300,NA
+2008,"FR","Basse-Normandie",25100,NA
+2009,"FR","Basse-Normandie",24300,NA
+2010,"FR","Basse-Normandie",24800,0.648103
+2011,"FR","Basse-Normandie",25700,NA
+2012,"FR","Basse-Normandie",25400,NA
+2013,"FR","Basse-Normandie",25700,0.85503
+2000,"FR","Bourgogne",21700,NA
+2001,"FR","Bourgogne",22100,NA
+2002,"FR","Bourgogne",22600,NA
+2003,"FR","Bourgogne",23000,NA
+2004,"FR","Bourgogne",24100,NA
+2005,"FR","Bourgogne",24400,NA
+2006,"FR","Bourgogne",25300,NA
+2007,"FR","Bourgogne",26700,NA
+2008,"FR","Bourgogne",26600,NA
+2009,"FR","Bourgogne",25500,NA
+2010,"FR","Bourgogne",25400,0.629824
+2011,"FR","Bourgogne",26300,NA
+2012,"FR","Bourgogne",26400,NA
+2013,"FR","Bourgogne",26700,0.434835
+2000,"FR","NORD - PAS-DE-CALAIS",19300,NA
+2001,"FR","NORD - PAS-DE-CALAIS",19800,NA
+2002,"FR","NORD - PAS-DE-CALAIS",20500,NA
+2003,"FR","NORD - PAS-DE-CALAIS",21200,NA
+2004,"FR","NORD - PAS-DE-CALAIS",21900,NA
+2005,"FR","NORD - PAS-DE-CALAIS",22600,NA
+2006,"FR","NORD - PAS-DE-CALAIS",23700,NA
+2007,"FR","NORD - PAS-DE-CALAIS",24700,NA
+2008,"FR","NORD - PAS-DE-CALAIS",25300,NA
+2009,"FR","NORD - PAS-DE-CALAIS",24500,NA
+2010,"FR","NORD - PAS-DE-CALAIS",24700,NA
+2011,"FR","NORD - PAS-DE-CALAIS",25600,NA
+2012,"FR","NORD - PAS-DE-CALAIS",25500,NA
+2013,"FR","NORD - PAS-DE-CALAIS",25700,NA
+2000,"FR","Nord - Pas-de-Calais",19300,NA
+2001,"FR","Nord - Pas-de-Calais",19800,NA
+2002,"FR","Nord - Pas-de-Calais",20500,NA
+2003,"FR","Nord - Pas-de-Calais",21200,NA
+2004,"FR","Nord - Pas-de-Calais",21900,NA
+2005,"FR","Nord - Pas-de-Calais",22600,NA
+2006,"FR","Nord - Pas-de-Calais",23700,NA
+2007,"FR","Nord - Pas-de-Calais",24700,NA
+2008,"FR","Nord - Pas-de-Calais",25300,NA
+2009,"FR","Nord - Pas-de-Calais",24500,NA
+2010,"FR","Nord - Pas-de-Calais",24700,0.692292
+2011,"FR","Nord - Pas-de-Calais",25600,NA
+2012,"FR","Nord - Pas-de-Calais",25500,NA
+2013,"FR","Nord - Pas-de-Calais",25700,0.285524
+2000,"FR","EST",21900,NA
+2001,"FR","EST",22600,NA
+2002,"FR","EST",23000,NA
+2003,"FR","EST",23400,NA
+2004,"FR","EST",24200,NA
+2005,"FR","EST",24500,NA
+2006,"FR","EST",25300,NA
+2007,"FR","EST",26300,NA
+2008,"FR","EST",26200,NA
+2009,"FR","EST",25300,NA
+2010,"FR","EST",25300,NA
+2011,"FR","EST",26000,NA
+2012,"FR","EST",25700,NA
+2013,"FR","EST",25800,NA
+2000,"FR","Lorraine",20300,NA
+2001,"FR","Lorraine",21000,NA
+2002,"FR","Lorraine",21400,NA
+2003,"FR","Lorraine",21900,NA
+2004,"FR","Lorraine",22900,NA
+2005,"FR","Lorraine",23300,NA
+2006,"FR","Lorraine",24100,NA
+2007,"FR","Lorraine",24800,NA
+2008,"FR","Lorraine",24300,NA
+2009,"FR","Lorraine",23500,NA
+2010,"FR","Lorraine",23400,0.375779
+2011,"FR","Lorraine",24000,NA
+2012,"FR","Lorraine",23900,NA
+2013,"FR","Lorraine",24000,0.509552
+2000,"FR","Alsace",24500,NA
+2001,"FR","Alsace",25000,NA
+2002,"FR","Alsace",25300,NA
+2003,"FR","Alsace",25700,NA
+2004,"FR","Alsace",26300,NA
+2005,"FR","Alsace",26500,NA
+2006,"FR","Alsace",27400,NA
+2007,"FR","Alsace",28800,NA
+2008,"FR","Alsace",29300,NA
+2009,"FR","Alsace",28500,NA
+2010,"FR","Alsace",28300,0.619167
+2011,"FR","Alsace",29300,NA
+2012,"FR","Alsace",29100,NA
+2013,"FR","Alsace",29400,0.716354
+2000,"FR","Franche-Comté",21400,NA
+2001,"FR","Franche-Comté",22300,NA
+2002,"FR","Franche-Comté",22700,NA
+2003,"FR","Franche-Comté",23000,NA
+2004,"FR","Franche-Comté",23700,NA
+2005,"FR","Franche-Comté",23900,NA
+2006,"FR","Franche-Comté",24400,NA
+2007,"FR","Franche-Comté",25200,NA
+2008,"FR","Franche-Comté",25000,NA
+2009,"FR","Franche-Comté",24000,NA
+2010,"FR","Franche-Comté",24200,0.639998
+2011,"FR","Franche-Comté",24900,NA
+2012,"FR","Franche-Comté",24000,NA
+2013,"FR","Franche-Comté",23700,0.667669
+2000,"FR","OUEST",21400,NA
+2001,"FR","OUEST",22200,NA
+2002,"FR","OUEST",22700,NA
+2003,"FR","OUEST",23300,NA
+2004,"FR","OUEST",24300,NA
+2005,"FR","OUEST",24900,NA
+2006,"FR","OUEST",25800,NA
+2007,"FR","OUEST",26700,NA
+2008,"FR","OUEST",26500,NA
+2009,"FR","OUEST",25600,NA
+2010,"FR","OUEST",25800,NA
+2011,"FR","OUEST",26900,NA
+2012,"FR","OUEST",27100,NA
+2013,"FR","OUEST",27400,NA
+2000,"FR","Pays de la Loire",22100,NA
+2001,"FR","Pays de la Loire",23000,NA
+2002,"FR","Pays de la Loire",23600,NA
+2003,"FR","Pays de la Loire",24200,NA
+2004,"FR","Pays de la Loire",24900,NA
+2005,"FR","Pays de la Loire",25500,NA
+2006,"FR","Pays de la Loire",26300,NA
+2007,"FR","Pays de la Loire",27400,NA
+2008,"FR","Pays de la Loire",27800,NA
+2009,"FR","Pays de la Loire",26800,NA
+2010,"FR","Pays de la Loire",26900,0.494807
+2011,"FR","Pays de la Loire",28200,NA
+2012,"FR","Pays de la Loire",28300,NA
+2013,"FR","Pays de la Loire",28600,0.73872
+2000,"FR","Bretagne",21300,NA
+2001,"FR","Bretagne",21900,NA
+2002,"FR","Bretagne",22400,NA
+2003,"FR","Bretagne",23000,NA
+2004,"FR","Bretagne",24300,NA
+2005,"FR","Bretagne",25100,NA
+2006,"FR","Bretagne",26000,NA
+2007,"FR","Bretagne",26700,NA
+2008,"FR","Bretagne",26200,NA
+2009,"FR","Bretagne",25200,NA
+2010,"FR","Bretagne",25300,1.21809
+2011,"FR","Bretagne",26300,NA
+2012,"FR","Bretagne",26500,NA
+2013,"FR","Bretagne",26600,1.146102
+2000,"FR","Poitou-Charentes",20300,NA
+2001,"FR","Poitou-Charentes",20900,NA
+2002,"FR","Poitou-Charentes",21700,NA
+2003,"FR","Poitou-Charentes",22200,NA
+2004,"FR","Poitou-Charentes",23100,NA
+2005,"FR","Poitou-Charentes",23400,NA
+2006,"FR","Poitou-Charentes",24200,NA
+2007,"FR","Poitou-Charentes",25200,NA
+2008,"FR","Poitou-Charentes",24600,NA
+2009,"FR","Poitou-Charentes",24000,NA
+2010,"FR","Poitou-Charentes",24400,0.92835
+2011,"FR","Poitou-Charentes",25400,NA
+2012,"FR","Poitou-Charentes",25900,NA
+2013,"FR","Poitou-Charentes",26200,0.892842
+2000,"FR","SUD-OUEST",21400,NA
+2001,"FR","SUD-OUEST",22500,NA
+2002,"FR","SUD-OUEST",23200,NA
+2003,"FR","SUD-OUEST",23500,NA
+2004,"FR","SUD-OUEST",24300,NA
+2005,"FR","SUD-OUEST",25100,NA
+2006,"FR","SUD-OUEST",26400,NA
+2007,"FR","SUD-OUEST",27000,NA
+2008,"FR","SUD-OUEST",26800,NA
+2009,"FR","SUD-OUEST",26300,NA
+2010,"FR","SUD-OUEST",26500,NA
+2011,"FR","SUD-OUEST",27500,NA
+2012,"FR","SUD-OUEST",27800,NA
+2013,"FR","SUD-OUEST",28000,NA
+2000,"FR","Aquitaine",21800,NA
+2001,"FR","Aquitaine",23000,NA
+2002,"FR","Aquitaine",23600,NA
+2003,"FR","Aquitaine",24000,NA
+2004,"FR","Aquitaine",24600,NA
+2005,"FR","Aquitaine",25400,NA
+2006,"FR","Aquitaine",26500,NA
+2007,"FR","Aquitaine",27400,NA
+2008,"FR","Aquitaine",27000,NA
+2009,"FR","Aquitaine",26600,NA
+2010,"FR","Aquitaine",27000,0.982647
+2011,"FR","Aquitaine",28100,NA
+2012,"FR","Aquitaine",28100,NA
+2013,"FR","Aquitaine",28100,0.93857
+2000,"FR","Midi-Pyrénées",21200,NA
+2001,"FR","Midi-Pyrénées",22500,NA
+2002,"FR","Midi-Pyrénées",23100,NA
+2003,"FR","Midi-Pyrénées",23500,NA
+2004,"FR","Midi-Pyrénées",24400,NA
+2005,"FR","Midi-Pyrénées",25400,NA
+2006,"FR","Midi-Pyrénées",27000,NA
+2007,"FR","Midi-Pyrénées",27100,NA
+2008,"FR","Midi-Pyrénées",27300,NA
+2009,"FR","Midi-Pyrénées",26900,NA
+2010,"FR","Midi-Pyrénées",26700,0.534466
+2011,"FR","Midi-Pyrénées",27800,NA
+2012,"FR","Midi-Pyrénées",28500,NA
+2013,"FR","Midi-Pyrénées",28900,0.890183
+2000,"FR","Limousin",20000,NA
+2001,"FR","Limousin",20700,NA
+2002,"FR","Limousin",21600,NA
+2003,"FR","Limousin",22000,NA
+2004,"FR","Limousin",22300,NA
+2005,"FR","Limousin",23100,NA
+2006,"FR","Limousin",23900,NA
+2007,"FR","Limousin",24600,NA
+2008,"FR","Limousin",23700,NA
+2009,"FR","Limousin",23200,NA
+2010,"FR","Limousin",22900,0.884901
+2011,"FR","Limousin",23500,NA
+2012,"FR","Limousin",23600,NA
+2013,"FR","Limousin",24000,0.705953
+2000,"FR","CENTRE-EST",24100,NA
+2001,"FR","CENTRE-EST",24800,NA
+2002,"FR","CENTRE-EST",25100,NA
+2003,"FR","CENTRE-EST",25600,NA
+2004,"FR","CENTRE-EST",26900,NA
+2005,"FR","CENTRE-EST",27500,NA
+2006,"FR","CENTRE-EST",28800,NA
+2007,"FR","CENTRE-EST",29800,NA
+2008,"FR","CENTRE-EST",30200,NA
+2009,"FR","CENTRE-EST",29000,NA
+2010,"FR","CENTRE-EST",29600,NA
+2011,"FR","CENTRE-EST",30700,NA
+2012,"FR","CENTRE-EST",30700,NA
+2013,"FR","CENTRE-EST",31000,NA
+2000,"FR","Rhône-Alpes",24900,NA
+2001,"FR","Rhône-Alpes",25600,NA
+2002,"FR","Rhône-Alpes",25900,NA
+2003,"FR","Rhône-Alpes",26300,NA
+2004,"FR","Rhône-Alpes",27700,NA
+2005,"FR","Rhône-Alpes",28400,NA
+2006,"FR","Rhône-Alpes",29800,NA
+2007,"FR","Rhône-Alpes",30700,NA
+2008,"FR","Rhône-Alpes",31400,NA
+2009,"FR","Rhône-Alpes",30000,NA
+2010,"FR","Rhône-Alpes",30600,0.961513
+2011,"FR","Rhône-Alpes",31800,NA
+2012,"FR","Rhône-Alpes",31800,NA
+2013,"FR","Rhône-Alpes",32000,0.788318
+2000,"FR","Auvergne",20600,NA
+2001,"FR","Auvergne",21100,NA
+2002,"FR","Auvergne",21700,NA
+2003,"FR","Auvergne",22200,NA
+2004,"FR","Auvergne",23200,NA
+2005,"FR","Auvergne",23800,NA
+2006,"FR","Auvergne",24600,NA
+2007,"FR","Auvergne",25700,NA
+2008,"FR","Auvergne",25000,NA
+2009,"FR","Auvergne",24200,NA
+2010,"FR","Auvergne",24600,0.712116
+2011,"FR","Auvergne",25700,NA
+2012,"FR","Auvergne",25700,NA
+2013,"FR","Auvergne",25900,0.862454
+2000,"FR","MÉDITERRANÉE",21100,NA
+2001,"FR","MÉDITERRANÉE",22000,NA
+2002,"FR","MÉDITERRANÉE",22400,NA
+2003,"FR","MÉDITERRANÉE",23100,NA
+2004,"FR","MÉDITERRANÉE",24100,NA
+2005,"FR","MÉDITERRANÉE",24900,NA
+2006,"FR","MÉDITERRANÉE",26000,NA
+2007,"FR","MÉDITERRANÉE",26700,NA
+2008,"FR","MÉDITERRANÉE",26800,NA
+2009,"FR","MÉDITERRANÉE",26400,NA
+2010,"FR","MÉDITERRANÉE",27100,NA
+2011,"FR","MÉDITERRANÉE",27700,NA
+2012,"FR","MÉDITERRANÉE",28100,NA
+2013,"FR","MÉDITERRANÉE",28300,NA
+2000,"FR","Languedoc-Roussillon",18700,NA
+2001,"FR","Languedoc-Roussillon",19500,NA
+2002,"FR","Languedoc-Roussillon",19900,NA
+2003,"FR","Languedoc-Roussillon",20600,NA
+2004,"FR","Languedoc-Roussillon",21400,NA
+2005,"FR","Languedoc-Roussillon",21900,NA
+2006,"FR","Languedoc-Roussillon",22900,NA
+2007,"FR","Languedoc-Roussillon",23700,NA
+2008,"FR","Languedoc-Roussillon",24000,NA
+2009,"FR","Languedoc-Roussillon",23600,NA
+2010,"FR","Languedoc-Roussillon",23600,0.684202
+2011,"FR","Languedoc-Roussillon",24400,NA
+2012,"FR","Languedoc-Roussillon",24200,NA
+2013,"FR","Languedoc-Roussillon",24400,0.517005
+2000,"FR","Provence-Alpes-Côte d'Azur",22500,NA
+2001,"FR","Provence-Alpes-Côte d'Azur",23500,NA
+2002,"FR","Provence-Alpes-Côte d'Azur",23900,NA
+2003,"FR","Provence-Alpes-Côte d'Azur",24600,NA
+2004,"FR","Provence-Alpes-Côte d'Azur",25800,NA
+2005,"FR","Provence-Alpes-Côte d'Azur",26700,NA
+2006,"FR","Provence-Alpes-Côte d'Azur",27800,NA
+2007,"FR","Provence-Alpes-Côte d'Azur",28500,NA
+2008,"FR","Provence-Alpes-Côte d'Azur",28500,NA
+2009,"FR","Provence-Alpes-Côte d'Azur",28000,NA
+2010,"FR","Provence-Alpes-Côte d'Azur",29100,0.345777
+2011,"FR","Provence-Alpes-Côte d'Azur",29700,NA
+2012,"FR","Provence-Alpes-Côte d'Azur",30400,NA
+2013,"FR","Provence-Alpes-Côte d'Azur",30700,0.188156
+2000,"FR","Corse",18500,NA
+2001,"FR","Corse",19300,NA
+2002,"FR","Corse",19500,NA
+2003,"FR","Corse",20100,NA
+2004,"FR","Corse",20800,NA
+2005,"FR","Corse",21700,NA
+2006,"FR","Corse",22800,NA
+2007,"FR","Corse",23300,NA
+2008,"FR","Corse",24500,NA
+2009,"FR","Corse",25000,NA
+2010,"FR","Corse",25400,0.248762
+2011,"FR","Corse",26100,NA
+2012,"FR","Corse",26200,NA
+2013,"FR","Corse",26600,0.31166
+2000,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2001,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2002,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2003,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2004,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2005,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2006,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2007,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2008,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2009,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2010,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2011,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2012,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2013,"FR","DÉPARTEMENTS D'OUTRE-MER",NA,NA
+2000,"FR","Guadeloupe",NA,NA
+2001,"FR","Guadeloupe",NA,NA
+2002,"FR","Guadeloupe",NA,NA
+2003,"FR","Guadeloupe",NA,NA
+2004,"FR","Guadeloupe",NA,NA
+2005,"FR","Guadeloupe",NA,NA
+2006,"FR","Guadeloupe",NA,NA
+2007,"FR","Guadeloupe",NA,NA
+2008,"FR","Guadeloupe",NA,NA
+2009,"FR","Guadeloupe",NA,NA
+2010,"FR","Guadeloupe",NA,-0.508348
+2011,"FR","Guadeloupe",NA,NA
+2012,"FR","Guadeloupe",NA,NA
+2013,"FR","Guadeloupe",NA,-0.29951
+2000,"FR","Martinique",NA,NA
+2001,"FR","Martinique",NA,NA
+2002,"FR","Martinique",NA,NA
+2003,"FR","Martinique",NA,NA
+2004,"FR","Martinique",NA,NA
+2005,"FR","Martinique",NA,NA
+2006,"FR","Martinique",NA,NA
+2007,"FR","Martinique",NA,NA
+2008,"FR","Martinique",NA,NA
+2009,"FR","Martinique",NA,NA
+2010,"FR","Martinique",NA,NA
+2011,"FR","Martinique",NA,NA
+2012,"FR","Martinique",NA,NA
+2013,"FR","Martinique",NA,NA
+2000,"FR","Guyane",NA,NA
+2001,"FR","Guyane",NA,NA
+2002,"FR","Guyane",NA,NA
+2003,"FR","Guyane",NA,NA
+2004,"FR","Guyane",NA,NA
+2005,"FR","Guyane",NA,NA
+2006,"FR","Guyane",NA,NA
+2007,"FR","Guyane",NA,NA
+2008,"FR","Guyane",NA,NA
+2009,"FR","Guyane",NA,NA
+2010,"FR","Guyane",NA,NA
+2011,"FR","Guyane",NA,NA
+2012,"FR","Guyane",NA,NA
+2013,"FR","Guyane",NA,NA
+2000,"FR","La Réunion",NA,NA
+2001,"FR","La Réunion",NA,NA
+2002,"FR","La Réunion",NA,NA
+2003,"FR","La Réunion",NA,NA
+2004,"FR","La Réunion",NA,NA
+2005,"FR","La Réunion",NA,NA
+2006,"FR","La Réunion",NA,NA
+2007,"FR","La Réunion",NA,NA
+2008,"FR","La Réunion",NA,NA
+2009,"FR","La Réunion",NA,NA
+2010,"FR","La Réunion",NA,NA
+2011,"FR","La Réunion",NA,NA
+2012,"FR","La Réunion",NA,NA
+2013,"FR","La Réunion",NA,NA
+2000,"FR","DÉPARTEMENTS D'OUTRE-MER",13000,NA
+2001,"FR","DÉPARTEMENTS D'OUTRE-MER",13700,NA
+2002,"FR","DÉPARTEMENTS D'OUTRE-MER",14200,NA
+2003,"FR","DÉPARTEMENTS D'OUTRE-MER",14900,NA
+2004,"FR","DÉPARTEMENTS D'OUTRE-MER",15500,NA
+2005,"FR","DÉPARTEMENTS D'OUTRE-MER",16300,NA
+2006,"FR","DÉPARTEMENTS D'OUTRE-MER",17300,NA
+2007,"FR","DÉPARTEMENTS D'OUTRE-MER",18000,NA
+2008,"FR","DÉPARTEMENTS D'OUTRE-MER",18400,NA
+2009,"FR","DÉPARTEMENTS D'OUTRE-MER",18100,NA
+2010,"FR","DÉPARTEMENTS D'OUTRE-MER",18300,NA
+2011,"FR","DÉPARTEMENTS D'OUTRE-MER",18400,NA
+2012,"FR","DÉPARTEMENTS D'OUTRE-MER",19200,NA
+2013,"FR","DÉPARTEMENTS D'OUTRE-MER",19500,NA
+2000,"FR","Guadeloupe",13500,NA
+2001,"FR","Guadeloupe",14200,NA
+2002,"FR","Guadeloupe",14700,NA
+2003,"FR","Guadeloupe",16100,NA
+2004,"FR","Guadeloupe",16600,NA
+2005,"FR","Guadeloupe",17400,NA
+2006,"FR","Guadeloupe",18700,NA
+2007,"FR","Guadeloupe",19400,NA
+2008,"FR","Guadeloupe",20500,NA
+2009,"FR","Guadeloupe",20300,NA
+2010,"FR","Guadeloupe",20900,NA
+2011,"FR","Guadeloupe",21200,NA
+2012,"FR","Guadeloupe",21500,NA
+2013,"FR","Guadeloupe",21800,NA
+2000,"FR","Martinique",15300,NA
+2001,"FR","Martinique",16100,NA
+2002,"FR","Martinique",16600,NA
+2003,"FR","Martinique",17500,NA
+2004,"FR","Martinique",18200,NA
+2005,"FR","Martinique",19000,NA
+2006,"FR","Martinique",20200,NA
+2007,"FR","Martinique",21000,NA
+2008,"FR","Martinique",20900,NA
+2009,"FR","Martinique",20700,NA
+2010,"FR","Martinique",21200,-0.350851
+2011,"FR","Martinique",21500,NA
+2012,"FR","Martinique",22200,NA
+2013,"FR","Martinique",22600,NA
+2000,"FR","Guyane",12000,NA
+2001,"FR","Guyane",13400,NA
+2002,"FR","Guyane",13900,NA
+2003,"FR","Guyane",13400,NA
+2004,"FR","Guyane",13300,NA
+2005,"FR","Guyane",13900,NA
+2006,"FR","Guyane",15300,NA
+2007,"FR","Guyane",14900,NA
+2008,"FR","Guyane",15000,NA
+2009,"FR","Guyane",15300,NA
+2010,"FR","Guyane",15000,-0.467938
+2011,"FR","Guyane",15100,NA
+2012,"FR","Guyane",16300,NA
+2013,"FR","Guyane",16600,NA
+2000,"FR","La Réunion",13500,NA
+2001,"FR","La Réunion",14200,NA
+2002,"FR","La Réunion",14900,NA
+2003,"FR","La Réunion",15600,NA
+2004,"FR","La Réunion",16400,NA
+2005,"FR","La Réunion",17200,NA
+2006,"FR","La Réunion",18200,NA
+2007,"FR","La Réunion",19100,NA
+2008,"FR","La Réunion",19700,NA
+2009,"FR","La Réunion",19000,NA
+2010,"FR","La Réunion",19100,-0.055498
+2011,"FR","La Réunion",19100,NA
+2012,"FR","La Réunion",20400,NA
+2013,"FR","La Réunion",20700,NA
+2000,"FR","Mayotte",4300,NA
+2001,"FR","Mayotte",4400,NA
+2002,"FR","Mayotte",4500,NA
+2003,"FR","Mayotte",4900,NA
+2004,"FR","Mayotte",5400,NA
+2005,"FR","Mayotte",5900,NA
+2006,"FR","Mayotte",6600,NA
+2007,"FR","Mayotte",6900,NA
+2008,"FR","Mayotte",7900,NA
+2009,"FR","Mayotte",7600,NA
+2010,"FR","Mayotte",8000,NA
+2011,"FR","Mayotte",8200,NA
+2012,"FR","Mayotte",8400,NA
+2013,"FR","Mayotte",8800,NA
+2000,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2001,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2002,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2003,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2004,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2005,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2006,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2007,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2008,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2009,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2010,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2011,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2012,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2013,"FR","EXTRA-REGIO NUTS 1",NA,NA
+2000,"FR","Extra-Regio NUTS 2",NA,NA
+2001,"FR","Extra-Regio NUTS 2",NA,NA
+2002,"FR","Extra-Regio NUTS 2",NA,NA
+2003,"FR","Extra-Regio NUTS 2",NA,NA
+2004,"FR","Extra-Regio NUTS 2",NA,NA
+2005,"FR","Extra-Regio NUTS 2",NA,NA
+2006,"FR","Extra-Regio NUTS 2",NA,NA
+2007,"FR","Extra-Regio NUTS 2",NA,NA
+2008,"FR","Extra-Regio NUTS 2",NA,NA
+2009,"FR","Extra-Regio NUTS 2",NA,NA
+2010,"FR","Extra-Regio NUTS 2",NA,NA
+2011,"FR","Extra-Regio NUTS 2",NA,NA
+2012,"FR","Extra-Regio NUTS 2",NA,NA
+2013,"FR","Extra-Regio NUTS 2",NA,NA
+2000,"UK","NORTH EAST (ENGLAND)",20000,NA
+2001,"UK","NORTH EAST (ENGLAND)",20500,NA
+2002,"UK","NORTH EAST (ENGLAND)",21700,NA
+2003,"UK","NORTH EAST (ENGLAND)",21100,NA
+2004,"UK","NORTH EAST (ENGLAND)",23300,NA
+2005,"UK","NORTH EAST (ENGLAND)",24300,NA
+2006,"UK","NORTH EAST (ENGLAND)",25700,NA
+2007,"UK","NORTH EAST (ENGLAND)",26300,NA
+2008,"UK","NORTH EAST (ENGLAND)",22900,NA
+2009,"UK","NORTH EAST (ENGLAND)",19900,NA
+2010,"UK","NORTH EAST (ENGLAND)",21300,0.882495
+2011,"UK","NORTH EAST (ENGLAND)",21800,NA
+2012,"UK","NORTH EAST (ENGLAND)",23800,NA
+2013,"UK","NORTH EAST (ENGLAND)",23400,0.704738
+2000,"UK","Tees Valley and Durham",19300,NA
+2001,"UK","Tees Valley and Durham",19200,NA
+2002,"UK","Tees Valley and Durham",19900,NA
+2003,"UK","Tees Valley and Durham",19700,NA
+2004,"UK","Tees Valley and Durham",21800,NA
+2005,"UK","Tees Valley and Durham",21900,NA
+2006,"UK","Tees Valley and Durham",23700,NA
+2007,"UK","Tees Valley and Durham",24400,NA
+2008,"UK","Tees Valley and Durham",21500,NA
+2009,"UK","Tees Valley and Durham",18900,NA
+2010,"UK","Tees Valley and Durham",20400,NA
+2011,"UK","Tees Valley and Durham",20200,NA
+2012,"UK","Tees Valley and Durham",22000,NA
+2013,"UK","Tees Valley and Durham",21900,NA
+2000,"UK","Northumberland and Tyne and Wear",20500,NA
+2001,"UK","Northumberland and Tyne and Wear",21500,NA
+2002,"UK","Northumberland and Tyne and Wear",23200,NA
+2003,"UK","Northumberland and Tyne and Wear",22200,NA
+2004,"UK","Northumberland and Tyne and Wear",24500,NA
+2005,"UK","Northumberland and Tyne and Wear",26300,NA
+2006,"UK","Northumberland and Tyne and Wear",27300,NA
+2007,"UK","Northumberland and Tyne and Wear",27900,NA
+2008,"UK","Northumberland and Tyne and Wear",24200,NA
+2009,"UK","Northumberland and Tyne and Wear",20700,NA
+2010,"UK","Northumberland and Tyne and Wear",22100,NA
+2011,"UK","Northumberland and Tyne and Wear",23100,NA
+2012,"UK","Northumberland and Tyne and Wear",25300,NA
+2013,"UK","Northumberland and Tyne and Wear",24600,NA
+2000,"UK","NORTH WEST (ENGLAND)",23600,NA
+2001,"UK","NORTH WEST (ENGLAND)",24500,NA
+2002,"UK","NORTH WEST (ENGLAND)",25700,NA
+2003,"UK","NORTH WEST (ENGLAND)",24700,NA
+2004,"UK","NORTH WEST (ENGLAND)",26700,NA
+2005,"UK","NORTH WEST (ENGLAND)",27500,NA
+2006,"UK","NORTH WEST (ENGLAND)",29300,NA
+2007,"UK","NORTH WEST (ENGLAND)",30400,NA
+2008,"UK","NORTH WEST (ENGLAND)",26400,NA
+2009,"UK","NORTH WEST (ENGLAND)",23200,NA
+2010,"UK","NORTH WEST (ENGLAND)",24900,1.01017
+2011,"UK","NORTH WEST (ENGLAND)",24600,NA
+2012,"UK","NORTH WEST (ENGLAND)",27100,NA
+2013,"UK","NORTH WEST (ENGLAND)",27000,0.852965
+2000,"UK","Cumbria",21800,NA
+2001,"UK","Cumbria",21900,NA
+2002,"UK","Cumbria",22900,NA
+2003,"UK","Cumbria",22200,NA
+2004,"UK","Cumbria",25100,NA
+2005,"UK","Cumbria",24400,NA
+2006,"UK","Cumbria",27500,NA
+2007,"UK","Cumbria",28100,NA
+2008,"UK","Cumbria",25700,NA
+2009,"UK","Cumbria",22200,NA
+2010,"UK","Cumbria",24900,NA
+2011,"UK","Cumbria",24300,NA
+2012,"UK","Cumbria",27200,NA
+2013,"UK","Cumbria",27700,NA
+2000,"UK","Cheshire",NA,NA
+2001,"UK","Cheshire",NA,NA
+2002,"UK","Cheshire",NA,NA
+2003,"UK","Cheshire",NA,NA
+2004,"UK","Cheshire",NA,NA
+2005,"UK","Cheshire",NA,NA
+2006,"UK","Cheshire",NA,NA
+2007,"UK","Cheshire",NA,NA
+2008,"UK","Cheshire",NA,NA
+2009,"UK","Cheshire",NA,NA
+2010,"UK","Cheshire",NA,NA
+2011,"UK","Cheshire",NA,NA
+2012,"UK","Cheshire",NA,NA
+2013,"UK","Cheshire",NA,NA
+2000,"UK","Greater Manchester",24300,NA
+2001,"UK","Greater Manchester",25300,NA
+2002,"UK","Greater Manchester",26400,NA
+2003,"UK","Greater Manchester",25100,NA
+2004,"UK","Greater Manchester",27400,NA
+2005,"UK","Greater Manchester",28300,NA
+2006,"UK","Greater Manchester",29800,NA
+2007,"UK","Greater Manchester",31000,NA
+2008,"UK","Greater Manchester",26400,NA
+2009,"UK","Greater Manchester",23300,NA
+2010,"UK","Greater Manchester",25000,NA
+2011,"UK","Greater Manchester",24400,NA
+2012,"UK","Greater Manchester",27100,NA
+2013,"UK","Greater Manchester",27000,NA
+2000,"UK","Lancashire",22600,NA
+2001,"UK","Lancashire",22700,NA
+2002,"UK","Lancashire",23600,NA
+2003,"UK","Lancashire",22800,NA
+2004,"UK","Lancashire",25100,NA
+2005,"UK","Lancashire",25600,NA
+2006,"UK","Lancashire",26300,NA
+2007,"UK","Lancashire",27800,NA
+2008,"UK","Lancashire",23900,NA
+2009,"UK","Lancashire",20700,NA
+2010,"UK","Lancashire",22200,NA
+2011,"UK","Lancashire",22100,NA
+2012,"UK","Lancashire",24300,NA
+2013,"UK","Lancashire",24300,NA
+2000,"UK","Merseyside",NA,NA
+2001,"UK","Merseyside",NA,NA
+2002,"UK","Merseyside",NA,NA
+2003,"UK","Merseyside",NA,NA
+2004,"UK","Merseyside",NA,NA
+2005,"UK","Merseyside",NA,NA
+2006,"UK","Merseyside",NA,NA
+2007,"UK","Merseyside",NA,NA
+2008,"UK","Merseyside",NA,NA
+2009,"UK","Merseyside",NA,NA
+2010,"UK","Merseyside",NA,NA
+2011,"UK","Merseyside",NA,NA
+2012,"UK","Merseyside",NA,NA
+2013,"UK","Merseyside",NA,NA
+2000,"UK","Cheshire",28600,NA
+2001,"UK","Cheshire",31800,NA
+2002,"UK","Cheshire",33500,NA
+2003,"UK","Cheshire",32000,NA
+2004,"UK","Cheshire",33300,NA
+2005,"UK","Cheshire",35500,NA
+2006,"UK","Cheshire",38700,NA
+2007,"UK","Cheshire",40100,NA
+2008,"UK","Cheshire",34900,NA
+2009,"UK","Cheshire",30400,NA
+2010,"UK","Cheshire",32600,NA
+2011,"UK","Cheshire",32400,NA
+2012,"UK","Cheshire",37300,NA
+2013,"UK","Cheshire",36300,NA
+2000,"UK","Merseyside",21100,NA
+2001,"UK","Merseyside",21600,NA
+2002,"UK","Merseyside",23000,NA
+2003,"UK","Merseyside",22100,NA
+2004,"UK","Merseyside",23700,NA
+2005,"UK","Merseyside",24200,NA
+2006,"UK","Merseyside",26500,NA
+2007,"UK","Merseyside",26800,NA
+2008,"UK","Merseyside",23800,NA
+2009,"UK","Merseyside",21600,NA
+2010,"UK","Merseyside",23000,NA
+2011,"UK","Merseyside",22800,NA
+2012,"UK","Merseyside",23900,NA
+2013,"UK","Merseyside",23800,NA
+2000,"UK","YORKSHIRE AND THE HUMBER",23000,NA
+2001,"UK","YORKSHIRE AND THE HUMBER",23300,NA
+2002,"UK","YORKSHIRE AND THE HUMBER",24700,NA
+2003,"UK","YORKSHIRE AND THE HUMBER",24000,NA
+2004,"UK","YORKSHIRE AND THE HUMBER",26000,NA
+2005,"UK","YORKSHIRE AND THE HUMBER",26800,NA
+2006,"UK","YORKSHIRE AND THE HUMBER",28200,NA
+2007,"UK","YORKSHIRE AND THE HUMBER",29700,NA
+2008,"UK","YORKSHIRE AND THE HUMBER",25500,NA
+2009,"UK","YORKSHIRE AND THE HUMBER",22500,NA
+2010,"UK","YORKSHIRE AND THE HUMBER",23700,0.601232
+2011,"UK","YORKSHIRE AND THE HUMBER",24000,NA
+2012,"UK","YORKSHIRE AND THE HUMBER",26000,NA
+2013,"UK","YORKSHIRE AND THE HUMBER",25500,0.935642
+2000,"UK","East Yorkshire and Northern Lincolnshire",22100,NA
+2001,"UK","East Yorkshire and Northern Lincolnshire",22400,NA
+2002,"UK","East Yorkshire and Northern Lincolnshire",23800,NA
+2003,"UK","East Yorkshire and Northern Lincolnshire",23100,NA
+2004,"UK","East Yorkshire and Northern Lincolnshire",25200,NA
+2005,"UK","East Yorkshire and Northern Lincolnshire",26000,NA
+2006,"UK","East Yorkshire and Northern Lincolnshire",27100,NA
+2007,"UK","East Yorkshire and Northern Lincolnshire",28900,NA
+2008,"UK","East Yorkshire and Northern Lincolnshire",24800,NA
+2009,"UK","East Yorkshire and Northern Lincolnshire",23100,NA
+2010,"UK","East Yorkshire and Northern Lincolnshire",23500,NA
+2011,"UK","East Yorkshire and Northern Lincolnshire",23200,NA
+2012,"UK","East Yorkshire and Northern Lincolnshire",25300,NA
+2013,"UK","East Yorkshire and Northern Lincolnshire",24200,NA
+2000,"UK","North Yorkshire",25500,NA
+2001,"UK","North Yorkshire",25900,NA
+2002,"UK","North Yorkshire",28500,NA
+2003,"UK","North Yorkshire",27600,NA
+2004,"UK","North Yorkshire",29600,NA
+2005,"UK","North Yorkshire",30000,NA
+2006,"UK","North Yorkshire",31200,NA
+2007,"UK","North Yorkshire",32800,NA
+2008,"UK","North Yorkshire",28100,NA
+2009,"UK","North Yorkshire",24100,NA
+2010,"UK","North Yorkshire",26000,NA
+2011,"UK","North Yorkshire",26700,NA
+2012,"UK","North Yorkshire",28900,NA
+2013,"UK","North Yorkshire",28700,NA
+2000,"UK","South Yorkshire",19300,NA
+2001,"UK","South Yorkshire",19900,NA
+2002,"UK","South Yorkshire",21500,NA
+2003,"UK","South Yorkshire",20800,NA
+2004,"UK","South Yorkshire",22700,NA
+2005,"UK","South Yorkshire",23300,NA
+2006,"UK","South Yorkshire",24600,NA
+2007,"UK","South Yorkshire",26300,NA
+2008,"UK","South Yorkshire",22100,NA
+2009,"UK","South Yorkshire",19300,NA
+2010,"UK","South Yorkshire",20800,NA
+2011,"UK","South Yorkshire",20800,NA
+2012,"UK","South Yorkshire",22600,NA
+2013,"UK","South Yorkshire",22200,NA
+2000,"UK","West Yorkshire",24700,NA
+2001,"UK","West Yorkshire",24800,NA
+2002,"UK","West Yorkshire",25700,NA
+2003,"UK","West Yorkshire",25100,NA
+2004,"UK","West Yorkshire",27000,NA
+2005,"UK","West Yorkshire",28200,NA
+2006,"UK","West Yorkshire",29700,NA
+2007,"UK","West Yorkshire",30900,NA
+2008,"UK","West Yorkshire",26900,NA
+2009,"UK","West Yorkshire",23500,NA
+2010,"UK","West Yorkshire",24800,NA
+2011,"UK","West Yorkshire",25300,NA
+2012,"UK","West Yorkshire",27400,NA
+2013,"UK","West Yorkshire",26900,NA
+2000,"UK","EAST MIDLANDS (ENGLAND)",23800,NA
+2001,"UK","EAST MIDLANDS (ENGLAND)",24200,NA
+2002,"UK","EAST MIDLANDS (ENGLAND)",24800,NA
+2003,"UK","EAST MIDLANDS (ENGLAND)",24000,NA
+2004,"UK","EAST MIDLANDS (ENGLAND)",25300,NA
+2005,"UK","EAST MIDLANDS (ENGLAND)",26600,NA
+2006,"UK","EAST MIDLANDS (ENGLAND)",28000,NA
+2007,"UK","EAST MIDLANDS (ENGLAND)",29100,NA
+2008,"UK","EAST MIDLANDS (ENGLAND)",25200,NA
+2009,"UK","EAST MIDLANDS (ENGLAND)",21600,NA
+2010,"UK","EAST MIDLANDS (ENGLAND)",23800,1.2263
+2011,"UK","EAST MIDLANDS (ENGLAND)",24300,NA
+2012,"UK","EAST MIDLANDS (ENGLAND)",26400,NA
+2013,"UK","EAST MIDLANDS (ENGLAND)",26300,0.688921
+2000,"UK","Derbyshire and Nottinghamshire",22900,NA
+2001,"UK","Derbyshire and Nottinghamshire",23200,NA
+2002,"UK","Derbyshire and Nottinghamshire",24000,NA
+2003,"UK","Derbyshire and Nottinghamshire",22700,NA
+2004,"UK","Derbyshire and Nottinghamshire",24400,NA
+2005,"UK","Derbyshire and Nottinghamshire",26100,NA
+2006,"UK","Derbyshire and Nottinghamshire",27300,NA
+2007,"UK","Derbyshire and Nottinghamshire",28000,NA
+2008,"UK","Derbyshire and Nottinghamshire",24200,NA
+2009,"UK","Derbyshire and Nottinghamshire",20800,NA
+2010,"UK","Derbyshire and Nottinghamshire",22900,NA
+2011,"UK","Derbyshire and Nottinghamshire",23900,NA
+2012,"UK","Derbyshire and Nottinghamshire",25900,NA
+2013,"UK","Derbyshire and Nottinghamshire",25600,NA
+2000,"UK","Leicestershire, Rutland and Northamptonshire",26000,NA
+2001,"UK","Leicestershire, Rutland and Northamptonshire",26100,NA
+2002,"UK","Leicestershire, Rutland and Northamptonshire",26700,NA
+2003,"UK","Leicestershire, Rutland and Northamptonshire",26100,NA
+2004,"UK","Leicestershire, Rutland and Northamptonshire",27800,NA
+2005,"UK","Leicestershire, Rutland and Northamptonshire",28700,NA
+2006,"UK","Leicestershire, Rutland and Northamptonshire",30300,NA
+2007,"UK","Leicestershire, Rutland and Northamptonshire",32100,NA
+2008,"UK","Leicestershire, Rutland and Northamptonshire",27600,NA
+2009,"UK","Leicestershire, Rutland and Northamptonshire",23800,NA
+2010,"UK","Leicestershire, Rutland and Northamptonshire",26100,NA
+2011,"UK","Leicestershire, Rutland and Northamptonshire",25900,NA
+2012,"UK","Leicestershire, Rutland and Northamptonshire",28200,NA
+2013,"UK","Leicestershire, Rutland and Northamptonshire",28100,NA
+2000,"UK","Lincolnshire",21100,NA
+2001,"UK","Lincolnshire",22400,NA
+2002,"UK","Lincolnshire",22900,NA
+2003,"UK","Lincolnshire",22700,NA
+2004,"UK","Lincolnshire",22500,NA
+2005,"UK","Lincolnshire",22800,NA
+2006,"UK","Lincolnshire",24400,NA
+2007,"UK","Lincolnshire",25400,NA
+2008,"UK","Lincolnshire",22500,NA
+2009,"UK","Lincolnshire",19100,NA
+2010,"UK","Lincolnshire",20900,NA
+2011,"UK","Lincolnshire",21600,NA
+2012,"UK","Lincolnshire",23600,NA
+2013,"UK","Lincolnshire",23900,NA
+2000,"UK","WEST MIDLANDS (ENGLAND)",24900,NA
+2001,"UK","WEST MIDLANDS (ENGLAND)",25000,NA
+2002,"UK","WEST MIDLANDS (ENGLAND)",25700,NA
+2003,"UK","WEST MIDLANDS (ENGLAND)",24500,NA
+2004,"UK","WEST MIDLANDS (ENGLAND)",26300,NA
+2005,"UK","WEST MIDLANDS (ENGLAND)",27100,NA
+2006,"UK","WEST MIDLANDS (ENGLAND)",28300,NA
+2007,"UK","WEST MIDLANDS (ENGLAND)",29000,NA
+2008,"UK","WEST MIDLANDS (ENGLAND)",25000,NA
+2009,"UK","WEST MIDLANDS (ENGLAND)",21300,NA
+2010,"UK","WEST MIDLANDS (ENGLAND)",23300,0.756776
+2011,"UK","WEST MIDLANDS (ENGLAND)",23800,NA
+2012,"UK","WEST MIDLANDS (ENGLAND)",26200,NA
+2013,"UK","WEST MIDLANDS (ENGLAND)",25900,0.6551
+2000,"UK","Herefordshire, Worcestershire and Warwickshire",25900,NA
+2001,"UK","Herefordshire, Worcestershire and Warwickshire",25500,NA
+2002,"UK","Herefordshire, Worcestershire and Warwickshire",25600,NA
+2003,"UK","Herefordshire, Worcestershire and Warwickshire",25100,NA
+2004,"UK","Herefordshire, Worcestershire and Warwickshire",27500,NA
+2005,"UK","Herefordshire, Worcestershire and Warwickshire",27900,NA
+2006,"UK","Herefordshire, Worcestershire and Warwickshire",30300,NA
+2007,"UK","Herefordshire, Worcestershire and Warwickshire",30200,NA
+2008,"UK","Herefordshire, Worcestershire and Warwickshire",26300,NA
+2009,"UK","Herefordshire, Worcestershire and Warwickshire",22500,NA
+2010,"UK","Herefordshire, Worcestershire and Warwickshire",24900,NA
+2011,"UK","Herefordshire, Worcestershire and Warwickshire",25700,NA
+2012,"UK","Herefordshire, Worcestershire and Warwickshire",28800,NA
+2013,"UK","Herefordshire, Worcestershire and Warwickshire",28600,NA
+2000,"UK","Shropshire and Staffordshire",22200,NA
+2001,"UK","Shropshire and Staffordshire",22100,NA
+2002,"UK","Shropshire and Staffordshire",23300,NA
+2003,"UK","Shropshire and Staffordshire",22300,NA
+2004,"UK","Shropshire and Staffordshire",24300,NA
+2005,"UK","Shropshire and Staffordshire",24900,NA
+2006,"UK","Shropshire and Staffordshire",26000,NA
+2007,"UK","Shropshire and Staffordshire",26700,NA
+2008,"UK","Shropshire and Staffordshire",23600,NA
+2009,"UK","Shropshire and Staffordshire",19900,NA
+2010,"UK","Shropshire and Staffordshire",21800,NA
+2011,"UK","Shropshire and Staffordshire",22400,NA
+2012,"UK","Shropshire and Staffordshire",24300,NA
+2013,"UK","Shropshire and Staffordshire",24100,NA
+2000,"UK","West Midlands",25900,NA
+2001,"UK","West Midlands",26500,NA
+2002,"UK","West Midlands",27100,NA
+2003,"UK","West Midlands",25500,NA
+2004,"UK","West Midlands",27000,NA
+2005,"UK","West Midlands",27900,NA
+2006,"UK","West Midlands",28800,NA
+2007,"UK","West Midlands",29800,NA
+2008,"UK","West Midlands",25200,NA
+2009,"UK","West Midlands",21600,NA
+2010,"UK","West Midlands",23400,NA
+2011,"UK","West Midlands",23700,NA
+2012,"UK","West Midlands",26100,NA
+2013,"UK","West Midlands",25700,NA
+2000,"UK","EAST OF ENGLAND",27800,NA
+2001,"UK","EAST OF ENGLAND",28300,NA
+2002,"UK","EAST OF ENGLAND",29200,NA
+2003,"UK","EAST OF ENGLAND",28300,NA
+2004,"UK","EAST OF ENGLAND",29700,NA
+2005,"UK","EAST OF ENGLAND",30700,NA
+2006,"UK","EAST OF ENGLAND",32500,NA
+2007,"UK","EAST OF ENGLAND",33300,NA
+2008,"UK","EAST OF ENGLAND",29400,NA
+2009,"UK","EAST OF ENGLAND",25200,NA
+2010,"UK","EAST OF ENGLAND",27100,0.718651
+2011,"UK","EAST OF ENGLAND",27300,NA
+2012,"UK","EAST OF ENGLAND",29800,NA
+2013,"UK","EAST OF ENGLAND",29200,0.906543
+2000,"UK","East Anglia",27100,NA
+2001,"UK","East Anglia",27700,NA
+2002,"UK","East Anglia",28300,NA
+2003,"UK","East Anglia",27300,NA
+2004,"UK","East Anglia",29000,NA
+2005,"UK","East Anglia",29700,NA
+2006,"UK","East Anglia",32500,NA
+2007,"UK","East Anglia",32800,NA
+2008,"UK","East Anglia",28600,NA
+2009,"UK","East Anglia",24700,NA
+2010,"UK","East Anglia",26800,NA
+2011,"UK","East Anglia",27300,NA
+2012,"UK","East Anglia",30000,NA
+2013,"UK","East Anglia",29400,NA
+2000,"UK","Bedfordshire and Hertfordshire",32700,NA
+2001,"UK","Bedfordshire and Hertfordshire",32800,NA
+2002,"UK","Bedfordshire and Hertfordshire",34000,NA
+2003,"UK","Bedfordshire and Hertfordshire",32400,NA
+2004,"UK","Bedfordshire and Hertfordshire",34000,NA
+2005,"UK","Bedfordshire and Hertfordshire",35900,NA
+2006,"UK","Bedfordshire and Hertfordshire",36300,NA
+2007,"UK","Bedfordshire and Hertfordshire",37400,NA
+2008,"UK","Bedfordshire and Hertfordshire",34000,NA
+2009,"UK","Bedfordshire and Hertfordshire",28900,NA
+2010,"UK","Bedfordshire and Hertfordshire",30300,NA
+2011,"UK","Bedfordshire and Hertfordshire",30000,NA
+2012,"UK","Bedfordshire and Hertfordshire",32800,NA
+2013,"UK","Bedfordshire and Hertfordshire",32600,NA
+2000,"UK","Essex",23900,NA
+2001,"UK","Essex",24700,NA
+2002,"UK","Essex",25600,NA
+2003,"UK","Essex",25600,NA
+2004,"UK","Essex",26600,NA
+2005,"UK","Essex",27000,NA
+2006,"UK","Essex",28700,NA
+2007,"UK","Essex",30000,NA
+2008,"UK","Essex",25800,NA
+2009,"UK","Essex",22300,NA
+2010,"UK","Essex",24200,NA
+2011,"UK","Essex",24500,NA
+2012,"UK","Essex",26400,NA
+2013,"UK","Essex",25600,NA
+2000,"UK","LONDON",46600,NA
+2001,"UK","LONDON",46500,NA
+2002,"UK","LONDON",47500,NA
+2003,"UK","LONDON",45700,NA
+2004,"UK","LONDON",49000,NA
+2005,"UK","LONDON",52200,NA
+2006,"UK","LONDON",54200,NA
+2007,"UK","LONDON",57700,NA
+2008,"UK","LONDON",50400,NA
+2009,"UK","LONDON",44000,NA
+2010,"UK","LONDON",47300,0.424223
+2011,"UK","LONDON",49500,NA
+2012,"UK","LONDON",54200,NA
+2013,"UK","LONDON",53500,1.00291
+2000,"UK","Inner London",NA,NA
+2001,"UK","Inner London",NA,NA
+2002,"UK","Inner London",NA,NA
+2003,"UK","Inner London",NA,NA
+2004,"UK","Inner London",NA,NA
+2005,"UK","Inner London",NA,NA
+2006,"UK","Inner London",NA,NA
+2007,"UK","Inner London",NA,NA
+2008,"UK","Inner London",NA,NA
+2009,"UK","Inner London",NA,NA
+2010,"UK","Inner London",NA,NA
+2011,"UK","Inner London",NA,NA
+2012,"UK","Inner London",NA,NA
+2013,"UK","Inner London",NA,NA
+2000,"UK","Outer London",NA,NA
+2001,"UK","Outer London",NA,NA
+2002,"UK","Outer London",NA,NA
+2003,"UK","Outer London",NA,NA
+2004,"UK","Outer London",NA,NA
+2005,"UK","Outer London",NA,NA
+2006,"UK","Outer London",NA,NA
+2007,"UK","Outer London",NA,NA
+2008,"UK","Outer London",NA,NA
+2009,"UK","Outer London",NA,NA
+2010,"UK","Outer London",NA,NA
+2011,"UK","Outer London",NA,NA
+2012,"UK","Outer London",NA,NA
+2013,"UK","Outer London",NA,NA
+2000,"UK","Inner London - West",125000,NA
+2001,"UK","Inner London - West",123900,NA
+2002,"UK","Inner London - West",126100,NA
+2003,"UK","Inner London - West",121900,NA
+2004,"UK","Inner London - West",132000,NA
+2005,"UK","Inner London - West",142600,NA
+2006,"UK","Inner London - West",149000,NA
+2007,"UK","Inner London - West",163400,NA
+2008,"UK","Inner London - West",145800,NA
+2009,"UK","Inner London - West",132900,NA
+2010,"UK","Inner London - West",145200,NA
+2011,"UK","Inner London - West",151400,NA
+2012,"UK","Inner London - West",166200,NA
+2013,"UK","Inner London - West",155900,NA
+2000,"UK","Inner London - East",47000,NA
+2001,"UK","Inner London - East",47100,NA
+2002,"UK","Inner London - East",47800,NA
+2003,"UK","Inner London - East",46300,NA
+2004,"UK","Inner London - East",50300,NA
+2005,"UK","Inner London - East",54600,NA
+2006,"UK","Inner London - East",56300,NA
+2007,"UK","Inner London - East",60100,NA
+2008,"UK","Inner London - East",51700,NA
+2009,"UK","Inner London - East",44800,NA
+2010,"UK","Inner London - East",47100,NA
+2011,"UK","Inner London - East",50700,NA
+2012,"UK","Inner London - East",54500,NA
+2013,"UK","Inner London - East",58300,NA
+2000,"UK","Outer London - East and North East",23000,NA
+2001,"UK","Outer London - East and North East",22800,NA
+2002,"UK","Outer London - East and North East",23300,NA
+2003,"UK","Outer London - East and North East",22100,NA
+2004,"UK","Outer London - East and North East",23300,NA
+2005,"UK","Outer London - East and North East",24100,NA
+2006,"UK","Outer London - East and North East",25300,NA
+2007,"UK","Outer London - East and North East",26000,NA
+2008,"UK","Outer London - East and North East",22800,NA
+2009,"UK","Outer London - East and North East",19200,NA
+2010,"UK","Outer London - East and North East",20800,NA
+2011,"UK","Outer London - East and North East",21400,NA
+2012,"UK","Outer London - East and North East",24000,NA
+2013,"UK","Outer London - East and North East",23500,NA
+2000,"UK","Outer London - South",28300,NA
+2001,"UK","Outer London - South",27900,NA
+2002,"UK","Outer London - South",28900,NA
+2003,"UK","Outer London - South",27800,NA
+2004,"UK","Outer London - South",29400,NA
+2005,"UK","Outer London - South",30400,NA
+2006,"UK","Outer London - South",32000,NA
+2007,"UK","Outer London - South",33400,NA
+2008,"UK","Outer London - South",28700,NA
+2009,"UK","Outer London - South",24000,NA
+2010,"UK","Outer London - South",25800,NA
+2011,"UK","Outer London - South",26100,NA
+2012,"UK","Outer London - South",28700,NA
+2013,"UK","Outer London - South",27700,NA
+2000,"UK","Outer London - West and North West",35100,NA
+2001,"UK","Outer London - West and North West",34100,NA
+2002,"UK","Outer London - West and North West",34900,NA
+2003,"UK","Outer London - West and North West",33000,NA
+2004,"UK","Outer London - West and North West",34500,NA
+2005,"UK","Outer London - West and North West",35300,NA
+2006,"UK","Outer London - West and North West",36200,NA
+2007,"UK","Outer London - West and North West",37400,NA
+2008,"UK","Outer London - West and North West",33000,NA
+2009,"UK","Outer London - West and North West",27600,NA
+2010,"UK","Outer London - West and North West",29800,NA
+2011,"UK","Outer London - West and North West",31100,NA
+2012,"UK","Outer London - West and North West",35000,NA
+2013,"UK","Outer London - West and North West",34900,NA
+2000,"UK","SOUTH EAST (ENGLAND)",31600,NA
+2001,"UK","SOUTH EAST (ENGLAND)",32200,NA
+2002,"UK","SOUTH EAST (ENGLAND)",33700,NA
+2003,"UK","SOUTH EAST (ENGLAND)",31900,NA
+2004,"UK","SOUTH EAST (ENGLAND)",33300,NA
+2005,"UK","SOUTH EAST (ENGLAND)",34400,NA
+2006,"UK","SOUTH EAST (ENGLAND)",35900,NA
+2007,"UK","SOUTH EAST (ENGLAND)",37400,NA
+2008,"UK","SOUTH EAST (ENGLAND)",32800,NA
+2009,"UK","SOUTH EAST (ENGLAND)",28500,NA
+2010,"UK","SOUTH EAST (ENGLAND)",31100,1.0547
+2011,"UK","SOUTH EAST (ENGLAND)",31600,NA
+2012,"UK","SOUTH EAST (ENGLAND)",35100,NA
+2013,"UK","SOUTH EAST (ENGLAND)",34700,1.061881
+2000,"UK","Berkshire, Buckinghamshire and Oxfordshire",40300,NA
+2001,"UK","Berkshire, Buckinghamshire and Oxfordshire",40500,NA
+2002,"UK","Berkshire, Buckinghamshire and Oxfordshire",42700,NA
+2003,"UK","Berkshire, Buckinghamshire and Oxfordshire",41100,NA
+2004,"UK","Berkshire, Buckinghamshire and Oxfordshire",42700,NA
+2005,"UK","Berkshire, Buckinghamshire and Oxfordshire",44200,NA
+2006,"UK","Berkshire, Buckinghamshire and Oxfordshire",45200,NA
+2007,"UK","Berkshire, Buckinghamshire and Oxfordshire",47000,NA
+2008,"UK","Berkshire, Buckinghamshire and Oxfordshire",41300,NA
+2009,"UK","Berkshire, Buckinghamshire and Oxfordshire",35700,NA
+2010,"UK","Berkshire, Buckinghamshire and Oxfordshire",38900,NA
+2011,"UK","Berkshire, Buckinghamshire and Oxfordshire",40200,NA
+2012,"UK","Berkshire, Buckinghamshire and Oxfordshire",44500,NA
+2013,"UK","Berkshire, Buckinghamshire and Oxfordshire",43900,NA
+2000,"UK","Surrey, East and West Sussex",31200,NA
+2001,"UK","Surrey, East and West Sussex",31900,NA
+2002,"UK","Surrey, East and West Sussex",32800,NA
+2003,"UK","Surrey, East and West Sussex",31100,NA
+2004,"UK","Surrey, East and West Sussex",32000,NA
+2005,"UK","Surrey, East and West Sussex",32700,NA
+2006,"UK","Surrey, East and West Sussex",35000,NA
+2007,"UK","Surrey, East and West Sussex",36200,NA
+2008,"UK","Surrey, East and West Sussex",31600,NA
+2009,"UK","Surrey, East and West Sussex",27700,NA
+2010,"UK","Surrey, East and West Sussex",30200,NA
+2011,"UK","Surrey, East and West Sussex",30100,NA
+2012,"UK","Surrey, East and West Sussex",34100,NA
+2013,"UK","Surrey, East and West Sussex",34000,NA
+2000,"UK","Hampshire and Isle of Wight",28900,NA
+2001,"UK","Hampshire and Isle of Wight",30000,NA
+2002,"UK","Hampshire and Isle of Wight",31700,NA
+2003,"UK","Hampshire and Isle of Wight",29000,NA
+2004,"UK","Hampshire and Isle of Wight",30900,NA
+2005,"UK","Hampshire and Isle of Wight",31800,NA
+2006,"UK","Hampshire and Isle of Wight",33500,NA
+2007,"UK","Hampshire and Isle of Wight",35400,NA
+2008,"UK","Hampshire and Isle of Wight",31100,NA
+2009,"UK","Hampshire and Isle of Wight",27100,NA
+2010,"UK","Hampshire and Isle of Wight",29800,NA
+2011,"UK","Hampshire and Isle of Wight",30200,NA
+2012,"UK","Hampshire and Isle of Wight",33300,NA
+2013,"UK","Hampshire and Isle of Wight",32800,NA
+2000,"UK","Kent",23600,NA
+2001,"UK","Kent",24300,NA
+2002,"UK","Kent",25500,NA
+2003,"UK","Kent",24100,NA
+2004,"UK","Kent",25700,NA
+2005,"UK","Kent",27100,NA
+2006,"UK","Kent",27900,NA
+2007,"UK","Kent",28800,NA
+2008,"UK","Kent",25500,NA
+2009,"UK","Kent",21700,NA
+2010,"UK","Kent",23600,NA
+2011,"UK","Kent",24000,NA
+2012,"UK","Kent",26400,NA
+2013,"UK","Kent",25800,NA
+2000,"UK","SOUTH WEST (ENGLAND)",25400,NA
+2001,"UK","SOUTH WEST (ENGLAND)",26100,NA
+2002,"UK","SOUTH WEST (ENGLAND)",27000,NA
+2003,"UK","SOUTH WEST (ENGLAND)",26100,NA
+2004,"UK","SOUTH WEST (ENGLAND)",28000,NA
+2005,"UK","SOUTH WEST (ENGLAND)",28900,NA
+2006,"UK","SOUTH WEST (ENGLAND)",30100,NA
+2007,"UK","SOUTH WEST (ENGLAND)",31600,NA
+2008,"UK","SOUTH WEST (ENGLAND)",27600,NA
+2009,"UK","SOUTH WEST (ENGLAND)",24300,NA
+2010,"UK","SOUTH WEST (ENGLAND)",26600,1.06357
+2011,"UK","SOUTH WEST (ENGLAND)",26500,NA
+2012,"UK","SOUTH WEST (ENGLAND)",28900,NA
+2013,"UK","SOUTH WEST (ENGLAND)",28600,0.522235
+2000,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",29400,NA
+2001,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",30500,NA
+2002,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",31800,NA
+2003,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",30400,NA
+2004,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",32500,NA
+2005,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",33200,NA
+2006,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",34000,NA
+2007,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",36400,NA
+2008,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",31900,NA
+2009,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",28000,NA
+2010,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",31100,NA
+2011,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",30600,NA
+2012,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",33100,NA
+2013,"UK","Gloucestershire, Wiltshire and Bristol/Bath area",32800,NA
+2000,"UK","Dorset and Somerset",24300,NA
+2001,"UK","Dorset and Somerset",24200,NA
+2002,"UK","Dorset and Somerset",24300,NA
+2003,"UK","Dorset and Somerset",23700,NA
+2004,"UK","Dorset and Somerset",25200,NA
+2005,"UK","Dorset and Somerset",26700,NA
+2006,"UK","Dorset and Somerset",28200,NA
+2007,"UK","Dorset and Somerset",29200,NA
+2008,"UK","Dorset and Somerset",25600,NA
+2009,"UK","Dorset and Somerset",22500,NA
+2010,"UK","Dorset and Somerset",24000,NA
+2011,"UK","Dorset and Somerset",24300,NA
+2012,"UK","Dorset and Somerset",26700,NA
+2013,"UK","Dorset and Somerset",26200,NA
+2000,"UK","Cornwall and Isles of Scilly",18700,NA
+2001,"UK","Cornwall and Isles of Scilly",19000,NA
+2002,"UK","Cornwall and Isles of Scilly",20600,NA
+2003,"UK","Cornwall and Isles of Scilly",21100,NA
+2004,"UK","Cornwall and Isles of Scilly",21500,NA
+2005,"UK","Cornwall and Isles of Scilly",22200,NA
+2006,"UK","Cornwall and Isles of Scilly",24700,NA
+2007,"UK","Cornwall and Isles of Scilly",25000,NA
+2008,"UK","Cornwall and Isles of Scilly",21700,NA
+2009,"UK","Cornwall and Isles of Scilly",19300,NA
+2010,"UK","Cornwall and Isles of Scilly",20500,NA
+2011,"UK","Cornwall and Isles of Scilly",20800,NA
+2012,"UK","Cornwall and Isles of Scilly",23600,NA
+2013,"UK","Cornwall and Isles of Scilly",22800,NA
+2000,"UK","Devon",21600,NA
+2001,"UK","Devon",22500,NA
+2002,"UK","Devon",23500,NA
+2003,"UK","Devon",22600,NA
+2004,"UK","Devon",25100,NA
+2005,"UK","Devon",25700,NA
+2006,"UK","Devon",26900,NA
+2007,"UK","Devon",27600,NA
+2008,"UK","Devon",24100,NA
+2009,"UK","Devon",21100,NA
+2010,"UK","Devon",23100,NA
+2011,"UK","Devon",22900,NA
+2012,"UK","Devon",25100,NA
+2013,"UK","Devon",25200,NA
+2000,"UK","WALES",20200,NA
+2001,"UK","WALES",20000,NA
+2002,"UK","WALES",20900,NA
+2003,"UK","WALES",20400,NA
+2004,"UK","WALES",22300,NA
+2005,"UK","WALES",23200,NA
+2006,"UK","WALES",24400,NA
+2007,"UK","WALES",25300,NA
+2008,"UK","WALES",21400,NA
+2009,"UK","WALES",19100,NA
+2010,"UK","WALES",20200,0.763792
+2011,"UK","WALES",21000,NA
+2012,"UK","WALES",23000,NA
+2013,"UK","WALES",22700,0.38925
+2000,"UK","West Wales and The Valleys",17200,NA
+2001,"UK","West Wales and The Valleys",17000,NA
+2002,"UK","West Wales and The Valleys",18000,NA
+2003,"UK","West Wales and The Valleys",17200,NA
+2004,"UK","West Wales and The Valleys",19100,NA
+2005,"UK","West Wales and The Valleys",20100,NA
+2006,"UK","West Wales and The Valleys",21200,NA
+2007,"UK","West Wales and The Valleys",21800,NA
+2008,"UK","West Wales and The Valleys",18700,NA
+2009,"UK","West Wales and The Valleys",17000,NA
+2010,"UK","West Wales and The Valleys",17900,NA
+2011,"UK","West Wales and The Valleys",18600,NA
+2012,"UK","West Wales and The Valleys",20500,NA
+2013,"UK","West Wales and The Valleys",20300,NA
+2000,"UK","East Wales",25400,NA
+2001,"UK","East Wales",25400,NA
+2002,"UK","East Wales",26000,NA
+2003,"UK","East Wales",25800,NA
+2004,"UK","East Wales",27900,NA
+2005,"UK","East Wales",28600,NA
+2006,"UK","East Wales",30100,NA
+2007,"UK","East Wales",31300,NA
+2008,"UK","East Wales",25900,NA
+2009,"UK","East Wales",22700,NA
+2010,"UK","East Wales",24100,NA
+2011,"UK","East Wales",24900,NA
+2012,"UK","East Wales",27300,NA
+2013,"UK","East Wales",26900,NA
+2000,"UK","SCOTLAND",25600,NA
+2001,"UK","SCOTLAND",26500,NA
+2002,"UK","SCOTLAND",27300,NA
+2003,"UK","SCOTLAND",26100,NA
+2004,"UK","SCOTLAND",28400,NA
+2005,"UK","SCOTLAND",29800,NA
+2006,"UK","SCOTLAND",31700,NA
+2007,"UK","SCOTLAND",32900,NA
+2008,"UK","SCOTLAND",28800,NA
+2009,"UK","SCOTLAND",25600,NA
+2010,"UK","SCOTLAND",26500,1.26005
+2011,"UK","SCOTLAND",26900,NA
+2012,"UK","SCOTLAND",29300,NA
+2013,"UK","SCOTLAND",29300,0.614953
+2000,"UK","North Eastern Scotland",NA,NA
+2001,"UK","North Eastern Scotland",NA,NA
+2002,"UK","North Eastern Scotland",NA,NA
+2003,"UK","North Eastern Scotland",NA,NA
+2004,"UK","North Eastern Scotland",NA,NA
+2005,"UK","North Eastern Scotland",NA,NA
+2006,"UK","North Eastern Scotland",NA,NA
+2007,"UK","North Eastern Scotland",NA,NA
+2008,"UK","North Eastern Scotland",NA,NA
+2009,"UK","North Eastern Scotland",NA,NA
+2010,"UK","North Eastern Scotland",NA,NA
+2011,"UK","North Eastern Scotland",NA,NA
+2012,"UK","North Eastern Scotland",NA,NA
+2013,"UK","North Eastern Scotland",NA,NA
+2000,"UK","Eastern Scotland",26200,NA
+2001,"UK","Eastern Scotland",26700,NA
+2002,"UK","Eastern Scotland",28400,NA
+2003,"UK","Eastern Scotland",27300,NA
+2004,"UK","Eastern Scotland",29700,NA
+2005,"UK","Eastern Scotland",30300,NA
+2006,"UK","Eastern Scotland",32800,NA
+2007,"UK","Eastern Scotland",34200,NA
+2008,"UK","Eastern Scotland",29000,NA
+2009,"UK","Eastern Scotland",25800,NA
+2010,"UK","Eastern Scotland",26700,NA
+2011,"UK","Eastern Scotland",26700,NA
+2012,"UK","Eastern Scotland",29200,NA
+2013,"UK","Eastern Scotland",28900,NA
+2000,"UK","South Western Scotland",23900,NA
+2001,"UK","South Western Scotland",25000,NA
+2002,"UK","South Western Scotland",25100,NA
+2003,"UK","South Western Scotland",24200,NA
+2004,"UK","South Western Scotland",26200,NA
+2005,"UK","South Western Scotland",28100,NA
+2006,"UK","South Western Scotland",29300,NA
+2007,"UK","South Western Scotland",29900,NA
+2008,"UK","South Western Scotland",26100,NA
+2009,"UK","South Western Scotland",23200,NA
+2010,"UK","South Western Scotland",24000,NA
+2011,"UK","South Western Scotland",24200,NA
+2012,"UK","South Western Scotland",26000,NA
+2013,"UK","South Western Scotland",26200,NA
+2000,"UK","Highlands and Islands",NA,NA
+2001,"UK","Highlands and Islands",NA,NA
+2002,"UK","Highlands and Islands",NA,NA
+2003,"UK","Highlands and Islands",NA,NA
+2004,"UK","Highlands and Islands",NA,NA
+2005,"UK","Highlands and Islands",NA,NA
+2006,"UK","Highlands and Islands",NA,NA
+2007,"UK","Highlands and Islands",NA,NA
+2008,"UK","Highlands and Islands",NA,NA
+2009,"UK","Highlands and Islands",NA,NA
+2010,"UK","Highlands and Islands",NA,NA
+2011,"UK","Highlands and Islands",NA,NA
+2012,"UK","Highlands and Islands",NA,NA
+2013,"UK","Highlands and Islands",NA,NA
+2000,"UK","North Eastern Scotland",33600,NA
+2001,"UK","North Eastern Scotland",35700,NA
+2002,"UK","North Eastern Scotland",36300,NA
+2003,"UK","North Eastern Scotland",33400,NA
+2004,"UK","North Eastern Scotland",35700,NA
+2005,"UK","North Eastern Scotland",37500,NA
+2006,"UK","North Eastern Scotland",41600,NA
+2007,"UK","North Eastern Scotland",46500,NA
+2008,"UK","North Eastern Scotland",43800,NA
+2009,"UK","North Eastern Scotland",38500,NA
+2010,"UK","North Eastern Scotland",41100,NA
+2011,"UK","North Eastern Scotland",42900,NA
+2012,"UK","North Eastern Scotland",48200,NA
+2013,"UK","North Eastern Scotland",48100,NA
+2000,"UK","Highlands and Islands",23600,NA
+2001,"UK","Highlands and Islands",23900,NA
+2002,"UK","Highlands and Islands",24700,NA
+2003,"UK","Highlands and Islands",23600,NA
+2004,"UK","Highlands and Islands",26800,NA
+2005,"UK","Highlands and Islands",28600,NA
+2006,"UK","Highlands and Islands",28800,NA
+2007,"UK","Highlands and Islands",29400,NA
+2008,"UK","Highlands and Islands",26100,NA
+2009,"UK","Highlands and Islands",23200,NA
+2010,"UK","Highlands and Islands",24100,NA
+2011,"UK","Highlands and Islands",25000,NA
+2012,"UK","Highlands and Islands",26900,NA
+2013,"UK","Highlands and Islands",27000,NA
+2000,"UK","NORTHERN IRELAND",23000,NA
+2001,"UK","NORTHERN IRELAND",23100,NA
+2002,"UK","NORTHERN IRELAND",23400,NA
+2003,"UK","NORTHERN IRELAND",23300,NA
+2004,"UK","NORTHERN IRELAND",24600,NA
+2005,"UK","NORTHERN IRELAND",25800,NA
+2006,"UK","NORTHERN IRELAND",27600,NA
+2007,"UK","NORTHERN IRELAND",29300,NA
+2008,"UK","NORTHERN IRELAND",24700,NA
+2009,"UK","NORTHERN IRELAND",21100,NA
+2010,"UK","NORTHERN IRELAND",22400,0.897796
+2011,"UK","NORTHERN IRELAND",22700,NA
+2012,"UK","NORTHERN IRELAND",24800,NA
+2013,"UK","NORTHERN IRELAND",24200,0.731184
+2000,"UK","Northern Ireland",23000,NA
+2001,"UK","Northern Ireland",23100,NA
+2002,"UK","Northern Ireland",23400,NA
+2003,"UK","Northern Ireland",23300,NA
+2004,"UK","Northern Ireland",24600,NA
+2005,"UK","Northern Ireland",25800,NA
+2006,"UK","Northern Ireland",27600,NA
+2007,"UK","Northern Ireland",29300,NA
+2008,"UK","Northern Ireland",24700,NA
+2009,"UK","Northern Ireland",21100,NA
+2010,"UK","Northern Ireland",22400,NA
+2011,"UK","Northern Ireland",22700,NA
+2012,"UK","Northern Ireland",24800,NA
+2013,"UK","Northern Ireland",24200,NA
+2000,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2001,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2002,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2003,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2004,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2005,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2006,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2007,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2008,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2009,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2010,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2011,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2012,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2013,"UK","EXTRA-REGIO NUTS 1",NA,NA
+2000,"UK","Extra-Regio NUTS 2",NA,NA
+2001,"UK","Extra-Regio NUTS 2",NA,NA
+2002,"UK","Extra-Regio NUTS 2",NA,NA
+2003,"UK","Extra-Regio NUTS 2",NA,NA
+2004,"UK","Extra-Regio NUTS 2",NA,NA
+2005,"UK","Extra-Regio NUTS 2",NA,NA
+2006,"UK","Extra-Regio NUTS 2",NA,NA
+2007,"UK","Extra-Regio NUTS 2",NA,NA
+2008,"UK","Extra-Regio NUTS 2",NA,NA
+2009,"UK","Extra-Regio NUTS 2",NA,NA
+2010,"UK","Extra-Regio NUTS 2",NA,NA
+2011,"UK","Extra-Regio NUTS 2",NA,NA
+2012,"UK","Extra-Regio NUTS 2",NA,NA
+2013,"UK","Extra-Regio NUTS 2",NA,NA

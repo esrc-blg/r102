@@ -139,7 +139,7 @@ longley[ , ncol(longley) ]
 We now load regional data from the European Union from the [Quality of Government Institute](http://qog.pol.gu.se/) to illustrate logical conditions and dealing with missing values. The data set is very large in the sense that it contains many different columns (variables)
 
 <div class="container btn-container">
-  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button>
+  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('qog_eureg_long_sep16.csv');">Download Data</button>
 </div>
 
 A full codebook of the data set is available online ([codebook](https://www.qogdata.pol.gu.se/data/qog_eureg_sep16.pdf)) 

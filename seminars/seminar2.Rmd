@@ -54,7 +54,7 @@ Now, everything is updated correctly.
 Let's re-load the EU data set that we used previously.
 
 <div class="container btn-container">
-  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button>
+  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('qog_eureg_long_sep16.csv');">Download Data</button>
 </div>
 
 
@@ -161,7 +161,7 @@ ggplot(eu, aes(x = eqi_eqi, y = econ_2gdp_eur_hab)) +
 This was useful. Let's say we have a more complex model. To illustrate this, we quickly load the `world.data` data set.
 
 <div class="container btn-container">
-  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/QoG2012.csv');">Download Data</button>
+  <button type = "button" class = "btn btn-lg btn-success" onclick="window.open('QoG2012.csv');">Download Data</button>
 </div>
 
 
@@ -205,12 +205,13 @@ world.data$lowerbound3 <- preds3$fit - 1.96 * preds3$se.fit
 world.data$upperbound3 <- preds3$fit + 1.96 * preds3$se.fit
 
 # selecting a subset of variables
-plot.data <- select(world.data,
-                    "undp_hdi",
-                    "wdi_gdpc",
-                    "bestguess1","lowerbound1","upperbound1",
-                    "bestguess2","lowerbound2","upperbound2",
-                    "bestguess3","lowerbound3","upperbound3")
+plot.data <- dplyr::select(
+  world.data,
+  "undp_hdi",
+  "wdi_gdpc",
+  "bestguess1","lowerbound1","upperbound1",
+  "bestguess2","lowerbound2","upperbound2",
+  "bestguess3","lowerbound3","upperbound3")
 
 # reshaping the data set
 plot.data <- reshape(plot.data, direction = "long",
@@ -268,12 +269,13 @@ world.data$lowerbound3 <- preds3$fit - qnorm(0.975) * preds3$se.fit
 world.data$upperbound3 <- preds3$fit + qnorm(0.975) * preds3$se.fit
 
 # selecting a subset of variables
-plot.data <- select(world.data,
-                    "undp_hdi",
-                    "wdi_gdpc",
-                    "bestguess1","lowerbound1","upperbound1",
-                    "bestguess2","lowerbound2","upperbound2",
-                    "bestguess3","lowerbound3","upperbound3")
+plot.data <- dplyr::select(
+  world.data,
+  "undp_hdi",
+  "wdi_gdpc",
+  "bestguess1","lowerbound1","upperbound1",
+  "bestguess2","lowerbound2","upperbound2",
+  "bestguess3","lowerbound3","upperbound3")
 
 # reshaping the data set
 plot.data <- reshape(plot.data, direction = "long",
@@ -321,11 +323,12 @@ eu.renamed <- rename(eu,
                      quality.of.government = eqi_eqi)
 ```
 
-Selecting a subset is as easy as renaming. The function `select()` lets us do this easily.
+Selecting a subset is as easy as renaming. The function `select()` lets us do this easily. The function `select()` exists in multiple packages. To avoid conflicts when loading these packages at the same time, we call `dplyr::select()` to make sure we use function from the correct package.
 
 ```{r}
-eu.renamed <- select(eu.renamed,
-                     country, region, wealth, quality.of.government)
+eu.renamed <- dplyr::select(
+  eu.renamed,
+  country, region, wealth, quality.of.government)
 names(eu.renamed)
 ```
 
@@ -338,12 +341,13 @@ rm(eu.renamed)
 We can rename and select in one step within the `select()` function.
 
 ```{r}
-eu <- select(eu,
-             country = NUTS0,
-             region = region_name,
-             year,
-             wealth = econ_2gdp_eur_hab,
-             quality.of.government = eqi_eqi)
+eu <- dplyr::select(
+  eu,
+  country = NUTS0,
+  region = region_name,
+  year,
+  wealth = econ_2gdp_eur_hab,
+  quality.of.government = eqi_eqi)
 summary(eu)
 ```
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Tidyverse introduction | Follow-up on R</title>
   <meta name="description" content="Chapter 2 Tidyverse introduction | Follow-up on R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Tidyverse introduction | Follow-up on R" />
   <meta property="og:type" content="book" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="seminar1.html">
-
+<link rel="prev" href="seminar1.html"/>
+<link rel="next" href="seminar3.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -62,7 +62,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -152,6 +151,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.5" data-path="seminar2.html"><a href="seminar2.html#merging-data-sets"><i class="fa fa-check"></i><b>2.1.5</b> Merging data sets</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="seminar3.html"><a href="seminar3.html"><i class="fa fa-check"></i><b>3</b> Merging, re-shaping, and regular expressions</a><ul>
+<li class="chapter" data-level="3.1" data-path="seminar3.html"><a href="seminar3.html#seminar-1"><i class="fa fa-check"></i><b>3.1</b> Seminar</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="seminar3.html"><a href="seminar3.html#merging"><i class="fa fa-check"></i><b>3.1.1</b> Merging</a></li>
+<li class="chapter" data-level="3.1.2" data-path="seminar3.html"><a href="seminar3.html#re-shaping"><i class="fa fa-check"></i><b>3.1.2</b> Re-shaping</a></li>
+<li class="chapter" data-level="3.1.3" data-path="seminar3.html"><a href="seminar3.html#regular-expression"><i class="fa fa-check"></i><b>3.1.3</b> Regular expression</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -177,22 +183,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.1</span> Introduction to the tidyverse</h3>
 <p>The <code>tidyverse</code> package makes it easier to pre-process data. The package attempts to make it easier to apply operations that would otherwise require a substantial amount of coding. The syntax of the <code>tidyverse</code> is meant to be more intuitive than base R syntax but that also means that you have to learn new syntax. Working with the tidyverse is a matter of taste. A great resource for learning <code>tidyverse</code> and R is the book <a href="https://r4ds.had.co.nz/">R for data science</a> which is freely available.</p>
 <p>Before getting started, we first need to install the <code>tidyverse</code> package like so: <code>install.packages("tidyverse")</code>. You only need to install once. However, doing this again is not a mistake. In fact, R, RStudio and R packages are regularly updated. It is good practice to update all of these on your computer as well. Just remember never to update before a deadline!</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear workspace</span>
-<span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
-
-<span class="co"># load tidyverse package</span>
-<span class="kw">library</span>(tidyverse)</code></pre>
-<pre><code>-- Attaching packages ---------- tidyverse 1.2.1 --</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="co"># clear workspace</span></a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb76-3" title="3"></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="co"># load tidyverse package</span></a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<pre><code>-- Attaching packages ----------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>v ggplot2 3.2.1     v purrr   0.3.2
 v tibble  2.1.3     v dplyr   0.8.3
 v tidyr   1.0.0     v stringr 1.4.0
 v readr   1.3.1     v forcats 0.4.0</code></pre>
-<pre><code>-- Conflicts ------------- tidyverse_conflicts() --
+<pre><code>-- Conflicts -------------------------------------------------------------------------- tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()</code></pre>
 <p>Let’s check whether we have updates available by runinng <code>tidyverse_update()</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check for available updates</span>
-<span class="kw">tidyverse_update</span>()</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="co"># check for available updates</span></a>
+<a class="sourceLine" id="cb80-2" title="2"><span class="kw">tidyverse_update</span>()</a></code></pre></div>
 <pre><code>The following packages are out of date:
   
 * httr   (1.4.0 -&gt; 1.4.1)
@@ -203,123 +209,124 @@ x dplyr::lag()    masks stats::lag()</code></pre>
 Start a clean R session then run:
 install.packages(c(&quot;httr&quot;, &quot;modelr&quot;, &quot;tidyr&quot;, &quot;xml2&quot;))</code></pre>
 <p>R tells us that several packages are in indeed out of data (this may be different on your computer - it’s possible that everything is up to date on your machine). Below, we update according to the console message.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;httr&quot;</span>, <span class="st">&quot;modelr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;xml2&quot;</span>))
-<span class="kw">tidyverse_update</span>()</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;httr&quot;</span>, <span class="st">&quot;modelr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;xml2&quot;</span>))</a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="kw">tidyverse_update</span>()</a></code></pre></div>
 <pre><code>All tidyverse packages up-to-date</code></pre>
 <p>Now, everything is updated correctly.</p>
 <p>Let’s re-load the EU data set that we used previously.</p>
 <div class="container btn-container">
-<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/qog_eureg_long_sep16.csv');">Download Data</button></p>
+<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('qog_eureg_long_sep16.csv');">Download Data</button></p>
 </div>
-<pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">eu &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;qog_eureg_long_sep16.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
 <div id="data-visualization-with-ggplot2" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Data visualization with ggplot2</h3>
 <p>In the previous exercise, we stopped on data illustration. Base R graphics is very powerful and you can do almost anything with it. However, it does require to write a lot of code. ggplot2 is useful because it helps us to produce good looking graphics with relative ease.</p>
 <p>Let’s create a simple scatter plot. We use the wealth variable <code>econ_2gdp_eur_hab</code> and the European Quality of Government Index (EQI) — variable name <code>eqi_eqi</code> — to assess whether the two are related but only for post 2010.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>,]) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</a></code></pre></div>
 <pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>The plot looks a bit better than what we produced with base R. We also spot a slightly positive relationship. Let’s walk trough the code. First, we type <code>ggplot()</code> which creates the coordinate system which we then add layers to. The argument that we supply to <code>ggplot()</code> is the data we are using. The code <code>ggplot(data = eu)</code> creates an empty plot. We then add the points or observations to the plot with the function <code>geom_point()</code>. The argument <code>mapping</code> is necessary for ggplot to decide how variables are mapped to visuals. <code>mapping</code> is always paired with <code>aes()</code> as well as the <code>x</code> and <code>y</code> arguments which just like in base R’s <code>plot()</code> function correspond to the axes. Recall that it is convention to place the independent variable on the x axis and the dependent variable on the y axis.</p>
 <p>Let’s add a third variable to the plot. Here, we use labor market statistics. The variable <code>unemp_pc_act</code> measures long-term unemployment as percentage of the active population. We use the variable for the color argument.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, 
-                              <span class="dt">color =</span> unemp_pc_act) ) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, </a>
+<a class="sourceLine" id="cb87-3" title="3">                              <span class="dt">color =</span> unemp_pc_act) ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb87-4" title="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</a></code></pre></div>
 <pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>The lighter shading corresponds to more unemployment. Using unemployment does not shed a lot of light on the relationship between the variables. It does seem like places with more unemployment cluster at the lower end of the governance index and they correspond with less per capita wealth which is to be expected.</p>
 <p>Instead of using a third variable on color, we could use it on the size of the points. For instance, population size is often applied here, making larger units more prominent. Let’s use the total population variable for the size of the points.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, <span class="dt">color =</span> unemp_pc_act, 
-                              <span class="dt">size =</span> demo_d2jan_t) ) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu[eu<span class="op">$</span>year <span class="op">&gt;</span><span class="dv">2010</span>, ]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab, <span class="dt">color =</span> unemp_pc_act, </a>
+<a class="sourceLine" id="cb89-3" title="3">                              <span class="dt">size =</span> demo_d2jan_t) ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb89-4" title="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</a></code></pre></div>
 <pre><code>Warning: Removed 2464 rows containing missing values (geom_point).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Let’s evaluate whether the relationship between the governance index and wealth holds within countries. We can use <strong>facets</strong> to create multiple plots where the splots are split by a variable like, for instance, country.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>NUTS0, <span class="dt">nrow =</span> <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> eu) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>NUTS0, <span class="dt">nrow =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>Warning: Removed 13469 rows containing missing values (geom_point).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>The variable to split the plot by should be discrete rather than continuous. It is diffcult to see much on facet plots, when the splitting variable has many categories as in this case. We see, however that especially in Italy there are large differences beteween the quality of governance.</p>
 <p>In our initial plot, we were interested in the relationship between governance and the wealth. Let’s add a linear regression line including the confidence interval to the plot.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu, <span class="kw">aes</span>(<span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">ggplot</span>(eu, <span class="kw">aes</span>(<span class="dt">x =</span> eqi_eqi, <span class="dt">y =</span> econ_2gdp_eur_hab)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-4" title="4"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Quality of Government Index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;GDP per capita price adjusted&quot;</span>)</a></code></pre></div>
 <pre><code>Warning: Removed 13469 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>Warning: Removed 13469 rows containing missing values (geom_point).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>This was useful. Let’s say we have a more complex model. To illustrate this, we quickly load the <code>world.data</code> data set.</p>
 <div class="container btn-container">
-<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('./docs/QoG2012.csv');">Download Data</button></p>
+<p><button type = "button" class = "btn btn-lg btn-success" onclick="window.open('QoG2012.csv');">Download Data</button></p>
 </div>
-<pre class="sourceCode r"><code class="sourceCode r">world.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QoG2012.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">world.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QoG2012.csv&quot;</span>)</a></code></pre></div>
 <p>Now, we regress quality of life measured by the United Nations Human Development Index on wealth measured as GDP per capita. We fit one linear model, one quadratic model and one log transformed model. We then make predictions including confidence intervals and add them to the data set. We then plot the results using ggplot.</p>
 <p>We need some additional data manipulation skills which we will cover as we go along. Specifically, we select a subset of the data set and we reshape the data set into long format.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># drop missings</span>
-world.data &lt;-<span class="st"> </span>world.data[ <span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>wdi_gdpc) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>undp_hdi), ]
-
-<span class="co"># run regressions</span>
-m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span>wdi_gdpc, <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
-m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(wdi_gdpc,<span class="dv">2</span>), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
-m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(wdi_gdpc), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
-
-<span class="co"># make predictions</span>
-preds1 &lt;-<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
-preds2 &lt;-<span class="st"> </span><span class="kw">predict</span>(m2, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
-preds3 &lt;-<span class="st"> </span><span class="kw">predict</span>(m3, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)
-
-<span class="co">## add point estimates and CIs to the world.data data set</span>
-
-<span class="co"># model 1</span>
-world.data<span class="op">$</span>bestguess1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit
-world.data<span class="op">$</span>lowerbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit
-world.data<span class="op">$</span>upperbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit
-
-<span class="co"># model 2</span>
-world.data<span class="op">$</span>bestguess2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit
-world.data<span class="op">$</span>lowerbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit
-world.data<span class="op">$</span>upperbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit
-
-<span class="co"># model 3</span>
-world.data<span class="op">$</span>bestguess3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit
-world.data<span class="op">$</span>lowerbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit
-world.data<span class="op">$</span>upperbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit
-
-<span class="co"># selecting a subset of variables</span>
-plot.data &lt;-<span class="st"> </span><span class="kw">select</span>(world.data,
-                    <span class="st">&quot;undp_hdi&quot;</span>,
-                    <span class="st">&quot;wdi_gdpc&quot;</span>,
-                    <span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,
-                    <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,
-                    <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>)
-
-<span class="co"># reshaping the data set</span>
-plot.data &lt;-<span class="st"> </span><span class="kw">reshape</span>(plot.data, <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>,
-        <span class="dt">varying =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,
-                    <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,
-                    <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>),
-        <span class="dt">timevar =</span> <span class="st">&quot;Model&quot;</span>,
-        <span class="dt">times =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>),
-        <span class="dt">v.names =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess&quot;</span>,<span class="st">&quot;lowerbound&quot;</span>,<span class="st">&quot;upperbound&quot;</span>),
-        <span class="dt">idvar =</span> <span class="kw">c</span>(<span class="st">&quot;undp_hdi&quot;</span>,<span class="st">&quot;wdi_gdpc&quot;</span>))
-
-<span class="co"># renaming the rownames of the data set</span>
-<span class="kw">row.names</span>(plot.data) &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(plot.data))
-
-<span class="co"># changing the grouping id into a factor</span>
-plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.data<span class="op">$</span>Model, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;Quadratic&quot;</span>, <span class="st">&quot;Log&quot;</span>))
-
-<span class="kw">ggplot</span>(plot.data, <span class="kw">aes</span>(<span class="dt">x =</span> wdi_gdpc, <span class="dt">y =</span> undp_hdi)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>( <span class="kw">aes</span>( <span class="dt">y =</span> bestguess, <span class="dt">color =</span> Model), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_ribbon</span>( <span class="kw">aes</span>( <span class="dt">ymin =</span> lowerbound, <span class="dt">ymax =</span> upperbound, <span class="dt">fill =</span> Model), <span class="dt">alpha =</span> <span class="fl">0.25</span> ) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;GDP per capita&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Human Development Index&quot;</span>, 
-          <span class="dt">title =</span> <span class="st">&quot;Relationship between wealth and quality of life&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="co"># drop missings</span></a>
+<a class="sourceLine" id="cb97-2" title="2">world.data &lt;-<span class="st"> </span>world.data[ <span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>wdi_gdpc) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(world.data<span class="op">$</span>undp_hdi), ]</a>
+<a class="sourceLine" id="cb97-3" title="3"></a>
+<a class="sourceLine" id="cb97-4" title="4"><span class="co"># run regressions</span></a>
+<a class="sourceLine" id="cb97-5" title="5">m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span>wdi_gdpc, <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)</a>
+<a class="sourceLine" id="cb97-6" title="6">m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(wdi_gdpc,<span class="dv">2</span>), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)</a>
+<a class="sourceLine" id="cb97-7" title="7">m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(undp_hdi <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(wdi_gdpc), <span class="dt">data =</span> world.data, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)</a>
+<a class="sourceLine" id="cb97-8" title="8"></a>
+<a class="sourceLine" id="cb97-9" title="9"><span class="co"># make predictions</span></a>
+<a class="sourceLine" id="cb97-10" title="10">preds1 &lt;-<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb97-11" title="11">preds2 &lt;-<span class="st"> </span><span class="kw">predict</span>(m2, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb97-12" title="12">preds3 &lt;-<span class="st"> </span><span class="kw">predict</span>(m3, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb97-13" title="13"></a>
+<a class="sourceLine" id="cb97-14" title="14"><span class="co">## add point estimates and CIs to the world.data data set</span></a>
+<a class="sourceLine" id="cb97-15" title="15"></a>
+<a class="sourceLine" id="cb97-16" title="16"><span class="co"># model 1</span></a>
+<a class="sourceLine" id="cb97-17" title="17">world.data<span class="op">$</span>bestguess1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit</a>
+<a class="sourceLine" id="cb97-18" title="18">world.data<span class="op">$</span>lowerbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-19" title="19">world.data<span class="op">$</span>upperbound1 &lt;-<span class="st"> </span>preds1<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds1<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-20" title="20"></a>
+<a class="sourceLine" id="cb97-21" title="21"><span class="co"># model 2</span></a>
+<a class="sourceLine" id="cb97-22" title="22">world.data<span class="op">$</span>bestguess2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit</a>
+<a class="sourceLine" id="cb97-23" title="23">world.data<span class="op">$</span>lowerbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-24" title="24">world.data<span class="op">$</span>upperbound2 &lt;-<span class="st"> </span>preds2<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds2<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-25" title="25"></a>
+<a class="sourceLine" id="cb97-26" title="26"><span class="co"># model 3</span></a>
+<a class="sourceLine" id="cb97-27" title="27">world.data<span class="op">$</span>bestguess3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit</a>
+<a class="sourceLine" id="cb97-28" title="28">world.data<span class="op">$</span>lowerbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-29" title="29">world.data<span class="op">$</span>upperbound3 &lt;-<span class="st"> </span>preds3<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>preds3<span class="op">$</span>se.fit</a>
+<a class="sourceLine" id="cb97-30" title="30"></a>
+<a class="sourceLine" id="cb97-31" title="31"><span class="co"># selecting a subset of variables</span></a>
+<a class="sourceLine" id="cb97-32" title="32">plot.data &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb97-33" title="33">  world.data,</a>
+<a class="sourceLine" id="cb97-34" title="34">  <span class="st">&quot;undp_hdi&quot;</span>,</a>
+<a class="sourceLine" id="cb97-35" title="35">  <span class="st">&quot;wdi_gdpc&quot;</span>,</a>
+<a class="sourceLine" id="cb97-36" title="36">  <span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,</a>
+<a class="sourceLine" id="cb97-37" title="37">  <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,</a>
+<a class="sourceLine" id="cb97-38" title="38">  <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>)</a>
+<a class="sourceLine" id="cb97-39" title="39"></a>
+<a class="sourceLine" id="cb97-40" title="40"><span class="co"># reshaping the data set</span></a>
+<a class="sourceLine" id="cb97-41" title="41">plot.data &lt;-<span class="st"> </span><span class="kw">reshape</span>(plot.data, <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>,</a>
+<a class="sourceLine" id="cb97-42" title="42">        <span class="dt">varying =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess1&quot;</span>,<span class="st">&quot;lowerbound1&quot;</span>,<span class="st">&quot;upperbound1&quot;</span>,</a>
+<a class="sourceLine" id="cb97-43" title="43">                    <span class="st">&quot;bestguess2&quot;</span>,<span class="st">&quot;lowerbound2&quot;</span>,<span class="st">&quot;upperbound2&quot;</span>,</a>
+<a class="sourceLine" id="cb97-44" title="44">                    <span class="st">&quot;bestguess3&quot;</span>,<span class="st">&quot;lowerbound3&quot;</span>,<span class="st">&quot;upperbound3&quot;</span>),</a>
+<a class="sourceLine" id="cb97-45" title="45">        <span class="dt">timevar =</span> <span class="st">&quot;Model&quot;</span>,</a>
+<a class="sourceLine" id="cb97-46" title="46">        <span class="dt">times =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>),</a>
+<a class="sourceLine" id="cb97-47" title="47">        <span class="dt">v.names =</span> <span class="kw">c</span>(<span class="st">&quot;bestguess&quot;</span>,<span class="st">&quot;lowerbound&quot;</span>,<span class="st">&quot;upperbound&quot;</span>),</a>
+<a class="sourceLine" id="cb97-48" title="48">        <span class="dt">idvar =</span> <span class="kw">c</span>(<span class="st">&quot;undp_hdi&quot;</span>,<span class="st">&quot;wdi_gdpc&quot;</span>))</a>
+<a class="sourceLine" id="cb97-49" title="49"></a>
+<a class="sourceLine" id="cb97-50" title="50"><span class="co"># renaming the rownames of the data set</span></a>
+<a class="sourceLine" id="cb97-51" title="51"><span class="kw">row.names</span>(plot.data) &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(plot.data))</a>
+<a class="sourceLine" id="cb97-52" title="52"></a>
+<a class="sourceLine" id="cb97-53" title="53"><span class="co"># changing the grouping id into a factor</span></a>
+<a class="sourceLine" id="cb97-54" title="54">plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span class="kw">factor</span>(plot.data<span class="op">$</span>Model, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;Quadratic&quot;</span>, <span class="st">&quot;Log&quot;</span>))</a>
+<a class="sourceLine" id="cb97-55" title="55"></a>
+<a class="sourceLine" id="cb97-56" title="56"><span class="kw">ggplot</span>(plot.data, <span class="kw">aes</span>(<span class="dt">x =</span> wdi_gdpc, <span class="dt">y =</span> undp_hdi)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-57" title="57"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.6</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-58" title="58"><span class="st">    </span><span class="kw">geom_line</span>( <span class="kw">aes</span>( <span class="dt">y =</span> bestguess, <span class="dt">color =</span> Model), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-59" title="59"><span class="st">    </span><span class="kw">geom_ribbon</span>( <span class="kw">aes</span>( <span class="dt">ymin =</span> lowerbound, <span class="dt">ymax =</span> upperbound, <span class="dt">fill =</span> Model), <span class="dt">alpha =</span> <span class="fl">0.25</span> ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-60" title="60"><span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;GDP per capita&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Human Development Index&quot;</span>, </a>
+<a class="sourceLine" id="cb97-61" title="61">          <span class="dt">title =</span> <span class="st">&quot;Relationship between wealth and quality of life&quot;</span>)</a></code></pre></div>
 <p><img src="r102_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 </div>
 <div id="renaming-variables-and-selecting-subsets" class="section level3">
@@ -332,27 +339,29 @@ plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span clas
 <li><code>econ_2gdp_eur_hab</code> into <code>wealth</code></li>
 <li><code>eqi_eqi</code> into <code>quality.of.government</code></li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">eu.renamed &lt;-<span class="st"> </span><span class="kw">rename</span>(eu,
-                     <span class="dt">country =</span> NUTS0,
-                     <span class="dt">region =</span> region_name,
-                     <span class="dt">wealth =</span> econ_2gdp_eur_hab,
-                     <span class="dt">quality.of.government =</span> eqi_eqi)</code></pre>
-<p>Selecting a subset is as easy as renaming. The function <code>select()</code> lets us do this easily.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.renamed &lt;-<span class="st"> </span><span class="kw">select</span>(eu.renamed,
-                     country, region, wealth, quality.of.government)
-<span class="kw">names</span>(eu.renamed)</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">eu.renamed &lt;-<span class="st"> </span><span class="kw">rename</span>(eu,</a>
+<a class="sourceLine" id="cb98-2" title="2">                     <span class="dt">country =</span> NUTS0,</a>
+<a class="sourceLine" id="cb98-3" title="3">                     <span class="dt">region =</span> region_name,</a>
+<a class="sourceLine" id="cb98-4" title="4">                     <span class="dt">wealth =</span> econ_2gdp_eur_hab,</a>
+<a class="sourceLine" id="cb98-5" title="5">                     <span class="dt">quality.of.government =</span> eqi_eqi)</a></code></pre></div>
+<p>Selecting a subset is as easy as renaming. The function <code>select()</code> lets us do this easily. The function <code>select()</code> exists in multiple packages. To avoid conflicts when loading these packages at the same time, we call <code>dplyr::select()</code> to make sure we use function from the correct package.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">eu.renamed &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb99-2" title="2">  eu.renamed,</a>
+<a class="sourceLine" id="cb99-3" title="3">  country, region, wealth, quality.of.government)</a>
+<a class="sourceLine" id="cb99-4" title="4"><span class="kw">names</span>(eu.renamed)</a></code></pre></div>
 <pre><code>[1] &quot;country&quot;               &quot;region&quot;                &quot;wealth&quot;               
 [4] &quot;quality.of.government&quot;</code></pre>
 <p>Let’s remove our small data set <code>eu.renamed</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(eu.renamed)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">rm</span>(eu.renamed)</a></code></pre></div>
 <p>We can rename and select in one step within the <code>select()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu &lt;-<span class="st"> </span><span class="kw">select</span>(eu,
-             <span class="dt">country =</span> NUTS0,
-             <span class="dt">region =</span> region_name,
-             year,
-             <span class="dt">wealth =</span> econ_2gdp_eur_hab,
-             <span class="dt">quality.of.government =</span> eqi_eqi)
-<span class="kw">summary</span>(eu)</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">eu &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb102-2" title="2">  eu,</a>
+<a class="sourceLine" id="cb102-3" title="3">  <span class="dt">country =</span> NUTS0,</a>
+<a class="sourceLine" id="cb102-4" title="4">  <span class="dt">region =</span> region_name,</a>
+<a class="sourceLine" id="cb102-5" title="5">  year,</a>
+<a class="sourceLine" id="cb102-6" title="6">  <span class="dt">wealth =</span> econ_2gdp_eur_hab,</a>
+<a class="sourceLine" id="cb102-7" title="7">  <span class="dt">quality.of.government =</span> eqi_eqi)</a>
+<a class="sourceLine" id="cb102-8" title="8"><span class="kw">summary</span>(eu)</a></code></pre></div>
 <pre><code>   country             region               year          wealth      
  Length:13884       Length:13884       Min.   :1990   Min.   :  1300  
  Class :character   Class :character   1st Qu.:1996   1st Qu.: 14600  
@@ -374,12 +383,12 @@ plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span clas
 <h3><span class="header-section-number">2.1.4</span> Aggregating and pipes</h3>
 <p>Our data set is on the region-year level. We want to compare countries over time. Therefore, we now aggregate our data up to the country-year level. Note that you want data in the most dis-aggregated fashion possible because aggregating to the next higher level is easy. We want to average over the regions within each country and year.</p>
 <p>To do this we introduce two new functions and one new concept. The new concept is called the pipe and its operator is <code>%&gt;%</code>. In our example we say first create a copy of the data set called <code>eu</code> called <code>eu.country.year</code>. We do not stop here but we continue on indicated by the pipe operator <code>%&gt;%</code>. We then group the data set by two variables with the <code>group_by()</code> function. The first variable that indentifies groups is the country and the second is the year. We then contiue on with the pipe operator <code>%&gt;%</code> and finally we summarize the data within the groups using the <code>summarize()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.country.year &lt;-<span class="st"> </span>eu <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-
-<span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">15</span>)</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">eu.country.year &lt;-<span class="st"> </span>eu <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb104-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb104-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb104-4" title="4">              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb104-5" title="5"></a>
+<a class="sourceLine" id="cb104-6" title="6"><span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">15</span>)</a></code></pre></div>
 <pre><code># A tibble: 15 x 4
 # Groups:   country [1]
    country  year wealth quality.of.government
@@ -400,17 +409,17 @@ plot.data<span class="op">$</span>Model &lt;-<span class="st"> </span><span clas
 14 AT       2003 27623.                   NaN
 15 AT       2004 28746.                   NaN</code></pre>
 <p>It turns out that we have a lot of missing data in our dataset. Our goal is to plot wealth over time. We have all the necessary parts to do this but we would like to also add an EU average. In other words, for each year we need to create a new observation that receives the value <code>EU</code> for the country variable and the average of wealth within that year and the average of quality of government within that year. We follow the same procedure as previosly.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.year &lt;-<span class="st"> </span>eu.country.year <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">eu.year &lt;-<span class="st"> </span>eu.country.year <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb106-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">wealth =</span> <span class="kw">mean</span>(wealth, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb106-4" title="4">              <span class="dt">quality.of.government =</span> <span class="kw">mean</span>(quality.of.government, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p>We now have two datasets which need to combine.</p>
 </div>
 <div id="merging-data-sets" class="section level3">
 <h3><span class="header-section-number">2.1.5</span> Merging data sets</h3>
 <p>We cannot just paste the data sets together because they differ in the number of columns. As a first step, we need to create a new variable in the data set <code>eu.year</code> called <code>country</code> which identifies the country in that data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.year<span class="op">$</span>country &lt;-<span class="st"> &quot;EU&quot;</span>
-eu.year</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1">eu.year<span class="op">$</span>country &lt;-<span class="st"> &quot;EU&quot;</span></a>
+<a class="sourceLine" id="cb107-2" title="2">eu.year</a></code></pre></div>
 <pre><code># A tibble: 26 x 4
     year wealth quality.of.government country
    &lt;int&gt;  &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;  
@@ -426,9 +435,9 @@ eu.year</code></pre>
 10  1999    NaN                   NaN EU     
 # ... with 16 more rows</code></pre>
 <p>We now merge the two variables together. Recall that observations are uniquely identified by the variables <code>country</code> and <code>year</code>. We neeed to order the observations in both data sets before merging. To do this we use the <code>arrange()</code> function from the <code>dplyr</code> package. The datasets are already ordered by the country first and the year second. Let’s reorder by year first and then country to illustrate how the function works.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.country.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.country.year, year, country)
-eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, year, country)
-<span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">eu.country.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.country.year, year, country)</a>
+<a class="sourceLine" id="cb109-2" title="2">eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, year, country)</a>
+<a class="sourceLine" id="cb109-3" title="3"><span class="kw">head</span>(eu.country.year, <span class="dt">n =</span> <span class="dv">20</span>)</a></code></pre></div>
 <pre><code># A tibble: 20 x 4
 # Groups:   country [20]
    country  year wealth quality.of.government
@@ -454,15 +463,15 @@ eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, y
 19 LU       1990    NaN                   NaN
 20 LV       1990    NaN                   NaN</code></pre>
 <p>We are ready to merge. To do so, we use the <code>merge()</code> function. We have the same variables in both data sets and both are unique observations. In this case, an alternative to using <code>merge()</code> is to simply bind the data sets together row-wise like so: <code>rbind(eu.country.year, eu.year)</code>. However, the nice side-effect of using <code>merge()</code> is that our order by years and then countries remains intact. So the first two arguemnts of <code>merge()</code> are the names of the data sets to merge. We then specify the variables to merge by in the <code>by</code> argument and finally we need to say keep all observations that are unique to either data set with <code>all = TRUE</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.join &lt;-<span class="st"> </span><span class="kw">merge</span>(eu.country.year, eu.year, <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(eu.country.year), <span class="kw">names</span>(eu.year)), <span class="dt">all =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">eu.join &lt;-<span class="st"> </span><span class="kw">merge</span>(eu.country.year, eu.year, <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(eu.country.year), <span class="kw">names</span>(eu.year)), <span class="dt">all =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Now, you should be able to plot wealth over time on your own. The plot should show the all “countries” in the data set. We do not have data before 2000, so there is no point in plotting it.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu.join[eu.join<span class="op">$</span>year<span class="op">&gt;</span><span class="dv">1999</span>,]) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country))</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="kw">ggplot</span>(eu.join[eu.join<span class="op">$</span>year<span class="op">&gt;</span><span class="dv">1999</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-2" title="2"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country))</a></code></pre></div>
 <pre><code>Warning: Removed 45 rows containing missing values (geom_path).</code></pre>
 <p><img src="r102_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>There are too many countries in this plot. Let’s compare the UK with France, Italy, Belgium, Greece, Germany, and Spain. To do this, we use the <code>filter()</code> function. We also take the opportunity to filter out the missing years.</p>
-<pre class="sourceCode r"><code class="sourceCode r">eu.join.small &lt;-<span class="st"> </span><span class="kw">filter</span>(eu.join, country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;UK&quot;</span>,<span class="st">&quot;FR&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;EL&quot;</span>,<span class="st">&quot;DE&quot;</span>,<span class="st">&quot;ES&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2015</span> )
-<span class="kw">head</span>(eu.join.small, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1">eu.join.small &lt;-<span class="st"> </span><span class="kw">filter</span>(eu.join, country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;UK&quot;</span>,<span class="st">&quot;FR&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;EL&quot;</span>,<span class="st">&quot;DE&quot;</span>,<span class="st">&quot;ES&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1999</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2015</span> )</a>
+<a class="sourceLine" id="cb114-2" title="2"><span class="kw">head</span>(eu.join.small, <span class="dt">n =</span> <span class="dv">20</span>)</a></code></pre></div>
 <pre><code>   country year   wealth quality.of.government
 1       BE 2000 25200.00                   NaN
 2       BE 2001 25900.00                   NaN
@@ -485,8 +494,8 @@ eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, y
 19      DE 2003 26347.27                   NaN
 20      DE 2004 26983.64                   NaN</code></pre>
 <p>Now, we plot the data again.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(eu.join.small) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country), <span class="dt">size =</span> <span class="fl">1.2</span>)</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">ggplot</span>(eu.join.small) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>( <span class="dt">x =</span> year, <span class="dt">y =</span> wealth, <span class="dt">col =</span> country), <span class="dt">size =</span> <span class="fl">1.2</span>)</a></code></pre></div>
 <p><img src="r102_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 
 </div>
@@ -497,8 +506,8 @@ eu.year &lt;-<span class="st"> </span><span class="kw">arrange</span>(eu.year, y
           </div>
         </div>
       </div>
-<a href="seminar1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="seminar1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="seminar3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -551,8 +560,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
