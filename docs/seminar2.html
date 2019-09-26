@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Follow-up on R</title>
-  <meta name="description" content="Follow-up on R" />
+  <title>Chapter 2 Tidyverse introduction | Follow-up on R</title>
+  <meta name="description" content="Chapter 2 Tidyverse introduction | Follow-up on R" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Follow-up on R" />
+  <meta property="og:title" content="Chapter 2 Tidyverse introduction | Follow-up on R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Follow-up on R" />
+  <meta name="twitter:title" content="Chapter 2 Tidyverse introduction | Follow-up on R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="seminar1.html">
 
-<link rel="next" href="seminar1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -161,45 +161,125 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Follow-up on R</h1>
-</div>
-<div id="about-this-course" class="section level1 unnumbered">
-<h1>About this course</h1>
-<p><strong><em>Course Content</em></strong></p>
-<p>This course builds on introductory R and expands on essential concepts for R. We cover common problems in data manipulation to pre-process datasets and we will cover some visualization. <span class="math inline">\(99.5\%\)</span> of a data scientist’s job is data pre-processing and visualization. The rest is analysis. Therefore, brushing up on programming skills in R makes the experience of working with R a lot more enjoyable.</p>
-<p><strong><em>Course Objectives</em></strong></p>
-<p>Participants will learn data manipulation skills such as merging data, re-shaping it, aggregating it and more. Course participants should be a lot more comfortable in working with R upon completing this course.</p>
-<p><strong><em>Course Prerequisites</em></strong></p>
-<p>Participants are expected to have used R and RStudio before.</p>
-<p><strong><em>Agenda</em></strong></p>
-<ol style="list-style-type: decimal">
-<li>Data sub-setting and logical conditions</li>
-<li>Tidyverse introduction: Simple data manipulation, renaming, summarizing, aggregating</li>
-<li>Merging data</li>
-<li>Reshaping data</li>
-<li>Regular expressions</li>
-</ol>
-<p><strong><em>Acknowledgements</em></strong></p>
-<p>The infrastructure for this website is in large parts adopted from work by UCL’s <a href="https://iris.ucl.ac.uk/iris/browse/profile?upi=ALIAX58">Altaf Ali</a>, <a href="https://www.jackblumenau.com/">Jack Blumenau</a>, <a href="https://lucasleemann.ch">Lucas Leemann</a>, <a href="https://sjankin.com/">Slava Jankin Mikhaylov</a>, and <a href="https://philippbroniecki.com">Philipp Broniecki</a>. The ESRC Business and Local Government Data Research Centre is funded by the <a href="https://esrc.ukri.org">Economic and Social Research Council (ESRC)</a>.</p>
-<hr />
-<div class="container btn-container">
-<button type="button" class="btn btn-lg btn-primary" onclick="window.open(&#39;https://github.com/esrc-blg/ml101/raw/master/data/data.zip&#39;);">
-placeholder
-</button>
-<button type="button" class="btn btn-lg btn-primary" onclick="window.open(&#39;https://github.com/esrc-blg/ml101/raw/master/slides/slides.pdf&#39;);">
-placeholder
-</button>
-</div>
+<div id="tidyverse-introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Tidyverse introduction</h1>
+<div id="seminar" class="section level2">
+<h2><span class="header-section-number">2.1</span> Seminar</h2>
+<div id="introduction-to-the-tidyverse" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Introduction to the tidyverse</h3>
+<p>The <code>tidyverse</code> package makes it easier to pre-process data. By pre-processing, we mean storing data in such a way that observations are in rows and variables are in columns. Data comes in different forms and is not always stored in this way. We will use data from the World Bank to illustrate this point.</p>
+<p>Before getting started, we first need to install the <code>tidyverse</code> package like so: <code>install.packages("tidyverse")</code>. You only need to install once. However, doing this again is not a mistake. In fact, R, RStudio and R packages are regularly updated. It is good practice to update all of these on your computer as well. Just remember never to update before a deadline!</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear workspace</span>
+<span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
 
+<span class="co"># load tidyverse package</span>
+<span class="kw">library</span>(tidyverse)</code></pre>
+<pre><code>-- Attaching packages -------------</code></pre>
+<pre><code>v ggplot2 3.2.1     v purrr   0.3.2
+v tibble  2.1.3     v dplyr   0.8.3
+v tidyr   1.0.0     v stringr 1.4.0
+v readr   1.3.1     v forcats 0.4.0</code></pre>
+<pre><code>-- Conflicts ----------------------
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<p>Let’s check whether we have updates available by runinng <code>tidyverse_update()</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check for available updates</span>
+<span class="kw">tidyverse_update</span>()</code></pre>
+<pre><code>The following packages are out of date:
+  
+* httr   (1.4.0 -&gt; 1.4.1)
+* modelr (0.1.4 -&gt; 0.1.5)
+* tidyr  (0.8.3 -&gt; 1.0.0)
+* xml2   (1.2.0 -&gt; 1.2.2)
+
+Start a clean R session then run:
+install.packages(c(&quot;httr&quot;, &quot;modelr&quot;, &quot;tidyr&quot;, &quot;xml2&quot;))</code></pre>
+<p>R tells us that several packages are in indeed out of data (this may be different on your computer - it’s possible that everything is up to date on your machine). Below, we update according to the console message.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;httr&quot;</span>, <span class="st">&quot;modelr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;xml2&quot;</span>))
+<span class="kw">tidyverse_update</span>()</code></pre>
+<pre><code>All tidyverse packages up-to-date</code></pre>
+<p>Now, everything is updated correctly.</p>
+<p>Let’s check the codebook of our data.</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IMMBRIT</td>
+<td>Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?</td>
+</tr>
+<tr class="even">
+<td>over.estimate</td>
+<td>1 if estimate is higher than 10.7%.</td>
+</tr>
+<tr class="odd">
+<td>RSex</td>
+<td>1 = male, 2 = female</td>
+</tr>
+<tr class="even">
+<td>RAge</td>
+<td>Age of respondent</td>
+</tr>
+<tr class="odd">
+<td>Househld</td>
+<td>Number of people living in respondent’s household</td>
+</tr>
+<tr class="even">
+<td>party_self</td>
+<td>1 = Conservatives; 2 = Labour; 3 = SNP; 4 = Ukip; 5 = BNP; 6 = GP; 7 = party.other</td>
+</tr>
+<tr class="odd">
+<td>paper</td>
+<td>Do you normally read any daily morning newspaper 3+ times/week?</td>
+</tr>
+<tr class="even">
+<td>WWWhourspW</td>
+<td>How many hours WWW per week?</td>
+</tr>
+<tr class="odd">
+<td>religious</td>
+<td>Do you regard yourself as belonging to any particular religion?</td>
+</tr>
+<tr class="even">
+<td>employMonths</td>
+<td>How many mnths w. present employer?</td>
+</tr>
+<tr class="odd">
+<td>urban</td>
+<td>Population density, 4 categories (highest density is 4, lowest is 1)</td>
+</tr>
+<tr class="even">
+<td>health.good</td>
+<td>How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good)</td>
+</tr>
+<tr class="odd">
+<td>HHInc</td>
+<td>Income bands for household, high number = high HH income</td>
+</tr>
+</tbody>
+</table>
+<p>The dataset is on your memory sticks and also available for download <a href="http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData">here</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load non-western foreigners data set</span>
+<span class="kw">load</span>(<span class="st">&quot;non_western_immigrants.RData&quot;</span>)</code></pre>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="seminar1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="seminar1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

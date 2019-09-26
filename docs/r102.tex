@@ -28,6 +28,46 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -140,6 +180,153 @@ placeholder
 \subsection{Learning objectives}\label{learning-objectives}}
 
 ABC\ldots{}
+
+\hypertarget{tidyverse-introduction}{%
+\section{Tidyverse introduction}\label{tidyverse-introduction}}
+
+\hypertarget{seminar}{%
+\subsection{Seminar}\label{seminar}}
+
+\hypertarget{introduction-to-the-tidyverse}{%
+\subsubsection{Introduction to the tidyverse}\label{introduction-to-the-tidyverse}}
+
+The \texttt{tidyverse} package makes it easier to pre-process data. By pre-processing, we mean storing data in such a way that observations are in rows and variables are in columns. Data comes in different forms and is not always stored in this way. We will use data from the World Bank to illustrate this point.
+
+Before getting started, we first need to install the \texttt{tidyverse} package like so: \texttt{install.packages("tidyverse")}. You only need to install once. However, doing this again is not a mistake. In fact, R, RStudio and R packages are regularly updated. It is good practice to update all of these on your computer as well. Just remember never to update before a deadline!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# clear workspace}
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{())}
+
+\CommentTok{# load tidyverse package}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's check whether we have updates available by runinng \texttt{tidyverse\_update()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# check for available updates}
+\KeywordTok{tidyverse_update}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+The following packages are out of date:
+  
+* httr   (1.4.0 -> 1.4.1)
+* modelr (0.1.4 -> 0.1.5)
+* tidyr  (0.8.3 -> 1.0.0)
+* xml2   (1.2.0 -> 1.2.2)
+
+Start a clean R session then run:
+install.packages(c("httr", "modelr", "tidyr", "xml2"))
+\end{verbatim}
+
+R tells us that several packages are in indeed out of data (this may be different on your computer - it's possible that everything is up to date on your machine). Below, we update according to the console message.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"httr"}\NormalTok{, }\StringTok{"modelr"}\NormalTok{, }\StringTok{"tidyr"}\NormalTok{, }\StringTok{"xml2"}\NormalTok{))}
+\KeywordTok{tidyverse_update}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+All tidyverse packages up-to-date
+\end{verbatim}
+
+Now, everything is updated correctly.
+
+Let's check the codebook of our data.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.11\columnwidth}\raggedright
+Variable Name\strut
+\end{minipage} & \begin{minipage}[b]{0.83\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+IMMBRIT\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Out of every 100 people in Britain, how many do you think are immigrants from Non-western countries?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+over.estimate\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+1 if estimate is higher than 10.7\%.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+RSex\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+1 = male, 2 = female\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+RAge\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Age of respondent\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+Househld\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Number of people living in respondent's household\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+party\_self\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+1 = Conservatives; 2 = Labour; 3 = SNP; 4 = Ukip; 5 = BNP; 6 = GP; 7 = party.other\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+paper\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Do you normally read any daily morning newspaper 3+ times/week?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+WWWhourspW\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+How many hours WWW per week?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+religious\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Do you regard yourself as belonging to any particular religion?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+employMonths\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+How many mnths w. present employer?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+urban\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Population density, 4 categories (highest density is 4, lowest is 1)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+health.good\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+How is your health in general for someone of your age? (0: bad, 1: fair, 2: fairly good, 3: good)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+HHInc\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+Income bands for household, high number = high HH income\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The dataset is on your memory sticks and also available for download \href{http://philippbroniecki.github.io/ML2017.io/data/BSAS_manip.RData}{here}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load non-western foreigners data set}
+\KeywordTok{load}\NormalTok{(}\StringTok{"non_western_immigrants.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 
 \end{document}

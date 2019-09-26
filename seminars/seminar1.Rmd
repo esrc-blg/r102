@@ -12,4 +12,29 @@ par(bg = '#fdf6e3')
 
 ABC...
 
+```{r}
+install.packages("maps")
+maps::
 
+maps::county()
+nz <- map_data("gb")
+
+map_data()
+?maps::map()
+
+ggplot(nz, aes(long, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "black")
+
+library(maps)
+install.packages("mapdata")
+library(mapdata)
+library(maptools)
+install.packages("ggmap")
+library(ggmap)
+install.packages("rgeos")
+library(rgeos)
+
+library(broom)
+shapefile <- readOGR(dsn="/Map shapefiles", layer="Local_Administrative_Units_Level_1_December_2015_Full_Clipped_Boundaries_in_England_and_Wales")
+
+```
